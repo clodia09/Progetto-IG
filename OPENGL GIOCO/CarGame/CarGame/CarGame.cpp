@@ -53,12 +53,16 @@ GLfloat LightPosition[]= { 0.0f, 0.0f, 15.0f, 1.0f };
 #define aisgl_max(x,y) (y>x?y:x)
 #define TRUE                1
 #define FALSE               0
-
+// definizioni di variabili di gameplay
+bool menu = true;
 float x_coord_car = 0.0;
 float x_coord_obs, z_coord_obs, z_coord_bck = 0.0;
 int casuale = 0;
 int window_height = 900;
 int window_width = 600;
+int vite = 3;
+int durata = 0;
+bool invincible = false;
 // ----------------------------------------------------------------------------
 void reshape(int width, int height)
 {
@@ -70,8 +74,23 @@ void reshape(int width, int height)
 		1.0, 1000.0);  // Znear and Zfar 
 	glViewport(0, 0, width, height);
 }
+//-----------------------------------------------------------------------------
+ void *font = GLUT_BITMAP_TIMES_ROMAN_24;
 
-// ----------------------------------------------------------------------------
+void output(int x, int y, std::string str)
+{
+	int len, i;
+
+	glRasterPos2f(x, y);
+	len = str.length();
+
+	for (i = 0; i < len; i++) {
+		glutBitmapCharacter(font, str[i]);
+	}
+	glutPostRedisplay();
+}
+//-----------------------------------------------------------------------------
+
 void get_bounding_box_for_node (const struct aiNode* nd, 
 	struct aiVector3D* min, 
 	struct aiVector3D* max, 
@@ -352,9 +371,13 @@ void do_motion (void)
 void check_collisions()
 {
 	if (z_coord_obs > -2 && z_coord_obs < 2) {
-		if (abs(x_coord_car - x_coord_obs) < 2)
-			exit(1);
-			
+		if (abs(x_coord_car - x_coord_obs) < 2 && invincible == false) {
+			invincible = true;
+			vite--;
+			if (vite == 0) {
+				exit(1);
+			}
+		}
 	}
 }
 // ----------------------------------------------------------------------------
@@ -366,57 +389,73 @@ void display(void)
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	gluLookAt(0.f,3.f,7.f,0.f,0.f,-5.f,0.f,1.f,0.f);
-	
-	
-	//draw car
-	glPushMatrix();
-	glTranslatef(x_coord_car, 0, 0);
-	recursive_render(scene, scene->mRootNode->mChildren[0], 1.0);
-	glPopMatrix();
-	
-	//draw obstacles
-	glPushMatrix();
-	glTranslatef(x_coord_obs, 0, z_coord_obs);
-	recursive_render(scene, scene->mRootNode->mChildren[2], 1.0);
-	glPopMatrix();
-	
-	//draw background
-	glPushMatrix();
-	glTranslatef(0, 0, z_coord_bck);
-	recursive_render(scene, scene->mRootNode->mChildren[1], 1.0);
-	glPopMatrix();
-	/*
-	glPushMatrix();
-	glLoadIdentity();
-	glColor3f(1.0f, 1.0f, 1.0f);
-	char score_str[20];
-	sprintf(score_str, "SCORE: %d", score);
-	glRasterPos2f(300, 300);
-	for (int i = 0; score_str[i] != '\0'; i++) {
-		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, score_str[i]);
+	gluLookAt(0.f, 3.f, 7.f, 0.f, 0.f, -5.f, 0.f, 1.f, 0.f);
+	if (menu){
+		if (invincible == true) {
+			durata++;
+			if (durata > 10) {
+				invincible = false;
+				durata = 0;
+			}
+		}
+		//draw car
+		glPushMatrix();
+		glTranslatef(x_coord_car, 0, 0);
+		recursive_render(scene, scene->mRootNode->mChildren[0], 1.0);
+		glPopMatrix();
+
+		//draw obstacles
+		glPushMatrix();
+		glTranslatef(x_coord_obs, 0, z_coord_obs);
+		recursive_render(scene, scene->mRootNode->mChildren[2], 1.0);
+		glPopMatrix();
+
+		//draw background
+		glPushMatrix();
+		glTranslatef(0, 0, z_coord_bck);
+		recursive_render(scene, scene->mRootNode->mChildren[1], 1.0);
+		glPopMatrix();
+
+		//scrive le vite mancanti
+		glPushMatrix();
+		glLoadIdentity();
+		glColor3f(1.0f, 1.0f, 1.0f);
+		char vite_str[10];
+		sprintf(vite_str, "Vite: %d", vite);
+		glRasterPos2f(window_width - 100, window_height - 20);
+		for (int i = 0; vite_str[i] != '\0'; i++) {
+			glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, vite_str[i]);
+		}
+		glPopMatrix();
+		/*
+		//draw tiers
+		glPushMatrix();
+			glTranslatef(x_coord_car, -0.3, -1.5);
+			glRotatef(z_coord_bck * -10, 1, 0, 0);
+			recursive_render(scene, scene->mRootNode->mChildren[3], 1.0);
+		glPopMatrix();
+
+		glPushMatrix();
+			glTranslatef(x_coord_car, -0.3, 1.5);
+			glRotatef(z_coord_bck * -10, 1, 0, 0);
+			recursive_render(scene, scene->mRootNode->mChildren[4], 1.0);
+		glPopMatrix();
+		*/
+
+		glutSwapBuffers();
+		do_motion();
+		check_collisions();
 	}
-	glPopMatrix();
+	else {
+		glColor3f(1.0, 0.0, 0.0);
+		std::string text_row_1 = "Tumbleweed";
+		std::string text_row_2 = "GIOCA!";
 
-	
-	//draw tiers
-	glPushMatrix();
-		glTranslatef(x_coord_car, -0.3, -1.5);
-		glRotatef(z_coord_bck * -10, 1, 0, 0);
-		recursive_render(scene, scene->mRootNode->mChildren[3], 1.0);
-	glPopMatrix();
-		
-	glPushMatrix();
-		glTranslatef(x_coord_car, -0.3, 1.5);
-		glRotatef(z_coord_bck * -10, 1, 0, 0);
-		recursive_render(scene, scene->mRootNode->mChildren[4], 1.0);
-	glPopMatrix();
-	*/
-	
-	glutSwapBuffers();
+		output(window_width-500, window_height-100, text_row_1);
+		output(window_width - 500, window_height - 500, text_row_2);
 
-	do_motion();
-	check_collisions();
+		glutSwapBuffers();
+	}
 }
 
 // ----------------------------------------------------------------------------
@@ -597,6 +636,8 @@ int main(int argc, char **argv)
 {
 	struct aiLogStream stream;
 	
+	int color_menu; //id del menù 
+
 	glutInitWindowSize(window_height,window_width);
 	glutInitWindowPosition(100,100);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
@@ -652,5 +693,9 @@ int main(int argc, char **argv)
 	// by Assimp.
 	aiDetachAllLogStreams();	
 
-	return 0;
+
+	glutMainLoop();
+	return 0; 
+
+	
 }

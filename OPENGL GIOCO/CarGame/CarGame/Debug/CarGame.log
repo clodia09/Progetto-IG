@@ -1,2 +1,3 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(534,5): warning MSB8028: la directory intermedia (Debug\) contiene file condivisi da un altro progetto (SimpleOpenGLTexturedLoader.vcxproj). Tale condizione può comportare un comportamento di pulizia e ricompilazione non corretto.
-  CarGame.vcxproj -> C:\Users\gnico\OneDrive\Desktop\OPENGL GIOCO\CarGame\Debug\CarGame.exe
+CarGame.obj : warning LNK4075: '/EDITANDCONTINUE' ignorato a causa della specifica di '/SAFESEH'
+  CarGame.vcxproj -> C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\CarGame\Debug\CarGame.exe
