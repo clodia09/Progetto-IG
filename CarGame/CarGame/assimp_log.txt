@@ -1,0 +1,10 @@
+Info,  T11968: Load models\car.obj
+Info,  T11968: Found a matching importer for this file format
+Info,  T11968: Import root directory is 'models\'
+Info,  T11968: Entering post processing pipeline
+Info,  T11968: TriangulateProcess finished. All polygons have been triangulated.
+Info,  T11968: Points: 0, Lines: 0, Triangles: 5, Polygons: 0 (Meshes, X = removed)
+Error, T11968: Unable to compute tangents: UV0 and normals must be there 
+Info,  T11968: JoinVerticesProcess finished | Verts in: 1108 out: 940 | ~15.2%
+Info,  T11968: Cache relevant are 5 meshes (546 faces). Average output ACMR is 1.758242
+Info,  T11968: Leaving post processing pipeline

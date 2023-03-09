@@ -1,0 +1,2 @@
+Info,  T25960: Load models\car.obj
+Error, T25960: Unable to open file "models\car.obj".
