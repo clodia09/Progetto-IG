@@ -1,2 +1,0 @@
-﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(517,5): warning MSB8028: la directory intermedia (Debug\) contiene file condivisi da un altro progetto (SimpleOpenGLTexturedLoader.vcxproj). Tale condizione può comportare un comportamento di pulizia e ricompilazione non corretto.
-  CarGame.vcxproj -> C:\Users\claud\Desktop\07. Lab_support_material\07. Lab_support_material\Additional material\CarGame\CarGame\Debug\CarGame.exe
