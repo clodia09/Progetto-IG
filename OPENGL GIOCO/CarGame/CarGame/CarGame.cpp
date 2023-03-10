@@ -29,6 +29,10 @@
 
 #include<cstdlib>
 
+#include <stdio.h>
+#include <string.h>
+#include <stdarg.h>
+
 
 // currently this is hardcoded
 static const std::string basepath = "./models/"; //per i file blend
@@ -56,13 +60,20 @@ GLfloat LightPosition[]= { 0.0f, 0.0f, 15.0f, 1.0f };
 // definizioni di variabili di gameplay
 bool menu = true;
 float x_coord_car = 0.0;
-float x_coord_obs, z_coord_obs, z_coord_bck = 0.0;
+float x_coord_obs, z_coord_obs, z_coord_bck= 0.0;
+float z_coord_stac = -40;
 int casuale = 0;
 int window_height = 900;
 int window_width = 600;
 int vite = 3;
 int durata = 0;
 bool invincible = false;
+int score = 0;
+bool salto = false;
+float y_salto = 0;
+bool discesa = false;
+int attesa = 0;
+bool staccionatatime = false;
 // ----------------------------------------------------------------------------
 void reshape(int width, int height)
 {
@@ -75,20 +86,36 @@ void reshape(int width, int height)
 	glViewport(0, 0, width, height);
 }
 //-----------------------------------------------------------------------------
- void *font = GLUT_BITMAP_TIMES_ROMAN_24;
-
-void output(int x, int y, std::string str)
+void draw_text(const char* format, int x, int y)
 {
-	int len, i;
+	char buffer[256];
+	va_list args;
+	va_start(args, format);
+	vsprintf(buffer, format, args);
+	va_end(args);
+	
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+	glOrtho(0, window_width, 0, window_height, -1, 1);
 
-	glRasterPos2f(x, y);
-	len = str.length();
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	glLoadIdentity();
+	glTranslatef(x, y, 0);
 
-	for (i = 0; i < len; i++) {
-		glutBitmapCharacter(font, str[i]);
+	glRasterPos2i(0, 0);
+	for (int i = 0; i < strlen(buffer); i++)
+	{
+		glutBitmapCharacter(GLUT_BITMAP_9_BY_15, buffer[i]);
 	}
-	glutPostRedisplay();
+
+	glPopMatrix();
+
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
 }
+// ----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
 void get_bounding_box_for_node (const struct aiNode* nd, 
@@ -340,9 +367,36 @@ void do_motion (void)
 	int time = glutGet(GLUT_ELAPSED_TIME);
 	
 	// Update coordinates
-	z_coord_obs += (time-prev_time) * 0.02;
-	z_coord_bck += (time - prev_time) * 0.02;
-
+	if (score < 300) {
+		z_coord_obs += (time - prev_time) * 0.02;
+		z_coord_bck += (time - prev_time) * 0.02;
+		if(staccionatatime==true)
+		z_coord_stac += (time - prev_time) * 0.02;
+	}
+	else if (score < 800) {
+		z_coord_obs += (time - prev_time) * 0.035;
+		z_coord_bck += (time - prev_time) * 0.035;
+		if (staccionatatime == true)
+		z_coord_stac += (time - prev_time) * 0.035;
+	}
+	else if (score < 1300) {
+		z_coord_obs += (time - prev_time) * 0.05;
+		z_coord_bck += (time - prev_time) * 0.05;
+		if (staccionatatime == true)
+		z_coord_stac += (time - prev_time) * 0.05;
+	}
+	else if (score < 2000) {
+		z_coord_obs += (time - prev_time) * 0.06;
+		z_coord_bck += (time - prev_time) * 0.06;
+		if (staccionatatime == true)
+		z_coord_stac += (time - prev_time) * 0.06;
+	}
+	else {
+		z_coord_obs += (time - prev_time) * 0.075;
+		z_coord_bck += (time - prev_time) * 0.075;
+		if (staccionatatime == true)
+		z_coord_stac += (time - prev_time) * 0.075;
+	}
 
 	if (z_coord_obs > 10) {			// Reset position for the obstacles
 		z_coord_obs = -40;
@@ -362,6 +416,10 @@ void do_motion (void)
 	{
 		z_coord_bck = -30;
 	}
+	if (z_coord_stac > 10) {
+		z_coord_stac = -50;
+		staccionatatime = false;
+	}
 
 	prev_time = time;
 
@@ -372,6 +430,15 @@ void check_collisions()
 {
 	if (z_coord_obs > -2 && z_coord_obs < 2) {
 		if (abs(x_coord_car - x_coord_obs) < 2 && invincible == false) {
+			invincible = true;
+			vite--;
+			if (vite == 0) {
+				exit(1);
+			}
+		}
+	}
+	if (z_coord_stac > -2 && z_coord_stac < 2) {
+		if (y_salto < 2 && invincible == false) {
 			invincible = true;
 			vite--;
 			if (vite == 0) {
@@ -393,16 +460,42 @@ void display(void)
 	if (menu){
 		if (invincible == true) {
 			durata++;
-			if (durata > 10) {
+			if (durata > 20) {
 				invincible = false;
 				durata = 0;
 			}
 		}
-		//draw car
-		glPushMatrix();
-		glTranslatef(x_coord_car, 0, 0);
-		recursive_render(scene, scene->mRootNode->mChildren[0], 1.0);
-		glPopMatrix();
+		score++;
+
+		//draw tumbleweed
+		if (salto == true) {
+			if (discesa==false) {
+				if(attesa==0)
+				y_salto += 0.5;
+				if (y_salto > 3) {
+					attesa++;
+					if (attesa == 10) {
+						discesa = true;
+						attesa = 0;
+					}
+				}
+			}
+			else if (discesa==true ) {
+				y_salto -= 0.5;
+				if (y_salto == 0) {
+					discesa = false;
+					salto = false;
+				}
+			}
+		
+		}
+		
+		if (durata % 2 == 0) {
+			glPushMatrix();
+			glTranslatef(x_coord_car, y_salto, 0);
+			recursive_render(scene, scene->mRootNode->mChildren[0], 1.0);
+			glPopMatrix();
+		}
 
 		//draw obstacles
 		glPushMatrix();
@@ -416,17 +509,33 @@ void display(void)
 		recursive_render(scene, scene->mRootNode->mChildren[1], 1.0);
 		glPopMatrix();
 
-		//scrive le vite mancanti
+		//draw spine
 		glPushMatrix();
-		glLoadIdentity();
-		glColor3f(1.0f, 1.0f, 1.0f);
-		char vite_str[10];
-		sprintf(vite_str, "Vite: %d", vite);
-		glRasterPos2f(window_width - 100, window_height - 20);
-		for (int i = 0; vite_str[i] != '\0'; i++) {
-			glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, vite_str[i]);
-		}
+		glTranslatef(x_coord_obs, 0, z_coord_obs);
+		recursive_render(scene, scene->mRootNode->mChildren[3], 1.0);
 		glPopMatrix();
+
+		//draw staccionata
+		if (score % 150 == 0) staccionatatime = true;
+		if(staccionatatime==true){
+		glPushMatrix();
+		glTranslatef(0, 0, z_coord_stac);
+		recursive_render(scene, scene->mRootNode->mChildren[4], 1.0);
+		glPopMatrix();
+		}
+		//draw vite mancanti
+		
+		char base_str[10];
+		sprintf(base_str, "Vite: %d", vite);
+		glColor3f(1.0f, 1.0f, 1.0f);
+		draw_text(base_str, 10, window_height - 20);
+		//draw punteggio
+		char score_str[20];
+		sprintf(score_str, "Punteggio: %d", score);
+		draw_text(score_str, 10, window_height - 40);
+		
+		//glColor3f(1.0, 0.0, 0.0); // impostare il colore del testo a rosso
+		//draw_text("Il mio testo rosso", 100, 100);
 		/*
 		//draw tiers
 		glPushMatrix();
@@ -447,13 +556,7 @@ void display(void)
 		check_collisions();
 	}
 	else {
-		glColor3f(1.0, 0.0, 0.0);
-		std::string text_row_1 = "Tumbleweed";
-		std::string text_row_2 = "GIOCA!";
-
-		output(window_width-500, window_height-100, text_row_1);
-		output(window_width - 500, window_height - 500, text_row_2);
-
+		
 		glutSwapBuffers();
 	}
 }
@@ -474,6 +577,14 @@ void specialKeyListener(int key, int x, int y)
 			x_coord_car -= 2.0;
 		}
 		break;	
+	case GLUT_KEY_UP:
+		if (salto == false) {
+			salto = true;
+		}
+		break;
+	default:
+		break;
+
 	}
 	glutPostRedisplay();
 }
@@ -632,6 +743,7 @@ int InitGL()					 // All Setup For OpenGL goes here
 }
 
 // ----------------------------------------------------------------------------
+
 int main(int argc, char **argv)
 {
 	struct aiLogStream stream;

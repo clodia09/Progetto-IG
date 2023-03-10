@@ -1,12 +1,12 @@
-Info,  T13944: Load models\car.obj
-Info,  T13944: Found a matching importer for this file format
-Info,  T13944: Import root directory is 'models\'
-Info,  T13944: Entering post processing pipeline
-Info,  T13944: TriangulateProcess finished. All polygons have been triangulated.
-Info,  T13944: Points: 0, Lines: 0, Triangles: 3, Polygons: 0 (Meshes, X = removed)
-Error, T13944: FindInvalidDataProcess fails on mesh uvcoords: All vectors are identical
-Info,  T13944: FindInvalidDataProcess finished. Found issues ...
-Error, T13944: Unable to compute tangents: UV0 and normals must be there 
-Info,  T13944: JoinVerticesProcess finished | Verts in: 442852 out: 442778 | ~0.0%
-Info,  T13944: Cache relevant are 3 meshes (221410 faces). Average output ACMR is 1.999837
-Info,  T13944: Leaving post processing pipeline
+Info,  T20668: Load models\car.obj
+Info,  T20668: Found a matching importer for this file format
+Info,  T20668: Import root directory is 'models\'
+Info,  T20668: Entering post processing pipeline
+Info,  T20668: TriangulateProcess finished. All polygons have been triangulated.
+Info,  T20668: Points: 0, Lines: 0, Triangles: 243, Polygons: 0 (Meshes, X = removed)
+Error, T20668: FindInvalidDataProcess fails on mesh uvcoords: All vectors are identical
+Info,  T20668: FindInvalidDataProcess finished. Found issues ...
+Error, T20668: Unable to compute tangents: UV0 and normals must be there 
+Info,  T20668: JoinVerticesProcess finished | Verts in: 454492 out: 454418 | ~0.0%
+Info,  T20668: Cache relevant are 243 meshes (226754 faces). Average output ACMR is 2.004040
+Info,  T20668: Leaving post processing pipeline
