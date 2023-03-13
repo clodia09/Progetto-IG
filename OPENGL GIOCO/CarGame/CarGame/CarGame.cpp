@@ -27,8 +27,10 @@
 #include <cmath>
 
 
-#include<cstdlib>
+#include <cstdlib>
 
+#include <GL/gl.h>
+#include <GL/glu.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdarg.h>
@@ -60,8 +62,9 @@ GLfloat LightPosition[]= { 0.0f, 0.0f, 15.0f, 1.0f };
 // definizioni di variabili di gameplay
 bool menu = true;
 float x_coord_car = 0.0;
-float x_coord_obs, z_coord_obs, z_coord_bck= 0.0;
-float z_coord_stac = -40;
+float x_coord_obs, z_coord_obs, z_coord_bck= -50;
+float z_coord_stac= -40;
+float z_coord_bck2 = -185;
 int casuale = 0;
 int window_height = 900;
 int window_width = 600;
@@ -263,6 +266,7 @@ void Color4f(const struct aiColor4D *color)
 	glColor4f(color->r, color->g, color->b, color->a);
 }
 
+
 // ----------------------------------------------------------------------------
 
 void recursive_render (const struct aiScene *sc, const struct aiNode* nd, float scale)
@@ -370,30 +374,35 @@ void do_motion (void)
 	if (score < 300) {
 		z_coord_obs += (time - prev_time) * 0.02;
 		z_coord_bck += (time - prev_time) * 0.02;
+		z_coord_bck2 += (time - prev_time) * 0.02;
 		if(staccionatatime==true)
 		z_coord_stac += (time - prev_time) * 0.02;
 	}
 	else if (score < 800) {
 		z_coord_obs += (time - prev_time) * 0.035;
 		z_coord_bck += (time - prev_time) * 0.035;
+		z_coord_bck2 += (time - prev_time) * 0.035;
 		if (staccionatatime == true)
 		z_coord_stac += (time - prev_time) * 0.035;
 	}
 	else if (score < 1300) {
 		z_coord_obs += (time - prev_time) * 0.05;
 		z_coord_bck += (time - prev_time) * 0.05;
+		z_coord_bck2 += (time - prev_time) * 0.05;
 		if (staccionatatime == true)
 		z_coord_stac += (time - prev_time) * 0.05;
 	}
 	else if (score < 2000) {
 		z_coord_obs += (time - prev_time) * 0.06;
 		z_coord_bck += (time - prev_time) * 0.06;
+		z_coord_bck2 += (time - prev_time) * 0.06;
 		if (staccionatatime == true)
 		z_coord_stac += (time - prev_time) * 0.06;
 	}
 	else {
 		z_coord_obs += (time - prev_time) * 0.075;
 		z_coord_bck += (time - prev_time) * 0.075;
+		z_coord_bck2 += (time - prev_time) * 0.075;
 		if (staccionatatime == true)
 		z_coord_stac += (time - prev_time) * 0.075;
 	}
@@ -412,10 +421,15 @@ void do_motion (void)
 		if (casuale == 2 || casuale ==1 )
 			x_coord_obs = -2.0;
 	}
-	if (z_coord_bck > 20)			// Reset position for the background
+	if (z_coord_bck > 130)			// Reset position for the background
 	{
-		z_coord_bck = -30;
+		z_coord_bck = -130;
 	}
+	if (z_coord_bck2 > 130)			// Reset position for the background
+	{
+		z_coord_bck2 = -130;
+	}
+
 	if (z_coord_stac > 10) {
 		z_coord_stac = -50;
 		staccionatatime = false;
@@ -448,16 +462,15 @@ void check_collisions()
 	}
 }
 // ----------------------------------------------------------------------------
-void display(void)
-{
+void display(void){
 	float tmp;
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+	if (menu) {
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	gluLookAt(0.f, 3.f, 7.f, 0.f, 0.f, -5.f, 0.f, 1.f, 0.f);
-	if (menu){
+	
 		if (invincible == true) {
 			durata++;
 			if (durata > 20) {
@@ -503,7 +516,7 @@ void display(void)
 		glTranslatef(x_coord_obs, 0, z_coord_obs);
 		recursive_render(scene, scene->mRootNode->mChildren[0], 1.0);
 		glPopMatrix();
-
+		
 		//draw background
 		
 		glPushMatrix();
@@ -511,12 +524,19 @@ void display(void)
 		recursive_render(scene, scene->mRootNode->mChildren[4], 1.0);
 		glPopMatrix();
 		
+		//draw background2
+		
+		glPushMatrix();
+		glTranslatef(0, 0, z_coord_bck2);
+		recursive_render(scene, scene->mRootNode->mChildren[5], 1.0);
+		glPopMatrix();
+		
 		//draw spine
 		glPushMatrix();
 		glTranslatef(x_coord_obs, 0, z_coord_obs);
 		recursive_render(scene, scene->mRootNode->mChildren[1], 1.0);
 		glPopMatrix();
-
+		
 		//draw staccionata
 		if (score % 150 == 0) staccionatatime = true;
 		if(staccionatatime==true){
@@ -526,12 +546,6 @@ void display(void)
 		glPopMatrix();
 		}
 
-		//draw rotaie
-	
-		glPushMatrix();
-		glTranslatef(0, 0, z_coord_bck);
-		recursive_render(scene, scene->mRootNode->mChildren[5], 1.0);
-		glPopMatrix();
 		
 		//draw vite mancanti
 		
@@ -539,6 +553,15 @@ void display(void)
 		sprintf(base_str, "Vite: %d", vite);
 		glColor3f(1.0f, 1.0f, 1.0f);
 		draw_text(base_str, 10, window_height - 20);
+
+		char terreno_str[30];
+		sprintf(terreno_str, "terreno1: %f.4", z_coord_bck);
+		glColor3f(1.0f, 1.0f, 1.0f);
+		draw_text(terreno_str, 10, window_height - 80);
+		char terreno2_str[30];
+		sprintf(terreno2_str, "terreno2: %f.4", z_coord_bck2);
+		glColor3f(1.0f, 1.0f, 1.0f);
+		draw_text(terreno2_str, 10, window_height - 100);
 		//draw punteggio
 		char score_str[20];
 		sprintf(score_str, "Punteggio: %d", score);
@@ -585,8 +608,10 @@ void display(void)
 		check_collisions();
 	}
 	else {
-		
+
 		glutSwapBuffers();
+
+
 	}
 }
 
@@ -743,33 +768,34 @@ int LoadGLTextures(const aiScene* scene)
 
 int InitGL()					 // All Setup For OpenGL goes here
 {
-	if (!LoadGLTextures(scene))
-	{
-		return FALSE;
+		if (!LoadGLTextures(scene))
+		{
+			return FALSE;
+		}
+
+		glEnable(GL_TEXTURE_2D);
+		glShadeModel(GL_SMOOTH);		 // Enables Smooth Shading
+		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+		glClearDepth(1.0f);				// Depth Buffer Setup
+		glEnable(GL_DEPTH_TEST);		// Enables Depth Testing
+		glDepthFunc(GL_LEQUAL);			// The Type Of Depth Test To Do
+		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);	// Really Nice Perspective Calculation
+
+		glEnable(GL_LIGHTING);
+		glEnable(GL_LIGHT0);    // Uses default lighting parameters
+		glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
+		glEnable(GL_NORMALIZE);
+
+		glLightfv(GL_LIGHT1, GL_AMBIENT, LightAmbient);
+		glLightfv(GL_LIGHT1, GL_DIFFUSE, LightDiffuse);
+		glLightfv(GL_LIGHT1, GL_POSITION, LightPosition);
+		glEnable(GL_LIGHT1);
+
+		glColorMaterial(GL_FRONT_AND_BACK, GL_DIFFUSE);
+
+		return TRUE;					// Initialization Went OK
 	}
 
-	glEnable(GL_TEXTURE_2D);
-	glShadeModel(GL_SMOOTH);		 // Enables Smooth Shading
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-	glClearDepth(1.0f);				// Depth Buffer Setup
-	glEnable(GL_DEPTH_TEST);		// Enables Depth Testing
-	glDepthFunc(GL_LEQUAL);			// The Type Of Depth Test To Do
-	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);	// Really Nice Perspective Calculation
-
-	glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);    // Uses default lighting parameters
-	glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
-	glEnable(GL_NORMALIZE);
-
-	glLightfv(GL_LIGHT1, GL_AMBIENT, LightAmbient);
-	glLightfv(GL_LIGHT1, GL_DIFFUSE, LightDiffuse);
-	glLightfv(GL_LIGHT1, GL_POSITION, LightPosition);
-	glEnable(GL_LIGHT1);
-
-	glColorMaterial(GL_FRONT_AND_BACK, GL_DIFFUSE);
-
-	return TRUE;					// Initialization Went OK
-}
 
 // ----------------------------------------------------------------------------
 void mouse(int button, int state, int x, int y) {
@@ -782,9 +808,12 @@ void mouse(int button, int state, int x, int y) {
 		glReadPixels(x, viewport[3] - y, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, pixel);
 
 		// se il colore del pixel è bianco, incrementa la variabile
-		//if (pixel[0] == 255 && pixel[1] == 255 && pixel[2] == 255) {
+		if (menu==true && (pixel[0] ==255 && pixel[1] == 0 && pixel[2] == 0)) {
+			menu=false;
+		}
+		else if (!menu) { 
 			vite++;
-		//}
+		}
 	}
 }
 // ----------------------------------------------------------------------------
@@ -792,7 +821,7 @@ int main(int argc, char **argv)
 {
 	struct aiLogStream stream;
 	
-	int color_menu; //id del menù 
+	
 
 	glutInitWindowSize(window_height,window_width);
 	glutInitWindowPosition(100,100);

@@ -1,14 +1,14 @@
-Info,  T16112: Load models\tumbleweed_s.obj
-Info,  T16112: Found a matching importer for this file format
-Info,  T16112: Import root directory is 'models\'
-Error, T16112: OBJ/MTL: Unexpected illumination model (0-2 recognized)
-Info,  T16112: Entering post processing pipeline
-Info,  T16112: TriangulateProcess finished. All polygons have been triangulated.
-Info,  T16112: Points: 0, Lines: 0, Triangles: 245, Polygons: 0 (Meshes, X = removed)
-Error, T16112: FindInvalidDataProcess fails on mesh uvcoords: All vectors are identical
-Info,  T16112: FindInvalidDataProcess finished. Found issues ...
-Error, T16112: Unable to compute tangents: UV0 and normals must be there 
+Info,  T4900: Load models\tumbleweed_s.obj
+Info,  T4900: Found a matching importer for this file format
+Info,  T4900: Import root directory is 'models\'
+Info,  T4900: Entering post processing pipeline
+Info,  T4900: RemoveRedundantMatsProcess finished. 1 redundant and 1 unused materials
+Info,  T4900: TriangulateProcess finished. All polygons have been triangulated.
+Info,  T4900: Points: 0, Lines: 0, Triangles: 244, Polygons: 0 (Meshes, X = removed)
+Error, T4900: FindInvalidDataProcess fails on mesh uvcoords: All vectors are identical
+Info,  T4900: FindInvalidDataProcess finished. Found issues ...
+Error, T4900: Unable to compute tangents: UV0 and normals must be there 
 Skipping one or more lines with the same contents
-Info,  T16112: JoinVerticesProcess finished | Verts in: 867536 out: 835827 | ~3.7%
-Info,  T16112: Cache relevant are 245 meshes (431672 faces). Average output ACMR is 1.939236
-Info,  T16112: Leaving post processing pipeline
+Info,  T4900: JoinVerticesProcess finished | Verts in: 483296 out: 461336 | ~4.5%
+Info,  T4900: Cache relevant are 244 meshes (241172 faces). Average output ACMR is 1.915927
+Info,  T4900: Leaving post processing pipeline
