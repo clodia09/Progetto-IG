@@ -49,8 +49,8 @@ static float angle = 0.f;
 std::map<std::string, GLuint*> textureIdMap;	// map image filenames to textureIds
 GLuint*		textureIds;							// pointer to texture Array
 
-GLfloat LightAmbient[] = { 0.1f, 0.1f, 0.1f, 1.0f };
-GLfloat LightDiffuse[]= { 1.0f, 1.0f, 1.0f, 1.0f };
+GLfloat LightAmbient[] = { 0.15f, 0.15f, 0.15f, 1.0f };
+GLfloat LightDiffuse[]= { 0.6f, 0.6f,0.6f, 1.0f };
 GLfloat LightPosition[]= { 0.0f, 0.0f, 15.0f, 1.0f };
 
 #define aisgl_min(x,y) (x<y?x:y)
@@ -493,26 +493,28 @@ void display(void)
 		if (durata % 2 == 0) {
 			glPushMatrix();
 			glTranslatef(x_coord_car, y_salto, 0);
-			recursive_render(scene, scene->mRootNode->mChildren[0], 1.0);
+			glRotatef(z_coord_bck * 10, 1, 1, 1);
+			recursive_render(scene, scene->mRootNode->mChildren[3], 1.0);
 			glPopMatrix();
 		}
 
-		//draw obstacles
+		//draw cactus
 		glPushMatrix();
 		glTranslatef(x_coord_obs, 0, z_coord_obs);
-		recursive_render(scene, scene->mRootNode->mChildren[2], 1.0);
+		recursive_render(scene, scene->mRootNode->mChildren[0], 1.0);
 		glPopMatrix();
 
 		//draw background
+		
 		glPushMatrix();
 		glTranslatef(0, 0, z_coord_bck);
-		recursive_render(scene, scene->mRootNode->mChildren[1], 1.0);
+		recursive_render(scene, scene->mRootNode->mChildren[4], 1.0);
 		glPopMatrix();
-
+		
 		//draw spine
 		glPushMatrix();
 		glTranslatef(x_coord_obs, 0, z_coord_obs);
-		recursive_render(scene, scene->mRootNode->mChildren[3], 1.0);
+		recursive_render(scene, scene->mRootNode->mChildren[1], 1.0);
 		glPopMatrix();
 
 		//draw staccionata
@@ -520,9 +522,17 @@ void display(void)
 		if(staccionatatime==true){
 		glPushMatrix();
 		glTranslatef(0, 0, z_coord_stac);
-		recursive_render(scene, scene->mRootNode->mChildren[4], 1.0);
+		recursive_render(scene, scene->mRootNode->mChildren[2], 1.0);
 		glPopMatrix();
 		}
+
+		//draw rotaie
+	
+		glPushMatrix();
+		glTranslatef(0, 0, z_coord_bck);
+		recursive_render(scene, scene->mRootNode->mChildren[5], 1.0);
+		glPopMatrix();
+		
 		//draw vite mancanti
 		
 		char base_str[10];
@@ -533,6 +543,25 @@ void display(void)
 		char score_str[20];
 		sprintf(score_str, "Punteggio: %d", score);
 		draw_text(score_str, 10, window_height - 40);
+		
+		//draw cuore rosso per aumentare le vite
+		glBegin(GL_POLYGON);
+		glColor3f(1.0f, 1.0f, 1.0f);
+		// Left half of the heart
+		glVertex2f(-0.5, 0.0);
+		glVertex2f(-0.8, 0.5);
+		glVertex2f(-0.8, 0.8);
+		glVertex2f(-0.5, 1.0);
+		glVertex2f(0.0, 0.8);
+		// Right half of the heart
+		glVertex2f(0.5, 1.0);
+		glVertex2f(0.8, 0.8);
+		glVertex2f(0.8, 0.5);
+		glVertex2f(0.5, 0.0);
+		// Bottom point of the heart
+		glVertex2f(0.0, -0.5);
+		glEnd();
+
 		
 		//glColor3f(1.0, 0.0, 0.0); // impostare il colore del testo a rosso
 		//draw_text("Il mio testo rosso", 100, 100);
@@ -743,7 +772,22 @@ int InitGL()					 // All Setup For OpenGL goes here
 }
 
 // ----------------------------------------------------------------------------
+void mouse(int button, int state, int x, int y) {
+	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
+		GLint viewport[4];
+		GLubyte pixel[3];
 
+		// ottiene le coordinate del click e legge il colore del pixel
+		glGetIntegerv(GL_VIEWPORT, viewport);
+		glReadPixels(x, viewport[3] - y, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, pixel);
+
+		// se il colore del pixel è bianco, incrementa la variabile
+		//if (pixel[0] == 255 && pixel[1] == 255 && pixel[2] == 255) {
+			vite++;
+		//}
+	}
+}
+// ----------------------------------------------------------------------------
 int main(int argc, char **argv)
 {
 	struct aiLogStream stream;
@@ -759,7 +803,7 @@ int main(int argc, char **argv)
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
 	glutSpecialFunc(specialKeyListener);
-
+	glutMouseFunc(mouse);
 
 	// get a handle to the predefined STDOUT log stream and attach
 	// it to the logging system. It will be active for all further
@@ -778,7 +822,7 @@ int main(int argc, char **argv)
 		loadasset( argv[1] );
 	else // otherwise the model is specified statically 
 	{
-		char* modelToLoad = "models\\car.obj";
+		char* modelToLoad = "models\\tumbleweed_s.obj";
 		fprintf(stdout, "loading: %s", modelToLoad);		
 		loadasset(modelToLoad);
 	}	
