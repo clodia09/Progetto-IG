@@ -51,7 +51,7 @@ static float angle = 0.f;
 std::map<std::string, GLuint*> textureIdMap;	// map image filenames to textureIds
 GLuint*		textureIds;							// pointer to texture Array
 
-GLfloat LightAmbient[] = { 0.15f, 0.15f, 0.15f, 1.0f };
+GLfloat LightAmbient[] = { 0.01f, 0.015f, 0.015f, 1.0f };
 GLfloat LightDiffuse[]= { 0.6f, 0.6f,0.6f, 1.0f };
 GLfloat LightPosition[]= { 0.0f, 0.0f, 15.0f, 1.0f };
 
@@ -505,8 +505,8 @@ void display(void){
 		
 		if (durata % 2 == 0) {
 			glPushMatrix();
-			glTranslatef(x_coord_car, y_salto, 0);
-			glRotatef(z_coord_bck * 10, 1, 1, 1);
+			glTranslatef(x_coord_car, y_salto + 1, 0);
+			glRotatef(z_coord_bck * 10, -0.5, 0, 0);
 			recursive_render(scene, scene->mRootNode->mChildren[3], 1.0);
 			glPopMatrix();
 		}
@@ -521,7 +521,7 @@ void display(void){
 		
 		glPushMatrix();
 		glTranslatef(0, 0, z_coord_bck);
-		recursive_render(scene, scene->mRootNode->mChildren[4], 1.0);
+		recursive_render(scene, scene->mRootNode->mChildren[6], 1.0);
 		glPopMatrix();
 		
 		//draw background2
@@ -529,6 +529,12 @@ void display(void){
 		glPushMatrix();
 		glTranslatef(0, 0, z_coord_bck2);
 		recursive_render(scene, scene->mRootNode->mChildren[5], 1.0);
+		glPopMatrix();
+
+		//draw background3
+
+		glPushMatrix();
+		recursive_render(scene, scene->mRootNode->mChildren[4], 1.0);
 		glPopMatrix();
 		
 		//draw spine
