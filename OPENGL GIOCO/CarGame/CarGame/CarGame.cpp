@@ -452,7 +452,7 @@ void check_collisions()
 		}
 	}
 	if (z_coord_stac > -2 && z_coord_stac < 2) {
-		if (y_salto < 2 && invincible == false) {
+		if (y_salto < 1.5 && invincible == false) {
 			invincible = true;
 			vite--;
 			if (vite == 0) {
@@ -484,17 +484,17 @@ void display(void){
 		if (salto == true) {
 			if (discesa==false) {
 				if(attesa==0)
-				y_salto += 0.5;
+				y_salto += 0.125;
 				if (y_salto > 3) {
 					attesa++;
-					if (attesa == 10) {
+					if (attesa == 30) {
 						discesa = true;
 						attesa = 0;
 					}
 				}
 			}
 			else if (discesa==true ) {
-				y_salto -= 0.5;
+				y_salto -= 0.125;
 				if (y_salto == 0) {
 					discesa = false;
 					salto = false;
@@ -505,7 +505,7 @@ void display(void){
 		
 		if (durata % 2 == 0) {
 			glPushMatrix();
-			glTranslatef(x_coord_car, y_salto + 1, 0);
+			glTranslatef(x_coord_car, y_salto + 0.8, 0);
 			glRotatef(z_coord_bck * 10, -0.5, 0, 0);
 			recursive_render(scene, scene->mRootNode->mChildren[3], 1.0);
 			glPopMatrix();
@@ -559,7 +559,7 @@ void display(void){
 		sprintf(base_str, "Vite: %d", vite);
 		glColor3f(1.0f, 1.0f, 1.0f);
 		draw_text(base_str, 10, window_height - 20);
-
+		/*
 		char terreno_str[30];
 		sprintf(terreno_str, "terreno1: %f.4", z_coord_bck);
 		glColor3f(1.0f, 1.0f, 1.0f);
@@ -590,7 +590,7 @@ void display(void){
 		// Bottom point of the heart
 		glVertex2f(0.0, -0.5);
 		glEnd();
-
+		*/
 		
 		//glColor3f(1.0, 0.0, 0.0); // impostare il colore del testo a rosso
 		//draw_text("Il mio testo rosso", 100, 100);
