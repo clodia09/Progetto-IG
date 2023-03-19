@@ -1,5 +1,15 @@
-# Blender MTL File: 'tumbleweed_s.blend'
-# Material Count: 9
+# Blender 3.3.1 MTL File: 'tumbleweed_s.blend'
+# www.blender.org
+
+newmtl Material
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd menu.png
 
 newmtl Material.001
 Ns 250.000000
@@ -21,6 +31,26 @@ Ni 1.450000
 d 1.000000
 illum 2
 
+newmtl Rock2Material.001
+Ns 30.996521
+Ka 1.000000 1.000000 1.000000
+Kd 0.157434 0.157434 0.157434
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl RockMaterial
+Ns 30.996521
+Ka 1.000000 1.000000 1.000000
+Kd 0.157434 0.157434 0.157434
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
 newmtl Tumbleweed_mat
 Ns 250.000000
 Ka 1.000000 1.000000 1.000000
@@ -31,12 +61,22 @@ Ni 1.450000
 d 1.000000
 illum 2
 
+newmtl asse
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd palette.png
+
 newmtl light
 Ns 250.000000
 Ka 1.000000 1.000000 1.000000
 Kd 0.800000 0.800000 0.800000
 Ks 0.500000 0.500000 0.500000
-Ke 1.000000 1.000000 1.000000
+Ke 208.299988 208.299988 208.299988
 Ni 1.450000
 d 1.000000
 illum 2
@@ -44,7 +84,6 @@ illum 2
 newmtl palette
 Ns 250.000000
 Ka 1.000000 1.000000 1.000000
-Kd 0.800000 0.800000 0.800000
 Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.450000
@@ -55,7 +94,6 @@ map_Kd palette.png
 newmtl palette.001
 Ns 250.000000
 Ka 1.000000 1.000000 1.000000
-Kd 0.800000 0.800000 0.800000
 Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.450000
@@ -64,7 +102,7 @@ illum 2
 map_Kd palette.png
 
 newmtl palo
-Ns 359.999993
+Ns 360.000000
 Ka 1.000000 1.000000 1.000000
 Kd 0.149152 0.048499 0.007093
 Ks 0.500000 0.500000 0.500000
@@ -74,21 +112,19 @@ d 1.000000
 illum 2
 
 newmtl sign
-Ns 597.107451
+Ns 597.107361
 Ka 1.000000 1.000000 1.000000
-Kd 0.800000 0.800000 0.800000
 Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Bump C:\\Users\\claud\\Desktop\\UNI\\Informatica Grafica\\Progetto\\BlenderObjects\\Textures\\MetalSpottyDiscoloration\\MetalSpottyDiscoloration001_NRM_4K_METALNESS.jpg
 map_Kd Sign_-_Saloon.jpg
+map_Bump -bm 1.000000 C:/Users/claud/Desktop/UNI/Informatica Grafica/Progetto/BlenderObjects/Textures/MetalSpottyDiscoloration/MetalSpottyDiscoloration001_NRM_4K_METALNESS.jpg
 
 newmtl sky_mat
 Ns 250.000000
 Ka 1.000000 1.000000 1.000000
-Kd 0.800000 0.800000 0.800000
 Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.450000

@@ -61,7 +61,8 @@ GLfloat LightPosition[]= { 0.0f, 0.0f, 15.0f, 1.0f };
 #define FALSE               0
 // definizioni di variabili di gameplay
 bool menu = true;
-float x_coord_car = 0.0;
+bool showMenu = false;
+float x_coord_t = 0.0;
 float x_coord_obs, z_coord_obs, z_coord_bck= -50;
 float z_coord_stac= -40;
 float z_coord_bck2 = -185;
@@ -281,7 +282,7 @@ void recursive_render (const struct aiScene *sc, const struct aiNode* nd, float 
 	// update transform
 	m.Transpose();
 	glPushMatrix();
-	//glTranslatef(x_coord_car, 0, 0);
+	//glTranslatef(x_coord_t, 0, 0);
 	glMultMatrixf((float*)&m);
 
 	// draw all meshes assigned to this node
@@ -443,10 +444,11 @@ void do_motion (void)
 void check_collisions()
 {
 	if (z_coord_obs > -2 && z_coord_obs < 2) {
-		if (abs(x_coord_car - x_coord_obs) < 2 && invincible == false) {
+		if (abs(x_coord_t - x_coord_obs) < 2 && invincible == false) {
 			invincible = true;
 			vite--;
 			if (vite == 0) {
+				showMenu = true;
 				exit(1);
 			}
 		}
@@ -456,167 +458,185 @@ void check_collisions()
 			invincible = true;
 			vite--;
 			if (vite == 0) {
+				showMenu = true;
 				exit(1);
 			}
 		}
 	}
 }
 // ----------------------------------------------------------------------------
-void display(void){
+void display(void) {
 	float tmp;
+	if (!showMenu) {
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		if (menu) {
+			glMatrixMode(GL_MODELVIEW);
+			glLoadIdentity();
+			gluLookAt(0.f, 3.f, 7.f, 0.f, 0.f, -5.f, 0.f, 1.f, 0.f);
 
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	if (menu) {
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	gluLookAt(0.f, 3.f, 7.f, 0.f, 0.f, -5.f, 0.f, 1.f, 0.f);
-	
-		if (invincible == true) {
-			durata++;
-			if (durata > 20) {
-				invincible = false;
-				durata = 0;
+			if (invincible == true) {
+				durata++;
+				if (durata > 20) {
+					invincible = false;
+					durata = 0;
+				}
 			}
-		}
-		score++;
+			score++;
 
-		//draw tumbleweed
-		if (salto == true) {
-			if (discesa==false) {
-				if(attesa==0)
-				y_salto += 0.125;
-				if (y_salto > 3) {
-					attesa++;
-					if (attesa == 30) {
-						discesa = true;
-						attesa = 0;
+			//draw tumbleweed
+			if (salto == true) {
+				if (discesa == false) {
+					if (attesa == 0)
+						y_salto += 0.125;
+					if (y_salto > 3) {
+						attesa++;
+						if (attesa == 30) {
+							discesa = true;
+							attesa = 0;
+						}
 					}
 				}
-			}
-			else if (discesa==true ) {
-				y_salto -= 0.125;
-				if (y_salto == 0) {
-					discesa = false;
-					salto = false;
+				else if (discesa == true) {
+					y_salto -= 0.125;
+					if (y_salto == 0) {
+						discesa = false;
+						salto = false;
+					}
 				}
+
 			}
-		
-		}
-		
-		if (durata % 2 == 0) {
+
+			if (durata % 2 == 0) {
+				glPushMatrix();
+				glTranslatef(x_coord_t, y_salto + 0.8, 0);
+				glRotatef(z_coord_bck * 10, -0.5, 0, 0);
+				recursive_render(scene, scene->mRootNode->mChildren[3], 1.0);
+				glPopMatrix();
+			}
+
+			//draw cactus
 			glPushMatrix();
-			glTranslatef(x_coord_car, y_salto + 0.8, 0);
-			glRotatef(z_coord_bck * 10, -0.5, 0, 0);
-			recursive_render(scene, scene->mRootNode->mChildren[3], 1.0);
+			glTranslatef(x_coord_obs, 0, z_coord_obs);
+			recursive_render(scene, scene->mRootNode->mChildren[0], 1.0);
 			glPopMatrix();
-		}
 
-		//draw cactus
-		glPushMatrix();
-		glTranslatef(x_coord_obs, 0, z_coord_obs);
-		recursive_render(scene, scene->mRootNode->mChildren[0], 1.0);
-		glPopMatrix();
-		
-		//draw background
-		
-		glPushMatrix();
-		glTranslatef(0, 0, z_coord_bck);
-		recursive_render(scene, scene->mRootNode->mChildren[6], 1.0);
-		glPopMatrix();
-		
-		//draw background2
-		
-		glPushMatrix();
-		glTranslatef(0, 0, z_coord_bck2);
-		recursive_render(scene, scene->mRootNode->mChildren[5], 1.0);
-		glPopMatrix();
+			//draw ground1
 
-		//draw background3
+			glPushMatrix();
+			glTranslatef(0, 0, z_coord_bck);
+			recursive_render(scene, scene->mRootNode->mChildren[6], 1.0);
+			glPopMatrix();
 
-		glPushMatrix();
-		recursive_render(scene, scene->mRootNode->mChildren[4], 1.0);
-		glPopMatrix();
-		
-		//draw spine
-		glPushMatrix();
-		glTranslatef(x_coord_obs, 0, z_coord_obs);
-		recursive_render(scene, scene->mRootNode->mChildren[1], 1.0);
-		glPopMatrix();
-		
-		//draw staccionata
-		if (score % 150 == 0) staccionatatime = true;
-		if(staccionatatime==true){
-		glPushMatrix();
-		glTranslatef(0, 0, z_coord_stac);
-		recursive_render(scene, scene->mRootNode->mChildren[2], 1.0);
-		glPopMatrix();
-		}
+			//draw ground2
 
-		
-		//draw vite mancanti
-		
-		char base_str[10];
-		sprintf(base_str, "Vite: %d", vite);
-		glColor3f(1.0f, 1.0f, 1.0f);
-		draw_text(base_str, 10, window_height - 20);
-		/*
-		char terreno_str[30];
-		sprintf(terreno_str, "terreno1: %f.4", z_coord_bck);
-		glColor3f(1.0f, 1.0f, 1.0f);
-		draw_text(terreno_str, 10, window_height - 80);
-		char terreno2_str[30];
-		sprintf(terreno2_str, "terreno2: %f.4", z_coord_bck2);
-		glColor3f(1.0f, 1.0f, 1.0f);
-		draw_text(terreno2_str, 10, window_height - 100);
-		//draw punteggio
-		char score_str[20];
-		sprintf(score_str, "Punteggio: %d", score);
-		draw_text(score_str, 10, window_height - 40);
-		
-		//draw cuore rosso per aumentare le vite
-		glBegin(GL_POLYGON);
-		glColor3f(1.0f, 1.0f, 1.0f);
-		// Left half of the heart
-		glVertex2f(-0.5, 0.0);
-		glVertex2f(-0.8, 0.5);
-		glVertex2f(-0.8, 0.8);
-		glVertex2f(-0.5, 1.0);
-		glVertex2f(0.0, 0.8);
-		// Right half of the heart
-		glVertex2f(0.5, 1.0);
-		glVertex2f(0.8, 0.8);
-		glVertex2f(0.8, 0.5);
-		glVertex2f(0.5, 0.0);
-		// Bottom point of the heart
-		glVertex2f(0.0, -0.5);
-		glEnd();
-		*/
-		
-		//glColor3f(1.0, 0.0, 0.0); // impostare il colore del testo a rosso
-		//draw_text("Il mio testo rosso", 100, 100);
-		/*
-		//draw tiers
-		glPushMatrix();
-			glTranslatef(x_coord_car, -0.3, -1.5);
-			glRotatef(z_coord_bck * -10, 1, 0, 0);
-			recursive_render(scene, scene->mRootNode->mChildren[3], 1.0);
-		glPopMatrix();
+			glPushMatrix();
+			glTranslatef(0, 0, z_coord_bck2);
+			recursive_render(scene, scene->mRootNode->mChildren[5], 1.0);
+			glPopMatrix();
 
-		glPushMatrix();
-			glTranslatef(x_coord_car, -0.3, 1.5);
-			glRotatef(z_coord_bck * -10, 1, 0, 0);
+			//draw sky1
+
+			glPushMatrix();
+			glTranslatef(z_coord_bck, 0, 0);
 			recursive_render(scene, scene->mRootNode->mChildren[4], 1.0);
-		glPopMatrix();
-		*/
+			glPopMatrix();
 
-		glutSwapBuffers();
-		do_motion();
-		check_collisions();
+			//draw sky2
+
+			glPushMatrix();
+			glTranslatef(z_coord_bck2, 0, 0);
+			recursive_render(scene, scene->mRootNode->mChildren[7], 1.0);
+			glPopMatrix();
+
+			//draw spine
+			glPushMatrix();
+			glTranslatef(x_coord_obs, 0, z_coord_obs);
+			recursive_render(scene, scene->mRootNode->mChildren[1], 1.0);
+			glPopMatrix();
+
+			//draw staccionata
+			if (score % 150 == 0) staccionatatime = true;
+			if (staccionatatime == true) {
+				glPushMatrix();
+				glTranslatef(0, 0, z_coord_stac);
+				recursive_render(scene, scene->mRootNode->mChildren[2], 1.0);
+				glPopMatrix();
+			}
+
+
+			//draw vite mancanti
+
+			char base_str[10];
+			sprintf(base_str, "Vite: %d", vite);
+			glColor3f(1.0f, 1.0f, 1.0f);
+			draw_text(base_str, 10, window_height - 20);
+			/*
+			char terreno_str[30];
+			sprintf(terreno_str, "terreno1: %f.4", z_coord_bck);
+			glColor3f(1.0f, 1.0f, 1.0f);
+			draw_text(terreno_str, 10, window_height - 80);
+			char terreno2_str[30];
+			sprintf(terreno2_str, "terreno2: %f.4", z_coord_bck2);
+			glColor3f(1.0f, 1.0f, 1.0f);
+			draw_text(terreno2_str, 10, window_height - 100);
+			//draw punteggio
+			char score_str[20];
+			sprintf(score_str, "Punteggio: %d", score);
+			draw_text(score_str, 10, window_height - 40);
+
+			//draw cuore rosso per aumentare le vite
+			glBegin(GL_POLYGON);
+			glColor3f(1.0f, 1.0f, 1.0f);
+			// Left half of the heart
+			glVertex2f(-0.5, 0.0);
+			glVertex2f(-0.8, 0.5);
+			glVertex2f(-0.8, 0.8);
+			glVertex2f(-0.5, 1.0);
+			glVertex2f(0.0, 0.8);
+			// Right half of the heart
+			glVertex2f(0.5, 1.0);
+			glVertex2f(0.8, 0.8);
+			glVertex2f(0.8, 0.5);
+			glVertex2f(0.5, 0.0);
+			// Bottom point of the heart
+			glVertex2f(0.0, -0.5);
+			glEnd();
+			*/
+
+			//glColor3f(1.0, 0.0, 0.0); // impostare il colore del testo a rosso
+			//draw_text("Il mio testo rosso", 100, 100);
+			/*
+			//draw tiers
+			glPushMatrix();
+				glTranslatef(x_coord_t, -0.3, -1.5);
+				glRotatef(z_coord_bck * -10, 1, 0, 0);
+				recursive_render(scene, scene->mRootNode->mChildren[3], 1.0);
+			glPopMatrix();
+
+			glPushMatrix();
+				glTranslatef(x_coord_t, -0.3, 1.5);
+				glRotatef(z_coord_bck * -10, 1, 0, 0);
+				recursive_render(scene, scene->mRootNode->mChildren[4], 1.0);
+			glPopMatrix();
+			*/
+
+			glutSwapBuffers();
+			do_motion();
+			check_collisions();
+		}
 	}
 	else {
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			glMatrixMode(GL_MODELVIEW);
+			glLoadIdentity();
+			gluLookAt(0.f, 3.f, 10.f, 0.f, 0.f, -4.f, 0.f, 1.f, 0.f);
 
-		glutSwapBuffers();
+			//drowMenu
+			glPushMatrix();
+			recursive_render(scene, scene->mRootNode->mChildren[8], 1.0);
+			glPopMatrix();
 
+			glutSwapBuffers();
 
 	}
 }
@@ -627,14 +647,14 @@ void specialKeyListener(int key, int x, int y)
 {
 	switch (key) {
 	case GLUT_KEY_RIGHT:
-		if (x_coord_car <= 0.0) {
-			x_coord_car += 2.0;
+		if (x_coord_t <= 0.0) {
+			x_coord_t += 2.0;
 		}
 		break;
 	case GLUT_KEY_LEFT:
 	
-		if (x_coord_car >= 0.0) {
-			x_coord_car -= 2.0;
+		if (x_coord_t >= 0.0) {
+			x_coord_t -= 2.0;
 		}
 		break;	
 	case GLUT_KEY_UP:

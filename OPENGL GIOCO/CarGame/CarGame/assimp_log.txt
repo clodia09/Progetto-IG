@@ -1,16 +1,16 @@
-Info,  T23108: Load models\tumbleweed_s.obj
-Info,  T23108: Found a matching importer for this file format
-Info,  T23108: Import root directory is 'models\'
-Info,  T23108: Entering post processing pipeline
-Info,  T23108: RemoveRedundantMatsProcess finished. 2 redundant and 1 unused materials
-Error, T23108: Failed to triangulate polygon (no ear found). Probably not a simple polygon?
+Info,  T24516: Load models\tumbleweed_s.obj
+Info,  T24516: Found a matching importer for this file format
+Info,  T24516: Import root directory is 'models\'
+Info,  T24516: Entering post processing pipeline
+Info,  T24516: RemoveRedundantMatsProcess finished. 2 redundant and 4 unused materials
+Error, T24516: Failed to triangulate polygon (no ear found). Probably not a simple polygon?
 Skipping one or more lines with the same contents
-Info,  T23108: TriangulateProcess finished. All polygons have been triangulated.
-Info,  T23108: Points: 0, Lines: 0, Triangles: 248, Polygons: 0 (Meshes, X = removed)
-Error, T23108: FindInvalidDataProcess fails on mesh uvcoords: All vectors are identical
-Info,  T23108: FindInvalidDataProcess finished. Found issues ...
-Error, T23108: Unable to compute tangents: UV0 and normals must be there 
+Info,  T24516: TriangulateProcess finished. All polygons have been triangulated.
+Info,  T24516: Points: 0, Lines: 0, Triangles: 251, Polygons: 0 (Meshes, X = removed)
+Error, T24516: FindInvalidDataProcess fails on mesh uvcoords: All vectors are identical
+Info,  T24516: FindInvalidDataProcess finished. Found issues ...
+Error, T24516: Unable to compute tangents: UV0 and normals must be there 
 Skipping one or more lines with the same contents
-Info,  T23108: JoinVerticesProcess finished | Verts in: 62572 out: 35117 | ~43.9%
-Info,  T23108: Cache relevant are 248 meshes (31890 faces). Average output ACMR is 1.147162
-Info,  T23108: Leaving post processing pipeline
+Info,  T24516: JoinVerticesProcess finished | Verts in: 77010 out: 39672 | ~48.5%
+Info,  T24516: Cache relevant are 251 meshes (36724 faces). Average output ACMR is 1.134789
+Info,  T24516: Leaving post processing pipeline
