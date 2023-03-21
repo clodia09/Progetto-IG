@@ -448,18 +448,50 @@ void check_collisions()
 			invincible = true;
 			vite--;
 			if (vite == 0) {
-				showMenu = true;
-				exit(1);
+				 menu = true;
+				 showMenu = false;
+				 x_coord_t = 0.0;
+				 x_coord_obs, z_coord_obs, z_coord_bck = -50;
+				 z_coord_stac = -40;
+			     z_coord_bck2 = -185;
+				 casuale = 0;
+				 window_height = 900;
+				 window_width = 600;
+				 vite = 3;
+				 durata = 0;
+				 invincible = false;
+			     score = 0;
+				 salto = false;
+				 y_salto = 0;
+				 discesa = false;
+				 attesa = 0;
+				 staccionatatime = false;
 			}
 		}
 	}
 	if (z_coord_stac > -2 && z_coord_stac < 2) {
-		if (y_salto < 1.5 && invincible == false) {
+		if (y_salto < 1.2 && invincible == false) {
 			invincible = true;
 			vite--;
 			if (vite == 0) {
-				showMenu = true;
-				exit(1);
+				menu = true;
+				showMenu = false;
+				x_coord_t = 0.0;
+				x_coord_obs, z_coord_obs, z_coord_bck = -50;
+				z_coord_stac = -40;
+				z_coord_bck2 = -185;
+				casuale = 0;
+				window_height = 900;
+				window_width = 600;
+				vite = 3;
+				durata = 0;
+				invincible = false;
+				score = 0;
+				salto = false;
+				y_salto = 0;
+				discesa = false;
+				attesa = 0;
+				staccionatatime = false;
 			}
 		}
 	}
@@ -469,14 +501,16 @@ void display(void) {
 	float tmp;
 	if (!showMenu) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		if (menu) {
-			glMatrixMode(GL_MODELVIEW);
-			glLoadIdentity();
+		glClearColor(0, 0, 0, 0);
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+		
+		if (!menu) {
 			gluLookAt(0.f, 3.f, 7.f, 0.f, 0.f, -5.f, 0.f, 1.f, 0.f);
 
 			if (invincible == true) {
 				durata++;
-				if (durata > 20) {
+				if (durata > 200) {
 					invincible = false;
 					durata = 0;
 				}
@@ -513,7 +547,7 @@ void display(void) {
 				recursive_render(scene, scene->mRootNode->mChildren[3], 1.0);
 				glPopMatrix();
 			}
-
+			
 			//draw cactus
 			glPushMatrix();
 			glTranslatef(x_coord_obs, 0, z_coord_obs);
@@ -564,12 +598,20 @@ void display(void) {
 			}
 
 
+
+
 			//draw vite mancanti
 
 			char base_str[10];
 			sprintf(base_str, "Vite: %d", vite);
 			glColor3f(1.0f, 1.0f, 1.0f);
 			draw_text(base_str, 10, window_height - 20);
+
+			//draw punteggio
+			char score_str[20];
+			sprintf(score_str, "Punteggio: %d", score);
+			draw_text(score_str, 10, window_height - 40);
+
 			/*
 			char terreno_str[30];
 			sprintf(terreno_str, "terreno1: %f.4", z_coord_bck);
@@ -579,11 +621,7 @@ void display(void) {
 			sprintf(terreno2_str, "terreno2: %f.4", z_coord_bck2);
 			glColor3f(1.0f, 1.0f, 1.0f);
 			draw_text(terreno2_str, 10, window_height - 100);
-			//draw punteggio
-			char score_str[20];
-			sprintf(score_str, "Punteggio: %d", score);
-			draw_text(score_str, 10, window_height - 40);
-
+			
 			//draw cuore rosso per aumentare le vite
 			glBegin(GL_POLYGON);
 			glColor3f(1.0f, 1.0f, 1.0f);
@@ -619,26 +657,26 @@ void display(void) {
 				recursive_render(scene, scene->mRootNode->mChildren[4], 1.0);
 			glPopMatrix();
 			*/
-
+			
 			glutSwapBuffers();
 			do_motion();
 			check_collisions();
 		}
-	}
-	else {
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			glMatrixMode(GL_MODELVIEW);
-			glLoadIdentity();
-			gluLookAt(0.f, 3.f, 10.f, 0.f, 0.f, -4.f, 0.f, 1.f, 0.f);
+		else {
 
-			//drowMenu
-			glPushMatrix();
-			recursive_render(scene, scene->mRootNode->mChildren[8], 1.0);
-			glPopMatrix();
+		gluLookAt(0.f, 0.f, 0.f, 0.f, 0.f, -5.f, 0.f, 1.f, 0.f);
+		//drawMenu
+		glPushMatrix();
+		glTranslatef(0, -5, -11);
+		recursive_render(scene, scene->mRootNode->mChildren[8], 1.0);
+		glPopMatrix();
 
-			glutSwapBuffers();
+		glutSwapBuffers();
+
 
 	}
+	}
+	
 }
 
 // ----------------------------------------------------------------------------
@@ -825,7 +863,7 @@ int InitGL()					 // All Setup For OpenGL goes here
 
 // ----------------------------------------------------------------------------
 void mouse(int button, int state, int x, int y) {
-	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
+	if (button == GLUT_LEFT_BUTTON) {
 		GLint viewport[4];
 		GLubyte pixel[3];
 
@@ -833,12 +871,8 @@ void mouse(int button, int state, int x, int y) {
 		glGetIntegerv(GL_VIEWPORT, viewport);
 		glReadPixels(x, viewport[3] - y, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, pixel);
 
-		// se il colore del pixel è bianco, incrementa la variabile
-		if (menu==true && (pixel[0] ==255 && pixel[1] == 0 && pixel[2] == 0)) {
-			menu=false;
-		}
-		else if (!menu) { 
-			vite++;
+		if (menu) {
+			menu = false;
 		}
 	}
 }
