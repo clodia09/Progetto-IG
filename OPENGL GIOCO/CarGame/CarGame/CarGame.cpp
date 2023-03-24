@@ -61,6 +61,7 @@ GLfloat LightPosition[]= { 0.0f, 0.0f, 15.0f, 1.0f };
 #define FALSE               0
 // definizioni di variabili di gameplay
 bool menu = true;
+bool credits = false;
 float vitachepassa = 10;
 bool passaononpassa = false;
 bool showMenu = false;
@@ -75,6 +76,7 @@ int vite = 3;
 int durata = 0;
 bool invincible = false;
 int score = 0;
+int casual = 0;
 bool salto = false;
 float y_salto = 0;
 bool discesa = false;
@@ -372,75 +374,76 @@ void do_motion (void)
 {
 	static GLint prev_time = 0;
 	int time = glutGet(GLUT_ELAPSED_TIME);
-	
-	// Update coordinates
-	if (score < 300) {
-		z_coord_obs += (time - prev_time) * 0.02;
-		z_coord_bck += (time - prev_time) * 0.02;
-		z_coord_bck2 += (time - prev_time) * 0.02;
-		if(staccionatatime==true)
-		z_coord_stac += (time - prev_time) * 0.02;
-	}
-	else if (score < 800) {
-		z_coord_obs += (time - prev_time) * 0.035;
-		z_coord_bck += (time - prev_time) * 0.035;
-		z_coord_bck2 += (time - prev_time) * 0.035;
-		if (staccionatatime == true)
-		z_coord_stac += (time - prev_time) * 0.035;
-	}
-	else if (score < 1300) {
-		z_coord_obs += (time - prev_time) * 0.05;
-		z_coord_bck += (time - prev_time) * 0.05;
-		z_coord_bck2 += (time - prev_time) * 0.05;
-		if (staccionatatime == true)
-		z_coord_stac += (time - prev_time) * 0.05;
-	}
-	else if (score < 2000) {
-		z_coord_obs += (time - prev_time) * 0.06;
-		z_coord_bck += (time - prev_time) * 0.06;
-		z_coord_bck2 += (time - prev_time) * 0.06;
-		if (staccionatatime == true)
-		z_coord_stac += (time - prev_time) * 0.06;
-	}
-	else {
-		z_coord_obs += (time - prev_time) * 0.075;
-		z_coord_bck += (time - prev_time) * 0.075;
-		z_coord_bck2 += (time - prev_time) * 0.075;
-		if (staccionatatime == true)
-		z_coord_stac += (time - prev_time) * 0.075;
-	}
+	if (!menu) {
+		// Update coordinates
+		if (score < 300) {
+			z_coord_obs += (time - prev_time) * 0.02;
+			z_coord_bck += (time - prev_time) * 0.02;
+			z_coord_bck2 += (time - prev_time) * 0.02;
+			if (staccionatatime == true)
+				z_coord_stac += (time - prev_time) * 0.02;
+		}
+		else if (score < 800) {
+			z_coord_obs += (time - prev_time) * 0.035;
+			z_coord_bck += (time - prev_time) * 0.035;
+			z_coord_bck2 += (time - prev_time) * 0.035;
+			if (staccionatatime == true)
+				z_coord_stac += (time - prev_time) * 0.035;
+		}
+		else if (score < 1300) {
+			z_coord_obs += (time - prev_time) * 0.05;
+			z_coord_bck += (time - prev_time) * 0.05;
+			z_coord_bck2 += (time - prev_time) * 0.05;
+			if (staccionatatime == true)
+				z_coord_stac += (time - prev_time) * 0.05;
+		}
+		else if (score < 2000) {
+			z_coord_obs += (time - prev_time) * 0.06;
+			z_coord_bck += (time - prev_time) * 0.06;
+			z_coord_bck2 += (time - prev_time) * 0.06;
+			if (staccionatatime == true)
+				z_coord_stac += (time - prev_time) * 0.06;
+		}
+		else {
+			z_coord_obs += (time - prev_time) * 0.06;
+			z_coord_bck += (time - prev_time) * 0.06;
+			z_coord_bck2 += (time - prev_time) * 0.06;
+			if (staccionatatime == true)
+				z_coord_stac += (time - prev_time) * 0.06;
+		}
 
-	if (z_coord_obs > 10) {			// Reset position for the obstacles
-		z_coord_obs = -40;
+		if (z_coord_obs > 10) {			// Reset position for the obstacles
+			z_coord_obs = -40;
 
-		srand(time);
-		// Get a random number for the x_coord
-		
-		casuale = (rand() % (7 - 1)) + 1; // (rand() % (max- min)) + min , genera numero casuale tra max e min;
-		if (casuale == 6 || casuale == 5 || casuale==7)
-			x_coord_obs = 2.0;
-		if (casuale == 4 || casuale ==3 )
-			x_coord_obs = 0.0;
-		if (casuale == 2 || casuale ==1 )
-			x_coord_obs = -2.0;
-	}
-	if (z_coord_bck > 130)			// Reset position for the background
-	{
-		z_coord_bck = -130;
-	}
-	if (z_coord_bck2 > 130)			// Reset position for the background
-	{
-		z_coord_bck2 = -130;
-	}
+			srand(time);
+			// Get a random number for the x_coord
 
-	if (z_coord_stac > 10) {
-		z_coord_stac = -50;
-		staccionatatime = false;
+			casuale = (rand() % (7 - 1)) + 1; // (rand() % (max- min)) + min , genera numero casuale tra max e min;
+			if (casuale == 6 || casuale == 5 || casuale == 7)
+				x_coord_obs = 2.0;
+			if (casuale == 4 || casuale == 3)
+				x_coord_obs = 0.0;
+			if (casuale == 2 || casuale == 1)
+				x_coord_obs = -2.0;
+		}
+		if (z_coord_bck > 130)			// Reset position for the background
+		{
+			z_coord_bck = -130;
+		}
+		if (z_coord_bck2 > 130)			// Reset position for the background
+		{
+			z_coord_bck2 = -130;
+		}
+
+		if (z_coord_stac > 10) {
+			z_coord_stac = -50;
+			staccionatatime = false;
+		}
+
+		prev_time = time;
+
+		glutPostRedisplay();
 	}
-
-	prev_time = time;
-
-	glutPostRedisplay ();
 }
 
 void check_collisions()
@@ -449,7 +452,7 @@ void check_collisions()
 		if (abs(x_coord_t - x_coord_obs) < 2 && invincible == false) {
 			invincible = true;
 			vite--;
-			if (vite == 0) {
+			if (vite == 0){
 				 menu = true;
 				 showMenu = false;
 				 x_coord_t = 0.0;
@@ -475,25 +478,25 @@ void check_collisions()
 		if (y_salto < 1.2 && invincible == false) {
 			invincible = true;
 			vite--;
-			if (vite == 0) {
-				menu = true;
-				showMenu = false;
-				x_coord_t = 0.0;
-				x_coord_obs, z_coord_obs, z_coord_bck = -50;
-				z_coord_stac = -40;
-				z_coord_bck2 = -185;
-				casuale = 0;
-				window_height = 900;
-				window_width = 600;
-				vite = 3;
-				durata = 0;
-				invincible = false;
-				score = 0;
-				salto = false;
-				y_salto = 0;
-				discesa = false;
-				attesa = 0;
-				staccionatatime = false;
+			if (vite == 0){
+				 menu = true;
+				 showMenu = false;
+				 x_coord_t = 0.0;
+				 x_coord_obs, z_coord_obs, z_coord_bck = -50;
+				 z_coord_stac = -40;
+			     z_coord_bck2 = -185;
+				 casuale = 0;
+				 window_height = 900;
+				 window_width = 600;
+				 vite = 3;
+				 durata = 0;
+				 invincible = false;
+			     score = 0;
+				 salto = false;
+				 y_salto = 0;
+				 discesa = false;
+				 attesa = 0;
+				 staccionatatime = false;
 			}
 		}
 	}
@@ -591,18 +594,21 @@ void display(void) {
 			glPopMatrix();
 
 			//draw vita che passa ogni tanto 
-			if (score % 2000 == 0) { 
+			if (score % 1000 == 0) { 
 				passaononpassa = true;
+				vitachepassa = 10;
+				casual = (rand() % (8 - 1)) + 1;
 			} 
 			if(passaononpassa==true) {
 			glPushMatrix();
-			glTranslatef(4, vitachepassa, -20);
-			recursive_render(scene, scene->mRootNode->mChildren[12], 1);
+			glTranslatef(casual, vitachepassa, -20);
+			recursive_render(scene, scene->mRootNode->mChildren[11], 1);
 			glPopMatrix();
 			vitachepassa -= 0.05;
-			if (vitachepassa == -2){
+			if (vitachepassa == 8){
 				passaononpassa = false;
 				vitachepassa = 10;
+	
 			}
 		}
 			//draw staccionata
@@ -625,9 +631,17 @@ void display(void) {
 			draw_text(base_str, 10, window_height - 20);
 
 			//draw punteggio
-			char score_str[20];
+			char score_str[21];
 			sprintf(score_str, "Punteggio: %d", score);
 			draw_text(score_str, 10, window_height - 40);
+
+			//draw passavita
+
+			char vita_str[30];
+			sprintf(vita_str, "altvita: %d", vitachepassa);
+			glColor3f(1.0f, 1.0f, 1.0f);
+			draw_text(vita_str, 10, window_height - 30);
+
 
 			/*
 			char terreno_str[30];
@@ -685,7 +699,12 @@ void display(void) {
 		//drawMenu
 		glPushMatrix();
 		glTranslatef(0, -5, -10);
-		recursive_render(scene, scene->mRootNode->mChildren[9], 1.0);
+		if (credits == false) {
+			recursive_render(scene, scene->mRootNode->mChildren[9], 1.0);
+		}
+		else {
+			recursive_render(scene, scene->mRootNode->mChildren[8], 1.0);
+		}
 		glPopMatrix();
 		
 		glutSwapBuffers();
@@ -888,22 +907,32 @@ void mouse(int button, int state, int x, int y) {
 		glGetIntegerv(GL_VIEWPORT, viewport);
 		glReadPixels(x, viewport[3] - y, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, pixel);
 
-		if (menu) {
+		if (menu == true && credits == false) {
+
 			
-			
-			if ((y >= 45 && y <= 246) && (x >= 560 && x <= 1030)) {
+			if ((y >= 90 && y <= 200) && (x >= 560 && x <= 980)) {
 				menu = false;
 				glutPostRedisplay();
 			}
-			else { 
-				printf("x=%d,y=%d  ",x,y);
+			if ((y >= 230 && y <= 340) && (x >= 560 && x <= 980)){
+				credits = true;
+				glutPostRedisplay();
 			}
-			if ((y >= 520 && y <= 725) && (x >= 560 && x <= 1030)) {
+			if ((y >= 375 && y <= 480) && (x >= 560 && x <= 980)) {
 				exit(1);
 			}
 			
+
+
+		}
+		if (credits) {
+			if ((y >= 450 && y <= 540) && (x >= 615 && x <= 905)) {
+				credits = false;
+				glutPostRedisplay();
+			}
 			
 		}
+		
 	}
 }
 // ----------------------------------------------------------------------------

@@ -1,16 +1,16 @@
-Info,  T6296: Load models\tumbleweed_s.obj
-Info,  T6296: Found a matching importer for this file format
-Info,  T6296: Import root directory is 'models\'
-Info,  T6296: Entering post processing pipeline
-Info,  T6296: RemoveRedundantMatsProcess finished. 2 redundant and 1 unused materials
-Error, T6296: Failed to triangulate polygon (no ear found). Probably not a simple polygon?
+Info,  T2332: Load models\tumbleweed_s.obj
+Info,  T2332: Found a matching importer for this file format
+Info,  T2332: Import root directory is 'models\'
+Info,  T2332: Entering post processing pipeline
+Info,  T2332: RemoveRedundantMatsProcess finished. 2 redundant and 1 unused materials
+Error, T2332: Failed to triangulate polygon (no ear found). Probably not a simple polygon?
 Skipping one or more lines with the same contents
-Info,  T6296: TriangulateProcess finished. All polygons have been triangulated.
-Info,  T6296: Points: 0, Lines: 0, Triangles: 254, Polygons: 0 (Meshes, X = removed)
-Error, T6296: FindInvalidDataProcess fails on mesh uvcoords: All vectors are identical
-Info,  T6296: FindInvalidDataProcess finished. Found issues ...
-Error, T6296: Unable to compute tangents: UV0 and normals must be there 
+Info,  T2332: TriangulateProcess finished. All polygons have been triangulated.
+Info,  T2332: Points: 0, Lines: 0, Triangles: 254, Polygons: 0 (Meshes, X = removed)
+Error, T2332: FindInvalidDataProcess fails on mesh uvcoords: All vectors are identical
+Info,  T2332: FindInvalidDataProcess finished. Found issues ...
+Error, T2332: Unable to compute tangents: UV0 and normals must be there 
 Skipping one or more lines with the same contents
-Info,  T6296: JoinVerticesProcess finished | Verts in: 77022 out: 39716 | ~48.4%
-Info,  T6296: Cache relevant are 254 meshes (36730 faces). Average output ACMR is 1.133351
-Info,  T6296: Leaving post processing pipeline
+Info,  T2332: JoinVerticesProcess finished | Verts in: 77022 out: 39716 | ~48.4%
+Info,  T2332: Cache relevant are 254 meshes (36730 faces). Average output ACMR is 1.133351
+Info,  T2332: Leaving post processing pipeline
