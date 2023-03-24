@@ -681,11 +681,11 @@ void display(void) {
 		}
 		else {
 
-		
+			gluLookAt(0.f, 3.f, 0.f, 0.f, 0.f, -50.f, 0.f, 1.f, 0.f);
 		//drawMenu
 		glPushMatrix();
 		glTranslatef(0, -5, -10);
-		recursive_render(scene, scene->mRootNode->mChildren[8], 1.0);
+		recursive_render(scene, scene->mRootNode->mChildren[9], 1.0);
 		glPopMatrix();
 		
 		glutSwapBuffers();
