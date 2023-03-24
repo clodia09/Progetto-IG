@@ -61,14 +61,16 @@ GLfloat LightPosition[]= { 0.0f, 0.0f, 15.0f, 1.0f };
 #define FALSE               0
 // definizioni di variabili di gameplay
 bool menu = true;
+float vitachepassa = 10;
+bool passaononpassa = false;
 bool showMenu = false;
 float x_coord_t = 0.0;
 float x_coord_obs, z_coord_obs, z_coord_bck= -50;
 float z_coord_stac= -40;
 float z_coord_bck2 = -185;
 int casuale = 0;
-int window_height = 900;
-int window_width = 600;
+int window_height = 100;
+int window_width = 1000;
 int vite = 3;
 int durata = 0;
 bool invincible = false;
@@ -547,7 +549,7 @@ void display(void) {
 				recursive_render(scene, scene->mRootNode->mChildren[3], 1.0);
 				glPopMatrix();
 			}
-			
+
 			//draw cactus
 			glPushMatrix();
 			glTranslatef(x_coord_obs, 0, z_coord_obs);
@@ -588,6 +590,21 @@ void display(void) {
 			recursive_render(scene, scene->mRootNode->mChildren[1], 1.0);
 			glPopMatrix();
 
+			//draw vita che passa ogni tanto 
+			if (score % 2000 == 0) { 
+				passaononpassa = true;
+			} 
+			if(passaononpassa==true) {
+			glPushMatrix();
+			glTranslatef(4, vitachepassa, -20);
+			recursive_render(scene, scene->mRootNode->mChildren[12], 1);
+			glPopMatrix();
+			vitachepassa -= 0.05;
+			if (vitachepassa == -2){
+				passaononpassa = false;
+				vitachepassa = 10;
+			}
+		}
 			//draw staccionata
 			if (score % 150 == 0) staccionatatime = true;
 			if (staccionatatime == true) {
@@ -664,13 +681,13 @@ void display(void) {
 		}
 		else {
 
-		gluLookAt(0.f, 0.f, 0.f, 0.f, 0.f, -5.f, 0.f, 1.f, 0.f);
+		
 		//drawMenu
 		glPushMatrix();
-		glTranslatef(0, -5, -11);
+		glTranslatef(0, -5, -10);
 		recursive_render(scene, scene->mRootNode->mChildren[8], 1.0);
 		glPopMatrix();
-
+		
 		glutSwapBuffers();
 
 
@@ -863,7 +880,7 @@ int InitGL()					 // All Setup For OpenGL goes here
 
 // ----------------------------------------------------------------------------
 void mouse(int button, int state, int x, int y) {
-	if (button == GLUT_LEFT_BUTTON) {
+	if (button == GLUT_LEFT_BUTTON && state==GLUT_DOWN) {
 		GLint viewport[4];
 		GLubyte pixel[3];
 
@@ -872,7 +889,20 @@ void mouse(int button, int state, int x, int y) {
 		glReadPixels(x, viewport[3] - y, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, pixel);
 
 		if (menu) {
-			menu = false;
+			
+			
+			if ((y >= 45 && y <= 246) && (x >= 560 && x <= 1030)) {
+				menu = false;
+				glutPostRedisplay();
+			}
+			else { 
+				printf("x=%d,y=%d  ",x,y);
+			}
+			if ((y >= 520 && y <= 725) && (x >= 560 && x <= 1030)) {
+				exit(1);
+			}
+			
+			
 		}
 	}
 }
@@ -883,8 +913,7 @@ int main(int argc, char **argv)
 	
 	
 
-	glutInitWindowSize(window_height,window_width);
-	glutInitWindowPosition(100,100);
+	
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 	glutInit(&argc, argv);
 
@@ -893,7 +922,7 @@ int main(int argc, char **argv)
 	glutReshapeFunc(reshape);
 	glutSpecialFunc(specialKeyListener);
 	glutMouseFunc(mouse);
-
+	glutFullScreen();
 	// get a handle to the predefined STDOUT log stream and attach
 	// it to the logging system. It will be active for all further
 	// calls to aiImportFile(Ex) and aiApplyPostProcessing.
