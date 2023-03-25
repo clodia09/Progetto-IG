@@ -1,5 +1,16 @@
 # Blender MTL File: 'tumbleweed_s.blend'
-# Material Count: 13
+# Material Count: 14
+
+newmtl Material
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd palette.png
 
 newmtl Material.001
 Ns 250.000000
@@ -40,7 +51,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd Credits_info.jpg
+map_Kd Credits_info_final.jpg
 
 newmtl light
 Ns 250.000000
@@ -116,7 +127,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd play-retry-exit.jpg
+map_Kd score-retry-exit.jpg
 
 newmtl sign
 Ns 597.107451
