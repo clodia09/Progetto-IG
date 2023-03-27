@@ -648,7 +648,7 @@ void display(void) {
 			//draw punteggio
 			char score_str[21];
 			sprintf(score_str, "Punteggio: %d", score);
-			draw_text(score_str, 30 , window_height- 3);
+			draw_text(score_str, 30 , window_height - 2.5);
 
 			//draw passavita
 			/*
