@@ -1,16 +1,16 @@
-Info,  T9848: Load models\tumbleweed_s.obj
-Info,  T9848: Found a matching importer for this file format
-Info,  T9848: Import root directory is 'models\'
-Info,  T9848: Entering post processing pipeline
-Info,  T9848: RemoveRedundantMatsProcess finished. 3 redundant and 1 unused materials
-Error, T9848: Failed to triangulate polygon (no ear found). Probably not a simple polygon?
+Info,  T18104: Load models\tumbleweed_s.obj
+Info,  T18104: Found a matching importer for this file format
+Info,  T18104: Import root directory is 'models\'
+Info,  T18104: Entering post processing pipeline
+Info,  T18104: RemoveRedundantMatsProcess finished. 3 redundant and 1 unused materials
+Error, T18104: Failed to triangulate polygon (no ear found). Probably not a simple polygon?
 Skipping one or more lines with the same contents
-Info,  T9848: TriangulateProcess finished. All polygons have been triangulated.
-Info,  T9848: Points: 0, Lines: 0, Triangles: 255, Polygons: 0 (Meshes, X = removed)
-Error, T9848: FindInvalidDataProcess fails on mesh uvcoords: All vectors are identical
-Info,  T9848: FindInvalidDataProcess finished. Found issues ...
-Error, T9848: Unable to compute tangents: UV0 and normals must be there 
+Info,  T18104: TriangulateProcess finished. All polygons have been triangulated.
+Info,  T18104: Points: 0, Lines: 0, Triangles: 255, Polygons: 0 (Meshes, X = removed)
+Error, T18104: FindInvalidDataProcess fails on mesh uvcoords: All vectors are identical
+Info,  T18104: FindInvalidDataProcess finished. Found issues ...
+Error, T18104: Unable to compute tangents: UV0 and normals must be there 
 Skipping one or more lines with the same contents
-Info,  T9848: JoinVerticesProcess finished | Verts in: 77562 out: 39868 | ~48.6%
-Info,  T9848: Cache relevant are 255 meshes (36910 faces). Average output ACMR is 1.132782
-Info,  T9848: Leaving post processing pipeline
+Info,  T18104: JoinVerticesProcess finished | Verts in: 77562 out: 39868 | ~48.6%
+Info,  T18104: Cache relevant are 255 meshes (36910 faces). Average output ACMR is 1.132782
+Info,  T18104: Leaving post processing pipeline

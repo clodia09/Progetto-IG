@@ -63,6 +63,7 @@ GLfloat LightPosition[]= { 0.0f, 0.0f, 15.0f, 1.0f };
 bool menu = true;
 bool credits = false;
 float vitachepassa = 10;
+bool scoremenu = false;
 bool passaononpassa = false;
 bool showMenu = false;
 float x_coord_t = 0.0;
@@ -115,7 +116,7 @@ void draw_text(const char* format, int x, int y)
 	glRasterPos2i(0, 0);
 	for (int i = 0; i < strlen(buffer); i++)
 	{
-		glutBitmapCharacter(GLUT_BITMAP_9_BY_15, buffer[i]);
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, buffer[i]);
 	}
 
 	glPopMatrix();
@@ -454,6 +455,7 @@ void check_collisions()
 			vite--;
 			if (vite == 0){
 				 menu = true;
+				 scoremenu = true;
 				 showMenu = false;
 				 x_coord_t = 0.0;
 				 x_coord_obs, z_coord_obs, z_coord_bck = -50;
@@ -465,7 +467,6 @@ void check_collisions()
 				 vite = 3;
 				 durata = 0;
 				 invincible = false;
-			     score = 0;
 				 salto = false;
 				 y_salto = 0;
 				 discesa = false;
@@ -480,6 +481,7 @@ void check_collisions()
 			vite--;
 			if (vite == 0){
 				 menu = true;
+				 scoremenu = true;
 				 showMenu = false;
 				 x_coord_t = 0.0;
 				 x_coord_obs, z_coord_obs, z_coord_bck = -50;
@@ -491,7 +493,6 @@ void check_collisions()
 				 vite = 3;
 				 durata = 0;
 				 invincible = false;
-			     score = 0;
 				 salto = false;
 				 y_salto = 0;
 				 discesa = false;
@@ -593,24 +594,45 @@ void display(void) {
 			recursive_render(scene, scene->mRootNode->mChildren[1], 1.0);
 			glPopMatrix();
 
+			//draw vite rimaste
+			if (vite> 0) {
+				glPushMatrix();
+				glTranslatef(-10, 4, -20);
+				recursive_render(scene, scene->mRootNode->mChildren[12],0.5);
+				glPopMatrix();
+				if (vite > 1) {
+					glPushMatrix();
+					glTranslatef(-7, 4, -20);
+					recursive_render(scene, scene->mRootNode->mChildren[12], 0.5);
+					glPopMatrix();
+				}
+				if (vite > 2) {
+					glPushMatrix();
+					glTranslatef(-4,4, -20);
+					recursive_render(scene, scene->mRootNode->mChildren[12], 0.5);
+					glPopMatrix();
+				}
+			}
+
 			//draw vita che passa ogni tanto 
+			/*
 			if (score % 1000 == 0) { 
 				passaononpassa = true;
 				vitachepassa = 10;
-				casual = (rand() % (8 - 1)) + 1;
+				casual = (rand() % (25)) -5;
 			} 
 			if(passaononpassa==true) {
 			glPushMatrix();
-			glTranslatef(casual, vitachepassa, -20);
-			recursive_render(scene, scene->mRootNode->mChildren[11], 1);
+			glTranslatef(casual, vitachepassa, -12);
+			recursive_render(scene, scene->mRootNode->mChildren[12], 1);
 			glPopMatrix();
-			vitachepassa -= 0.05;
+			vitachepassa -= 0.025;
 			if (vitachepassa == 8){
 				passaononpassa = false;
 				vitachepassa = 10;
 	
 			}
-		}
+		}*/
 			//draw staccionata
 			if (score % 150 == 0) staccionatatime = true;
 			if (staccionatatime == true) {
@@ -623,27 +645,18 @@ void display(void) {
 
 
 
-			//draw vite mancanti
-
-			char base_str[10];
-			sprintf(base_str, "Vite: %d", vite);
-			glColor3f(1.0f, 1.0f, 1.0f);
-			draw_text(base_str, 10, window_height - 20);
-
 			//draw punteggio
 			char score_str[21];
 			sprintf(score_str, "Punteggio: %d", score);
-			draw_text(score_str, 10, window_height - 40);
+			draw_text(score_str, 30 , window_height- 3);
 
 			//draw passavita
-
+			/*
 			char vita_str[30];
 			sprintf(vita_str, "altvita: %d", vitachepassa);
 			glColor3f(1.0f, 1.0f, 1.0f);
 			draw_text(vita_str, 10, window_height - 30);
-
-
-			/*
+			
 			char terreno_str[30];
 			sprintf(terreno_str, "terreno1: %f.4", z_coord_bck);
 			glColor3f(1.0f, 1.0f, 1.0f);
@@ -699,8 +712,15 @@ void display(void) {
 		//drawMenu
 		glPushMatrix();
 		glTranslatef(0, -5, -10);
-		if (credits == false) {
+		if (credits == false && scoremenu== false ){
 			recursive_render(scene, scene->mRootNode->mChildren[9], 1.0);
+		}
+		else if(scoremenu==true) {
+			recursive_render(scene, scene->mRootNode->mChildren[10], 1.0);
+			//draw punteggio
+			char score2_str[10];
+			sprintf(score2_str, "%d", score);
+			draw_text(score2_str, 330, window_height - 120);
 		}
 		else {
 			recursive_render(scene, scene->mRootNode->mChildren[8], 1.0);
@@ -907,29 +927,56 @@ void mouse(int button, int state, int x, int y) {
 		glGetIntegerv(GL_VIEWPORT, viewport);
 		glReadPixels(x, viewport[3] - y, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, pixel);
 
-		if (menu == true && credits == false) {
+		if (menu == true) {
+			if (credits == false && scoremenu == false) {
 
-			
-			if ((y >= 90 && y <= 200) && (x >= 560 && x <= 980)) {
-				menu = false;
-				glutPostRedisplay();
+				if ((y >= 90 && y <= 200) && (x >= 560 && x <= 980)) {
+					menu = false;
+					glutPostRedisplay();
+				}
+				if ((y >= 230 && y <= 340) && (x >= 560 && x <= 980)) {
+					credits = true;
+					glutPostRedisplay();
+				}
+				if ((y >= 375 && y <= 480) && (x >= 560 && x <= 980)) {
+					exit(1);
+				}
 			}
-			if ((y >= 230 && y <= 340) && (x >= 560 && x <= 980)){
-				credits = true;
-				glutPostRedisplay();
+			if (credits == true && scoremenu == false) {
+				if ((y >= 450 && y <= 540) && (x >= 615 && x <= 905)) {
+					credits = false;
+					glutPostRedisplay();
+				}
 			}
-			if ((y >= 375 && y <= 480) && (x >= 560 && x <= 980)) {
-				exit(1);
-			}
-			
+			if (scoremenu){
+					if ((y >= 230 && y <= 340) && (x >= 560 && x <= 980)) {
+						menu = false;
+						score = 0;
+						x_coord_t = 0.0;
+						x_coord_obs, z_coord_obs, z_coord_bck = -50;
+						z_coord_stac = -40;
+						z_coord_bck2 = -185;
+						casuale = 0;
+						window_height = 900;
+						window_width = 600;
+						vite = 3;
+						durata = 0;
+						invincible = false;
+						salto = false;
+						y_salto = 0;
+						discesa = false;
+						attesa = 0;
+						staccionatatime = false;
+						scoremenu = false;
+						glutPostRedisplay();
+					}
+					if ((y >= 375 && y <= 480) && (x >= 560 && x <= 980)) {
+						exit(1);
+					}
+				
 
-
-		}
-		if (credits) {
-			if ((y >= 450 && y <= 540) && (x >= 615 && x <= 905)) {
-				credits = false;
-				glutPostRedisplay();
-			}
+		    }
+		
 			
 		}
 		
