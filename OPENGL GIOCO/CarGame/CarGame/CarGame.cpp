@@ -62,10 +62,14 @@ GLfloat LightPosition[]= { 0.0f, 0.0f, 15.0f, 1.0f };
 // definizioni di variabili di gameplay
 bool menu = true;
 bool credits = false;
-float vitachepassa = 10;
+bool invincible = false;
+bool salto = false;
+bool discesa = false;
+bool staccionatatime = false;
 bool scoremenu = false;
 bool passaononpassa = false;
 bool showMenu = false;
+float vitachepassa = 10;
 float x_coord_t = 0.0;
 float x_coord_obs, z_coord_obs, z_coord_bck= -50;
 float z_coord_stac= -40;
@@ -75,14 +79,12 @@ int window_height = 100;
 int window_width = 1000;
 int vite = 3;
 int durata = 0;
-bool invincible = false;
 int score = 0;
 int casual = 0;
-bool salto = false;
 float y_salto = 0;
-bool discesa = false;
+
 int attesa = 0;
-bool staccionatatime = false;
+
 // ----------------------------------------------------------------------------
 void reshape(int width, int height)
 {
@@ -414,7 +416,7 @@ void do_motion (void)
 		}
 
 		if (z_coord_obs > 10) {			// Reset position for the obstacles
-			z_coord_obs = -40;
+			z_coord_obs = -55;
 
 			srand(time);
 			// Get a random number for the x_coord
@@ -427,6 +429,7 @@ void do_motion (void)
 			if (casuale == 2 || casuale == 1)
 				x_coord_obs = -2.0;
 		}
+		
 		if (z_coord_bck > 130)			// Reset position for the background
 		{
 			z_coord_bck = -130;
@@ -516,7 +519,7 @@ void display(void) {
 
 			if (invincible == true) {
 				durata++;
-				if (durata > 200) {
+				if (durata > 90) {
 					invincible = false;
 					durata = 0;
 				}
@@ -527,18 +530,18 @@ void display(void) {
 			if (salto == true) {
 				if (discesa == false) {
 					if (attesa == 0)
-						y_salto += 0.125;
-					if (y_salto > 3) {
+						y_salto += 0.3;
+					if (y_salto > 2) {
 						attesa++;
-						if (attesa == 30) {
+						if (attesa == 12) {
 							discesa = true;
 							attesa = 0;
 						}
 					}
 				}
 				else if (discesa == true) {
-					y_salto -= 0.125;
-					if (y_salto == 0) {
+					y_salto -= 0.3;
+					if (y_salto <= 0) {
 						discesa = false;
 						salto = false;
 					}
@@ -594,22 +597,22 @@ void display(void) {
 			recursive_render(scene, scene->mRootNode->mChildren[1], 1.0);
 			glPopMatrix();
 
-			//draw vite rimaste
+			//draw vite rimaste - cuori
 			if (vite> 0) {
 				glPushMatrix();
 				glTranslatef(-10, 4, -20);
-				recursive_render(scene, scene->mRootNode->mChildren[12],0.5);
+				recursive_render(scene, scene->mRootNode->mChildren[10],0.5);
 				glPopMatrix();
 				if (vite > 1) {
 					glPushMatrix();
-					glTranslatef(-7, 4, -20);
-					recursive_render(scene, scene->mRootNode->mChildren[12], 0.5);
+					glTranslatef(-8, 4, -20);
+					recursive_render(scene, scene->mRootNode->mChildren[10], 0.5);
 					glPopMatrix();
 				}
 				if (vite > 2) {
 					glPushMatrix();
-					glTranslatef(-4,4, -20);
-					recursive_render(scene, scene->mRootNode->mChildren[12], 0.5);
+					glTranslatef(-6, 4, -20);
+					recursive_render(scene, scene->mRootNode->mChildren[10], 0.5);
 					glPopMatrix();
 				}
 			}
@@ -648,7 +651,7 @@ void display(void) {
 			//draw punteggio
 			char score_str[21];
 			sprintf(score_str, "Punteggio: %d", score);
-			draw_text(score_str, 30 , window_height - 2.5);
+			draw_text(score_str, 30 , window_height - 3.5);
 
 			//draw passavita
 			/*
@@ -708,7 +711,7 @@ void display(void) {
 		}
 		else {
 
-			gluLookAt(0.f, 3.f, 0.f, 0.f, 0.f, -50.f, 0.f, 1.f, 0.f);
+		gluLookAt(0.f, 3.f, 0.f, 0.f, 0.f, -50.f, 0.f, 1.f, 0.f);
 		//drawMenu
 		glPushMatrix();
 		glTranslatef(0, -5, -10);
@@ -716,11 +719,37 @@ void display(void) {
 			recursive_render(scene, scene->mRootNode->mChildren[9], 1.0);
 		}
 		else if(scoremenu==true) {
-			recursive_render(scene, scene->mRootNode->mChildren[10], 1.0);
+			recursive_render(scene, scene->mRootNode->mChildren[11], 1.0);
 			//draw punteggio
 			char score2_str[10];
 			sprintf(score2_str, "%d", score);
-			draw_text(score2_str, 330, window_height - 120);
+			//draw_text(score2_str, 330, window_height - 120);
+				int numbers[10];
+				float pos_x = 0;//TODO
+				int i = 0;
+				while (score != 0) {
+					numbers[i] = score % 10; // ottiene l'ultima cifra del numero
+					glPushMatrix();
+					glTranslatef(pos_x, 0, 0);
+					switch (numbers[i]) {
+					case 1: recursive_render(scene, scene->mRootNode->mChildren[13], 1.0); break;
+					case 2: recursive_render(scene, scene->mRootNode->mChildren[14], 1.0); break;
+					case 3: recursive_render(scene, scene->mRootNode->mChildren[15], 1.0); break;
+					case 4: recursive_render(scene, scene->mRootNode->mChildren[16], 1.0); break;
+					case 5: recursive_render(scene, scene->mRootNode->mChildren[17], 1.0); break;
+					case 6: recursive_render(scene, scene->mRootNode->mChildren[18], 1.0); break;
+					case 7: recursive_render(scene, scene->mRootNode->mChildren[19], 1.0); break;
+					case 8: recursive_render(scene, scene->mRootNode->mChildren[20], 1.0); break;
+					case 9: recursive_render(scene, scene->mRootNode->mChildren[21], 1.0); break;
+					default: recursive_render(scene, scene->mRootNode->mChildren[12], 1.0);
+					}
+					i++;
+					score = score / 10; // rimuove l'ultima cifra dal numero
+					pos_x -= 0.38;
+					glPopMatrix();
+				}
+				
+			
 		}
 		else {
 			recursive_render(scene, scene->mRootNode->mChildren[8], 1.0);
