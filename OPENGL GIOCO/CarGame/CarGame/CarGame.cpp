@@ -60,6 +60,15 @@ GLfloat LightPosition[]= { 0.0f, 0.0f, 15.0f, 1.0f };
 #define TRUE                1
 #define FALSE               0
 // definizioni di variabili di gameplay
+int livello = 1;
+int modalità = 0;
+float velocità = 0.02;
+//questi due per lettura file scoreboard
+int num;
+FILE* fptr;
+int punteggi[5];
+int indice = 0;
+
 bool menu = true;
 bool credits = false;
 bool invincible = false;
@@ -71,8 +80,8 @@ bool passaononpassa = false;
 bool showMenu = false;
 float vitachepassa = 10;
 float x_coord_t = 0.0;
-float x_coord_obs, z_coord_obs, z_coord_bck= -50;
-float z_coord_stac= -40;
+float x_coord_obs, z_coord_obs, z_coord_bck = -50;
+float z_coord_stac = -40;
 float z_coord_bck2 = -185;
 int casuale = 0;
 int window_height = 100;
@@ -82,7 +91,6 @@ int durata = 0;
 int score = 0;
 int casual = 0;
 float y_salto = 0;
-
 int attesa = 0;
 
 // ----------------------------------------------------------------------------
@@ -449,7 +457,97 @@ void do_motion (void)
 		glutPostRedisplay();
 	}
 }
+// -----------------------------------------------------------------
+void scoreboard() {
 
+
+	if ((fptr = fopen("C:\\scoreboard.txt", "r")) == NULL) {
+		printf("Error! opening file");
+
+		// Program exits if the file pointer returns NULL.
+		exit(1);
+	}
+
+
+
+
+	while (fscanf(fptr, "%d\n", &num) != EOF) {
+		punteggi[indice] = num;
+		printf("%d %d\n", indice + 1, punteggi[indice]);
+		indice++;
+	}
+	if (score > punteggi[4]) {
+		if (score > punteggi[3]) {
+			if (score > punteggi[2]) {
+				if (score > punteggi[1]) {
+					if (score > punteggi[0]) {
+						punteggi[4] = punteggi[3];
+						punteggi[3] = punteggi[2];
+						punteggi[2] = punteggi[1];
+						punteggi[1] = punteggi[0];
+						punteggi[0] = score;
+					}
+					else {
+						punteggi[4] = punteggi[3];
+						punteggi[3] = punteggi[2];
+						punteggi[2] = punteggi[1];
+						punteggi[1] = score;
+					}
+				}
+				else {
+					punteggi[4] = punteggi[3];
+					punteggi[3] = punteggi[2];
+					punteggi[2] = score;
+				}
+			}
+			else {
+				punteggi[4] = punteggi[3];
+				punteggi[3] = score;
+			}
+		}
+		else {
+			punteggi[4] = score;
+		}
+	}
+	fclose(fptr);
+	indice = 0;
+
+	if ((fptr = fopen("C:\\scoreboard.txt", "w")) == NULL) {
+		printf("Error! opening file");
+
+		// Program exits if the file pointer returns NULL.
+		exit(1);
+	}
+	while (indice != 5) {
+		printf("%d %d\n", indice + 1, punteggi[indice]);
+		fprintf(fptr, "%d\n", punteggi[indice]);
+		indice++;
+	}
+	fclose(fptr);
+
+
+	//aggiorno variabili
+	menu = true;
+	scoremenu = true;
+	showMenu = false;
+	x_coord_t = 0.0;
+	x_coord_obs, z_coord_obs, z_coord_bck = -50;
+	z_coord_stac = -40;
+	z_coord_bck2 = -185;
+	casuale = 0;
+	window_height = 100;
+	window_width = 600;
+	vite = 3;
+	durata = 0;
+	invincible = false;
+	salto = false;
+	y_salto = 0;
+	discesa = false;
+	attesa = 0;
+	staccionatatime = false;
+
+}
+// -----------------------------------------------------------------
 void check_collisions()
 {
 	if (z_coord_obs > -2 && z_coord_obs < 2) {
@@ -457,22 +555,9 @@ void check_collisions()
 			invincible = true;
 			vite--;
 			if (vite == 0){
-				 menu = true;
-				 scoremenu = true;
-				 showMenu = false;
-				 x_coord_t = 0.0;
-				 x_coord_obs, z_coord_obs, z_coord_bck = -50;
-				 z_coord_stac = -40;
-			     z_coord_bck2 = -185;
-				 casuale = 0;
-				 vite = 3;
-				 durata = 0;
-				 invincible = false;
-				 salto = false;
-				 y_salto = 0;
-				 discesa = false;
-				 attesa = 0;
-				 staccionatatime = false;
+				
+				//aggiorna scoreboard 
+				scoreboard();
 			}
 		}
 	}
@@ -480,27 +565,17 @@ void check_collisions()
 		if (y_salto < 1.2 && invincible == false) {
 			invincible = true;
 			vite--;
-			if (vite == 0){
-				 menu = true;
-				 scoremenu = true;
-				 showMenu = false;
-				 x_coord_t = 0.0;
-				 x_coord_obs, z_coord_obs, z_coord_bck = -50;
-				 z_coord_stac = -40;
-			     z_coord_bck2 = -185;
-				 casuale = 0;
-				 vite = 3;
-				 durata = 0;
-				 invincible = false;
-				 salto = false;
-				 y_salto = 0;
-				 discesa = false;
-				 attesa = 0;
-				 staccionatatime = false;
+			if (vite == 0) {
+
+				//aggiorna scoreboard 
+				scoreboard();
 			}
 		}
 	}
 }
+// ----------------------------------------------------------------------------
+
+
 // ----------------------------------------------------------------------------
 void display(void) {
 	float tmp;
@@ -721,7 +796,7 @@ void display(void) {
 			sprintf(score2_str, "%d", score);
 			//draw_text(score2_str, 330, window_height - 120);
 				int numbers[10];
-				float pos_x = 0;//TODO
+				float pos_x = 0.399;//TODO
 				int i = 0;
 				while (score != 0) {
 					numbers[i] = score % 10; // ottiene l'ultima cifra del numero
@@ -748,7 +823,7 @@ void display(void) {
 			
 		}
 		else {
-			recursive_render(scene, scene->mRootNode->mChildren[8], 1.0);
+			recursive_render(scene, scene->mRootNode->mChildren[22], 1.0);
 		}
 		glPopMatrix();
 		
@@ -764,28 +839,30 @@ void display(void) {
 
 void specialKeyListener(int key, int x, int y)
 {
-	switch (key) {
-	case GLUT_KEY_RIGHT:
-		if (x_coord_t <= 0.0) {
-			x_coord_t += 2.0;
-		}
-		break;
-	case GLUT_KEY_LEFT:
-	
-		if (x_coord_t >= 0.0) {
-			x_coord_t -= 2.0;
-		}
-		break;	
-	case GLUT_KEY_UP:
-		if (salto == false) {
-			salto = true;
-		}
-		break;
-	default:
-		break;
+	if (!menu) {
+		switch (key) {
+		case GLUT_KEY_RIGHT:
+			if (x_coord_t <= 0.0) {
+				x_coord_t += 2.0;
+			}
+			break;
+		case GLUT_KEY_LEFT:
 
+			if (x_coord_t >= 0.0) {
+				x_coord_t -= 2.0;
+			}
+			break;
+		case GLUT_KEY_DOWN:
+			if (salto == false) {
+				salto = true;
+			}
+			break;
+		default:
+			break;
+
+		}
+		glutPostRedisplay();
 	}
-	glutPostRedisplay();
 }
 
 int loadasset (const char* path)
@@ -973,29 +1050,35 @@ void mouse(int button, int state, int x, int y) {
 					glutPostRedisplay();
 				}
 			}
-			if (scoremenu){
-					if ((y >= 230 && y <= 340) && (x >= 560 && x <= 980)) {
-						menu = false;
-						score = 0;
-						x_coord_t = 0.0;
-						x_coord_obs, z_coord_obs, z_coord_bck = -50;
-						z_coord_stac = -40;
-						z_coord_bck2 = -185;
-						casuale = 0;
-						vite = 3;
-						durata = 0;
-						invincible = false;
-						salto = false;
-						y_salto = 0;
-						discesa = false;
-						attesa = 0;
-						staccionatatime = false;
-						scoremenu = false;
-						glutPostRedisplay();
-					}
-					if ((y >= 375 && y <= 480) && (x >= 560 && x <= 980)) {
-						exit(1);
-					}
+			if (scoremenu) {
+				if ((y >= 230 && y <= 340) && (x >= 560 && x <= 980)) {
+					bool credits = false;
+					bool invincible = false;
+					bool salto = false;
+					bool discesa = false;
+					bool staccionatatime = false;
+					bool scoremenu = false;
+					bool passaononpassa = false;
+					float vitachepassa = 10;
+					float x_coord_t = 0.0;
+					float x_coord_obs, z_coord_obs, z_coord_bck = -15;
+					float z_coord_stac = -5;
+					float z_coord_bck2 = -150;
+					int casuale = 0;
+					int window_height = 100;
+					int window_width = 1000;
+					int vite = 3;
+					int durata = 0;
+					int score = 0;
+					int casual = 0;
+					float y_salto = 0;
+					int attesa = 0;
+					menu = false;
+					glutPostRedisplay();
+				}
+				if ((y >= 375 && y <= 480) && (x >= 560 && x <= 980)) {
+					exit(1);
+				}
 				
 
 		    }
