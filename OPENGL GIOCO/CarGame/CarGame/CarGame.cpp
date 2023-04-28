@@ -465,8 +465,6 @@ void check_collisions()
 				 z_coord_stac = -40;
 			     z_coord_bck2 = -185;
 				 casuale = 0;
-				 window_height = 900;
-				 window_width = 600;
 				 vite = 3;
 				 durata = 0;
 				 invincible = false;
@@ -491,8 +489,6 @@ void check_collisions()
 				 z_coord_stac = -40;
 			     z_coord_bck2 = -185;
 				 casuale = 0;
-				 window_height = 900;
-				 window_width = 600;
 				 vite = 3;
 				 durata = 0;
 				 invincible = false;
@@ -715,10 +711,10 @@ void display(void) {
 		//drawMenu
 		glPushMatrix();
 		glTranslatef(0, -5, -10);
-		if (credits == false && scoremenu== false ){
+		if (!credits && !scoremenu){
 			recursive_render(scene, scene->mRootNode->mChildren[9], 1.0);
 		}
-		else if(scoremenu==true) {
+		else if(scoremenu) {
 			recursive_render(scene, scene->mRootNode->mChildren[11], 1.0);
 			//draw punteggio
 			char score2_str[10];
@@ -745,7 +741,7 @@ void display(void) {
 					}
 					i++;
 					score = score / 10; // rimuove l'ultima cifra dal numero
-					pos_x -= 0.38;
+					pos_x -= 0.399;
 					glPopMatrix();
 				}
 				
@@ -986,8 +982,6 @@ void mouse(int button, int state, int x, int y) {
 						z_coord_stac = -40;
 						z_coord_bck2 = -185;
 						casuale = 0;
-						window_height = 900;
-						window_width = 600;
 						vite = 3;
 						durata = 0;
 						invincible = false;

@@ -1,19 +1,28 @@
-# Blender MTL File: 'tumbleweed_s.blend'
-# Material Count: 14
+# Blender 3.3.1 MTL File: 'tumbleweed_s.blend'
+# www.blender.org
 
-newmtl Material
-Ns 225.000000
+newmtl Bone
+Ns 250.000000
 Ka 1.000000 1.000000 1.000000
-Kd 0.800000 0.800000 0.800000
+Kd 0.800000 0.764356 0.551884
 Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd menu.png
+
+newmtl Material
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd palette.png
 
 newmtl Material.001
-Ns 225.000000
+Ns 250.000000
 Ka 1.000000 1.000000 1.000000
 Kd 0.060586 0.800000 0.086832
 Ks 0.500000 0.500000 0.500000
@@ -22,8 +31,18 @@ Ni 1.450000
 d 1.000000
 illum 2
 
+newmtl Material.002
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd BEST SCORES.jpg
+
 newmtl Material.003
-Ns 225.000000
+Ns 250.000000
 Ka 1.000000 1.000000 1.000000
 Kd 0.800000 0.602015 0.241969
 Ks 0.500000 0.500000 0.500000
@@ -32,8 +51,38 @@ Ni 1.450000
 d 1.000000
 illum 2
 
+newmtl Material.004
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd Levels.jpg
+
+newmtl Rock2Material.001
+Ns 30.996521
+Ka 1.000000 1.000000 1.000000
+Kd 0.157434 0.157434 0.157434
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl RockMaterial
+Ns 30.996521
+Ka 1.000000 1.000000 1.000000
+Kd 0.157434 0.157434 0.157434
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
 newmtl Tumbleweed_mat
-Ns 225.000000
+Ns 250.000000
 Ka 1.000000 1.000000 1.000000
 Kd 0.236273 0.129328 0.032746
 Ks 0.500000 0.500000 0.500000
@@ -42,19 +91,28 @@ Ni 1.450000
 d 1.000000
 illum 2
 
-newmtl credits_opened
-Ns 225.000000
+newmtl asse
+Ns 250.000000
 Ka 1.000000 1.000000 1.000000
-Kd 0.800000 0.800000 0.800000
 Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd Background\\4) Credits_info.png
+map_Kd palette.png
+
+newmtl credits_opened
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd Credits_info_final.jpg
 
 newmtl light
-Ns 225.000000
+Ns 250.000000
 Ka 1.000000 1.000000 1.000000
 Kd 0.800000 0.800000 0.800000
 Ks 0.500000 0.500000 0.500000
@@ -63,10 +121,19 @@ Ni 1.450000
 d 1.000000
 illum 2
 
-newmtl palette
-Ns 225.000000
+newmtl num_mat
+Ns 250.000000
 Ka 1.000000 1.000000 1.000000
-Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd numbers.jpg
+
+newmtl palette
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
 Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.450000
@@ -75,9 +142,8 @@ illum 2
 map_Kd palette.png
 
 newmtl palette.001
-Ns 225.000000
+Ns 250.000000
 Ka 1.000000 1.000000 1.000000
-Kd 0.800000 0.800000 0.800000
 Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.450000
@@ -86,7 +152,7 @@ illum 2
 map_Kd palette.png
 
 newmtl palo
-Ns 323.999994
+Ns 360.000000
 Ka 1.000000 1.000000 1.000000
 Kd 0.149152 0.048499 0.007093
 Ks 0.500000 0.500000 0.500000
@@ -96,54 +162,39 @@ d 1.000000
 illum 2
 
 newmtl play_credits_exit
-Ns 225.000000
+Ns 250.000000
 Ka 1.000000 1.000000 1.000000
-Kd 0.800000 0.800000 0.800000
 Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd 1) play-credits-exit.png
-
-newmtl play_credits_exit.001
-Ns 225.000000
-Ka 1.000000 1.000000 1.000000
-Kd 0.800000 0.800000 0.800000
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.450000
-d 1.000000
-illum 2
-map_Kd pngwing.com.png
+map_Kd play-bestscores-credits-exit.jpg
 
 newmtl play_retry_exit
-Ns 225.000000
+Ns 250.000000
 Ka 1.000000 1.000000 1.000000
-Kd 0.800000 0.800000 0.800000
 Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd Background\\7) play-retry-exit.png
+map_Kd score-retry-exit.jpg
 
 newmtl sign
-Ns 537.396706
+Ns 597.107361
 Ka 1.000000 1.000000 1.000000
-Kd 0.800000 0.800000 0.800000
 Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Bump C:\\Users\\gnico\\OneDrive\\Documenti\\UNI\\Informatica Grafica\\Progetto\\BlenderObjects\\Textures\\MetalSpottyDiscoloration\\MetalSpottyDiscoloration001_NRM_4K_METALNESS.jpg
 map_Kd Sign_-_Saloon.jpg
+map_Bump -bm 1.000000 C:/Users/claud/Desktop/UNI/Informatica Grafica/Progetto/BlenderObjects/Textures/MetalSpottyDiscoloration/MetalSpottyDiscoloration001_NRM_4K_METALNESS.jpg
 
 newmtl sky_mat
-Ns 225.000000
+Ns 250.000000
 Ka 1.000000 1.000000 1.000000
-Kd 0.800000 0.800000 0.800000
 Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.450000
