@@ -1,15 +1,15 @@
-Info,  T3924: Load models\tumbleweed_s.obj
-Info,  T3924: Found a matching importer for this file format
-Info,  T3924: Import root directory is 'models\'
-Info,  T3924: Entering post processing pipeline
-Info,  T3924: RemoveRedundantMatsProcess finished. 3 redundant and 5 unused materials
-Error, T3924: Failed to triangulate polygon (no ear found). Probably not a simple polygon?
-Info,  T3924: TriangulateProcess finished. All polygons have been triangulated.
-Info,  T3924: Points: 0, Lines: 0, Triangles: 266, Polygons: 0 (Meshes, X = removed)
-Error, T3924: FindInvalidDataProcess fails on mesh uvcoords: All vectors are identical
-Info,  T3924: FindInvalidDataProcess finished. Found issues ...
-Error, T3924: Unable to compute tangents: UV0 and normals must be there 
+Info,  T2372: Load models\tumbleweed_s.obj
+Info,  T2372: Found a matching importer for this file format
+Info,  T2372: Import root directory is 'models\'
+Info,  T2372: Entering post processing pipeline
+Info,  T2372: RemoveRedundantMatsProcess finished. 4 redundant and 5 unused materials
+Error, T2372: Failed to triangulate polygon (no ear found). Probably not a simple polygon?
+Info,  T2372: TriangulateProcess finished. All polygons have been triangulated.
+Info,  T2372: Points: 0, Lines: 0, Triangles: 266, Polygons: 0 (Meshes, X = removed)
+Error, T2372: FindInvalidDataProcess fails on mesh uvcoords: All vectors are identical
+Info,  T2372: FindInvalidDataProcess finished. Found issues ...
+Error, T2372: Unable to compute tangents: UV0 and normals must be there 
 Skipping one or more lines with the same contents
-Info,  T3924: JoinVerticesProcess finished | Verts in: 105728 out: 77487 | ~26.7%
-Info,  T3924: Cache relevant are 266 meshes (46170 faces). Average output ACMR is 1.702382
-Info,  T3924: Leaving post processing pipeline
+Info,  T2372: JoinVerticesProcess finished | Verts in: 105728 out: 77491 | ~26.7%
+Info,  T2372: Cache relevant are 266 meshes (46170 faces). Average output ACMR is 1.702382
+Info,  T2372: Leaving post processing pipeline

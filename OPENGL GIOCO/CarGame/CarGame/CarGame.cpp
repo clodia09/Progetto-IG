@@ -578,6 +578,27 @@ void check_collisions()
 
 // ----------------------------------------------------------------------------
 void display(void) {
+
+	/*
+	*  0 CACTUS
+	*  1 SPINE
+	*  2 STACCIONATA
+	*  3 TUMBLEWEED
+	*  4 SKY1
+	*  5 GROUND1
+	*  6 GROUND2
+	*  7 SKY2
+	*  8 CREDITS
+	*  9 PLAY INIZIALE
+	*  10 VITE
+	*  11 SCORE-RETRY
+	*  12 0
+	*  ...
+	*  21 9
+	*  22 BEST SCORES
+	*  23 LEVELS
+	*/
+
 	float tmp;
 	if (!showMenu) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -786,17 +807,17 @@ void display(void) {
 		//drawMenu
 		glPushMatrix();
 		glTranslatef(0, -5, -10);
-		if (!credits && !scoremenu){
+		if (credits== false && scoremenu== false){
 			recursive_render(scene, scene->mRootNode->mChildren[9], 1.0);
 		}
-		else if(scoremenu) {
+		else if(scoremenu==true) {
 			recursive_render(scene, scene->mRootNode->mChildren[11], 1.0);
 			//draw punteggio
 			char score2_str[10];
 			sprintf(score2_str, "%d", score);
 			//draw_text(score2_str, 330, window_height - 120);
 				int numbers[10];
-				float pos_x = 0.399;//TODO
+				float pos_x = 0.4;//TODO
 				int i = 0;
 				while (score != 0) {
 					numbers[i] = score % 10; // ottiene l'ultima cifra del numero
@@ -852,7 +873,7 @@ void specialKeyListener(int key, int x, int y)
 				x_coord_t -= 2.0;
 			}
 			break;
-		case GLUT_KEY_DOWN:
+		case GLUT_KEY_UP:
 			if (salto == false) {
 				salto = true;
 			}

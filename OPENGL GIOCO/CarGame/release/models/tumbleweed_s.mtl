@@ -39,7 +39,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd BEST SCORES.jpg
+map_Kd bestscores.jpg
 
 newmtl Material.003
 Ns 250.000000
@@ -129,7 +129,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd numbers.jpg
+map_Kd numbers_def.jpg
 
 newmtl palette
 Ns 250.000000
@@ -179,7 +179,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd score-retry-exit.jpg
+map_Kd scoreretryexit.jpg
 
 newmtl sign
 Ns 597.107361

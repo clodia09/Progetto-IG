@@ -1,59 +1,59 @@
-﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(534,5): warning MSB8028: la directory intermedia (Debug\) contiene file condivisi da un altro progetto (SimpleOpenGLTexturedLoader.vcxproj). Tale condizione può comportare un comportamento di pulizia e ricompilazione non corretto.
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(517,5): warning MSB8028: la directory intermedia (Debug\) contiene file condivisi da un altro progetto (SimpleOpenGLTexturedLoader.vcxproj). Tale condizione può comportare un comportamento di pulizia e ricompilazione non corretto.
   cl : warning della riga di comando D9035 : l'opzione 'Gm' è deprecata e verrà rimossa in una futura versione
   CarGame.cpp
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiVector2D.h(75,16): warning C4244: 'return': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(122,11): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(131,11): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(140,11): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(148,11): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(160,27): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(160,23): warning C4244: 'inizializzazione': conversione da 'double' a 'const float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(161,27): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(161,23): warning C4244: 'inizializzazione': conversione da 'double' a 'const float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(162,25): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(162,21): warning C4244: 'inizializzazione': conversione da 'double' a 'const float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(163,25): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(163,21): warning C4244: 'inizializzazione': conversione da 'double' a 'const float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(164,26): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(164,22): warning C4244: 'inizializzazione': conversione da 'double' a 'const float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(165,26): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(165,22): warning C4244: 'inizializzazione': conversione da 'double' a 'const float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(198,25): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(198,20): warning C4244: 'inizializzazione': conversione da 'double' a 'const float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(199,28): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(199,23): warning C4244: 'inizializzazione': conversione da 'double' a 'const float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(217,16): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(246,17): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(247,16): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(248,44): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(249,35): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiVector3D.inl(82,13): warning C4244: 'return': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiMatrix3x3.inl(124,25): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiMatrix3x3.inl(125,16): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiMatrix3x3.inl(138,11): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiMatrix3x3.inl(138,24): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiMatrix4x4.inl(269,11): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiMatrix4x4.inl(270,11): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiMatrix4x4.inl(271,11): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiMatrix4x4.inl(272,11): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiMatrix4x4.inl(273,11): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiMatrix4x4.inl(274,11): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiMatrix4x4.inl(327,23): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiMatrix4x4.inl(328,25): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiMatrix4x4.inl(342,23): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiMatrix4x4.inl(343,25): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiMatrix4x4.inl(356,23): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiMatrix4x4.inl(357,25): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiMatrix4x4.inl(365,11): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\AssImp\include\aiMatrix4x4.inl(365,24): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\CarGame\CarGame\CarGame.cpp(127,20): warning C4018: '<': errata corrispondenza tra signed e unsigned
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\CarGame\CarGame\CarGame.cpp(113,2): warning C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\CarGame\CarGame\CarGame.cpp(464,14): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\CarGame\CarGame\CarGame.cpp(474,9): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\CarGame\CarGame\CarGame.cpp(515,14): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\CarGame\CarGame\CarGame.cpp(724,4): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\CarGame\CarGame\CarGame.cpp(796,4): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\CarGame\CarGame\CarGame.cpp(581,8): warning C4101: 'tmp': variabile locale senza riferimenti
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\CarGame\CarGame\CarGame.cpp(1064,25): warning C4101: 'z_coord_obs': variabile locale senza riferimenti
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\CarGame\CarGame\CarGame.cpp(1064,12): warning C4101: 'x_coord_obs': variabile locale senza riferimenti
-  CarGame.vcxproj -> C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\CarGame\Debug\CarGame.exe
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiVector2D.h(75,16): warning C4244: 'return': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(122,11): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(131,11): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(140,11): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(148,11): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(160,27): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(160,23): warning C4244: 'inizializzazione': conversione da 'double' a 'const float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(161,27): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(161,23): warning C4244: 'inizializzazione': conversione da 'double' a 'const float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(162,25): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(162,21): warning C4244: 'inizializzazione': conversione da 'double' a 'const float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(163,25): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(163,21): warning C4244: 'inizializzazione': conversione da 'double' a 'const float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(164,26): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(164,22): warning C4244: 'inizializzazione': conversione da 'double' a 'const float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(165,26): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(165,22): warning C4244: 'inizializzazione': conversione da 'double' a 'const float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(198,25): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(198,20): warning C4244: 'inizializzazione': conversione da 'double' a 'const float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(199,28): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(199,23): warning C4244: 'inizializzazione': conversione da 'double' a 'const float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(217,16): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(246,17): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(247,16): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(248,44): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiQuaternion.h(249,35): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiVector3D.inl(82,13): warning C4244: 'return': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiMatrix3x3.inl(124,25): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiMatrix3x3.inl(125,16): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiMatrix3x3.inl(138,11): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiMatrix3x3.inl(138,24): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiMatrix4x4.inl(269,11): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiMatrix4x4.inl(270,11): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiMatrix4x4.inl(271,11): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiMatrix4x4.inl(272,11): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiMatrix4x4.inl(273,11): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiMatrix4x4.inl(274,11): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiMatrix4x4.inl(327,23): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiMatrix4x4.inl(328,25): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiMatrix4x4.inl(342,23): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiMatrix4x4.inl(343,25): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiMatrix4x4.inl(356,23): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiMatrix4x4.inl(357,25): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiMatrix4x4.inl(365,11): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\AssImp\include\aiMatrix4x4.inl(365,24): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\CarGame\CarGame\CarGame.cpp(127,20): warning C4018: '<': errata corrispondenza tra signed e unsigned
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\CarGame\CarGame\CarGame.cpp(113,2): warning C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\CarGame\CarGame\CarGame.cpp(464,14): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\CarGame\CarGame\CarGame.cpp(474,9): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\CarGame\CarGame\CarGame.cpp(515,14): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\CarGame\CarGame\CarGame.cpp(745,4): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\CarGame\CarGame\CarGame.cpp(817,4): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\CarGame\CarGame\CarGame.cpp(602,8): warning C4101: 'tmp': variabile locale senza riferimenti
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\CarGame\CarGame\CarGame.cpp(1085,25): warning C4101: 'z_coord_obs': variabile locale senza riferimenti
+C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\CarGame\CarGame\CarGame.cpp(1085,12): warning C4101: 'x_coord_obs': variabile locale senza riferimenti
+  CarGame.vcxproj -> C:\Users\claud\Desktop\ProgettoIG\Progetto-IG\OPENGL GIOCO\CarGame\Debug\CarGame.exe
