@@ -95,7 +95,8 @@ int score = 0;
 int casual = 0;
 float y_salto = 0;
 int attesa = 0;
-
+int birra1 = 0;
+int birra2 = 1;
 
 // ----------------------------------------------------------------------------
 void reshape(int width, int height)
@@ -570,6 +571,7 @@ void scoreboard() {
 	attesa = 0;
 	staccionatatime = false;
 	indice = 0;
+	birra = false;
 }
 // -----------------------------------------------------------------
 void check_collisions()
@@ -597,8 +599,19 @@ void check_collisions()
 		}
 	}
 	if (z_coord_birra > -2 && z_coord_birra < 2) {
-		if (abs(x_coord_t - x_coord_birra) < 2) {
+		if (abs(x_coord_t - x_coord_birra) < 2 && birratime==true) {
 			birratime = false;
+			int birracasuale = 0;
+			birracasuale = (rand() % (6-1)+1); // (rand() % (max- min)) + min , genera numero casuale tra max e min;
+			if (birracasuale > 3) {
+				birra1 = 0;
+				birra2 = 1;
+			}
+			else {
+				birra1 = 1;
+				birra2 = 0;
+			}
+			
 			birra = true;
 		}
 	}
@@ -764,17 +777,41 @@ void display(void) {
 			// draw icona birra
 			
 			glPushMatrix();
-			glTranslatef(8, 0, -8);
+			
 			if (birra == true) {
-				recursive_render(scene, scene->mRootNode->mChildren[25], 1.0);
+				if (birra1 == 0) {
+					glTranslatef(3.5, 1.2, -6);
+					recursive_render(scene, scene->mRootNode->mChildren[25], 1);
+				}
+				else {
+					glTranslatef(-7, 1.2, -6);
+					recursive_render(scene, scene->mRootNode->mChildren[28], 1);
+				}
 			}
 			else {
-				recursive_render(scene, scene->mRootNode->mChildren[26], 1.0);
+				glTranslatef(3.5, 1.2, -6);
+				recursive_render(scene, scene->mRootNode->mChildren[26], 1);
 			}
 			glPopMatrix();
-
-			// dra
-
+			// draw icona 2 birra
+			glPushMatrix();
+			
+			if (birra == true) {
+				if (birra2 == 0) {
+					glTranslatef(9, 1.2, -6);
+					recursive_render(scene, scene->mRootNode->mChildren[25], 1);
+				}
+				else {
+					glTranslatef(-1, 1.2, -6);
+					recursive_render(scene, scene->mRootNode->mChildren[28], 1);
+				}
+			}
+			else {
+				glTranslatef(-1, 1.2, -6);
+				recursive_render(scene, scene->mRootNode->mChildren[27], 1);
+			}
+			glPopMatrix();
+			
 
 			//draw punteggio
 			char score_str[21];
@@ -881,7 +918,7 @@ void display(void) {
 		}
 		else if (modalita == 2) {
 
-			recursive_render(scene, scene->mRootNode->mChildren[23], 1.0);
+			recursive_render(scene, scene->mRootNode->mChildren[22], 1.0);
 
 			
 			if ((fptr = fopen("C:\\scoreboard.txt", "r")) == NULL) {
@@ -905,16 +942,16 @@ void display(void) {
 					glPushMatrix();
 					glTranslatef(pos_x, pos_y, 0);
 					switch (numbers[i]) {
-					case 1: recursive_render(scene, scene->mRootNode->mChildren[14], 1.0); break;
-					case 2: recursive_render(scene, scene->mRootNode->mChildren[15], 1.0); break;
-					case 3: recursive_render(scene, scene->mRootNode->mChildren[16], 1.0); break;
-					case 4: recursive_render(scene, scene->mRootNode->mChildren[17], 1.0); break;
-					case 5: recursive_render(scene, scene->mRootNode->mChildren[18], 1.0); break;
-					case 6: recursive_render(scene, scene->mRootNode->mChildren[19], 1.0); break;
-					case 7: recursive_render(scene, scene->mRootNode->mChildren[20], 1.0); break;
-					case 8: recursive_render(scene, scene->mRootNode->mChildren[21], 1.0); break;
-					case 9: recursive_render(scene, scene->mRootNode->mChildren[22], 1.0); break;
-					default: recursive_render(scene, scene->mRootNode->mChildren[13], 1.0);
+					case 1: recursive_render(scene, scene->mRootNode->mChildren[13], 1.0); break;
+					case 2: recursive_render(scene, scene->mRootNode->mChildren[14], 1.0); break;
+					case 3: recursive_render(scene, scene->mRootNode->mChildren[15], 1.0); break;
+					case 4: recursive_render(scene, scene->mRootNode->mChildren[16], 1.0); break;
+					case 5: recursive_render(scene, scene->mRootNode->mChildren[17], 1.0); break;
+					case 6: recursive_render(scene, scene->mRootNode->mChildren[18], 1.0); break;
+					case 7: recursive_render(scene, scene->mRootNode->mChildren[19], 1.0); break;
+					case 8: recursive_render(scene, scene->mRootNode->mChildren[20], 1.0); break;
+					case 9: recursive_render(scene, scene->mRootNode->mChildren[21], 1.0); break;
+					default: recursive_render(scene, scene->mRootNode->mChildren[12], 1.0);
 					}
 					i++;
 					punteggi[indice] = punteggi[indice] / 10; // rimuove l'ultima cifra dal numero
@@ -1198,7 +1235,8 @@ void mouse(int button, int state, int x, int y) {
 				    y_salto = 0;
 					attesa = 0;
 					modalita = 0;
-
+					birra = false;
+					birratime = false;
 					glutPostRedisplay();
 				}
 				if ((y >= 375 && y <= 480) && (x >= 560 && x <= 980)) {
@@ -1213,9 +1251,27 @@ void mouse(int button, int state, int x, int y) {
 		if (!menu) {
 			if ((button == GLUT_LEFT_BUTTON) && (state == GLUT_DOWN))
 			{
-			//	if (x >= && y <= ) {
-			//	birra = false;
-			//	}
+				printf(" cliccato il punto x: %d, y: %d\n", x, y);
+			  if ((x >= 105 && x<=365) && (y >=255 && y <=485) && birra==true ) {
+				  if (birra1 == 1) {
+					  vite--;
+					  if (vite == 0) scoreboard();
+				  }
+				  else if (vite < 3) {
+					  vite++;
+					  birra = false;
+				  }
+			  }
+			  if ((x >= 1175 && x <= 1365) && (y >= 255 && y <= 485) && birra == true) {
+				  if (birra2 == 1) {
+					  vite--;
+					  if (vite == 0) scoreboard();
+				  }
+				  else if (vite < 3) {
+					  vite++;
+					  birra = false;
+				  }
+			  }
 			}
 		}
 		
