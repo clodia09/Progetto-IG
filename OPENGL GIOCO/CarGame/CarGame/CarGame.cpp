@@ -67,6 +67,7 @@ float velocità = 0.02;
 //questi due per lettura file scoreboard
 int num;
 FILE* fptr;
+bool newrecord = false;
 int punteggi[5];
 int indice = 0;
 bool birra = false;
@@ -509,27 +510,32 @@ void scoreboard() {
 						punteggi[2] = punteggi[1];
 						punteggi[1] = punteggi[0];
 						punteggi[0] = score;
+						newrecord = true;
 					}
 					else {
 						punteggi[4] = punteggi[3];
 						punteggi[3] = punteggi[2];
 						punteggi[2] = punteggi[1];
 						punteggi[1] = score;
+						newrecord = true;
 					}
 				}
 				else {
 					punteggi[4] = punteggi[3];
 					punteggi[3] = punteggi[2];
 					punteggi[2] = score;
+					newrecord = true;
 				}
 			}
 			else {
 				punteggi[4] = punteggi[3];
 				punteggi[3] = score;
+				newrecord = true;
 			}
 		}
 		else {
 			punteggi[4] = score;
+			newrecord = true;
 		}
 	}
 	fclose(fptr);
@@ -885,6 +891,10 @@ void display(void) {
 		}
 		else if(modalita==3) {
 			recursive_render(scene, scene->mRootNode->mChildren[11], 1.0);
+			if (newrecord == true) {
+				char score_str[21] = "NEW RECORD!";
+				draw_text(score_str, 280, window_height - 8);
+			}
 			//draw punteggio
 			char score2_str[10];
 			sprintf(score2_str, "%d", score);
@@ -1237,6 +1247,7 @@ void mouse(int button, int state, int x, int y) {
 					modalita = 0;
 					birra = false;
 					birratime = false;
+					newrecord = false;
 					glutPostRedisplay();
 				}
 				if ((y >= 375 && y <= 480) && (x >= 560 && x <= 980)) {
@@ -1251,10 +1262,11 @@ void mouse(int button, int state, int x, int y) {
 		if (!menu) {
 			if ((button == GLUT_LEFT_BUTTON) && (state == GLUT_DOWN))
 			{
-				printf(" cliccato il punto x: %d, y: %d\n", x, y);
+				//printf(" cliccato il punto x: %d, y: %d\n", x, y);
 			  if ((x >= 105 && x<=365) && (y >=255 && y <=485) && birra==true ) {
 				  if (birra1 == 1) {
 					  vite--;
+					  birra = false;
 					  if (vite == 0) scoreboard();
 				  }
 				  else if (vite < 3) {
@@ -1265,6 +1277,7 @@ void mouse(int button, int state, int x, int y) {
 			  if ((x >= 1175 && x <= 1365) && (y >= 255 && y <= 485) && birra == true) {
 				  if (birra2 == 1) {
 					  vite--;
+					  birra = false;
 					  if (vite == 0) scoreboard();
 				  }
 				  else if (vite < 3) {
