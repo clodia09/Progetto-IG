@@ -82,6 +82,9 @@ bool passaononpassa = false;
 bool showMenu = false;
 float vitachepassa = 10;
 float x_coord_t = 0.0;
+float z_coord_stac_laterale = 0.0;
+float z_coord_stac_laterale2 = -20.0;
+float z_coord_stac_laterale3 = -40.0;
 float x_coord_obs, z_coord_obs, z_coord_bck = -50;
 float z_coord_stac = -40;
 float z_coord_birra = -40;
@@ -397,6 +400,9 @@ void do_motion (void)
 			z_coord_obs += (time - prev_time) * 0.02;
 			z_coord_bck += (time - prev_time) * 0.02;
 			z_coord_bck2 += (time - prev_time) * 0.02;
+			z_coord_stac_laterale += (time - prev_time) * 0.02;
+			z_coord_stac_laterale2 += (time - prev_time) * 0.02;
+			z_coord_stac_laterale3 += (time - prev_time) * 0.02;
 			if (staccionatatime == true)
 				z_coord_stac += (time - prev_time) * 0.02;
 			if (birratime == true)
@@ -406,6 +412,9 @@ void do_motion (void)
 			z_coord_obs += (time - prev_time) * 0.035;
 			z_coord_bck += (time - prev_time) * 0.035;
 			z_coord_bck2 += (time - prev_time) * 0.035;
+			z_coord_stac_laterale += (time - prev_time) * 0.035;
+			z_coord_stac_laterale2 += (time - prev_time) * 0.035;
+			z_coord_stac_laterale3 += (time - prev_time) * 0.035;
 			if (staccionatatime == true)
 				z_coord_stac += (time - prev_time) * 0.035;
 			if (birratime == true)
@@ -415,6 +424,9 @@ void do_motion (void)
 			z_coord_obs += (time - prev_time) * 0.05;
 			z_coord_bck += (time - prev_time) * 0.05;
 			z_coord_bck2 += (time - prev_time) * 0.05;
+			z_coord_stac_laterale += (time - prev_time) * 0.05;
+			z_coord_stac_laterale2 += (time - prev_time) * 0.05;
+			z_coord_stac_laterale3 += (time - prev_time) * 0.05;
 			if (staccionatatime == true)
 				z_coord_stac += (time - prev_time) * 0.05;
 			if (birratime == true)
@@ -424,6 +436,9 @@ void do_motion (void)
 			z_coord_obs += (time - prev_time) * 0.06;
 			z_coord_bck += (time - prev_time) * 0.06;
 			z_coord_bck2 += (time - prev_time) * 0.06;
+			z_coord_stac_laterale += (time - prev_time) * 0.06;
+			z_coord_stac_laterale2 += (time - prev_time) * 0.06;
+			z_coord_stac_laterale3 += (time - prev_time) * 0.06;
 			if (staccionatatime == true)
 				z_coord_stac += (time - prev_time) * 0.06;
 			if (birratime == true)
@@ -433,6 +448,9 @@ void do_motion (void)
 			z_coord_obs += (time - prev_time) * 0.07;
 			z_coord_bck += (time - prev_time) * 0.07;
 			z_coord_bck2 += (time - prev_time) * 0.07;
+			z_coord_stac_laterale += (time - prev_time) * 0.07;
+			z_coord_stac_laterale2 += (time - prev_time) * 0.07;
+			z_coord_stac_laterale3 += (time - prev_time) * 0.07;
 			if (staccionatatime == true)
 				z_coord_stac += (time - prev_time) * 0.07;
 			if (birratime == true)
@@ -474,6 +492,17 @@ void do_motion (void)
 			z_coord_birra = -50;
 			birratime = false;
 		}
+		if (z_coord_stac_laterale > 10) {
+			z_coord_stac_laterale = -80;
+		}
+		if (z_coord_stac_laterale2 > 10) {
+			z_coord_stac_laterale2= -80;
+		}
+		if (z_coord_stac_laterale3 > 10) {
+			z_coord_stac_laterale3 = -80;
+		}
+	
+
 
 		prev_time = time;
 
@@ -767,6 +796,21 @@ void display(void) {
 				recursive_render(scene, scene->mRootNode->mChildren[2], 1.0);
 				glPopMatrix();
 			}
+			// draw staccionata laterale
+			glPushMatrix();
+			glTranslatef(0, 0, z_coord_stac_laterale);
+			recursive_render(scene, scene->mRootNode->mChildren[29], 1.0);
+			glPopMatrix();
+			// draw staccionata laterale2
+			glPushMatrix();
+			glTranslatef(0, 0, z_coord_stac_laterale2);
+			recursive_render(scene, scene->mRootNode->mChildren[29], 1.0);
+			glPopMatrix();
+			// draw staccionata laterale3
+			glPushMatrix();
+			glTranslatef(0, 0, z_coord_stac_laterale3);
+			recursive_render(scene, scene->mRootNode->mChildren[29], 1.0);
+			glPopMatrix();
 			//draw birra
 			if (score % 1000 == 0) {
 				birratime = true;
