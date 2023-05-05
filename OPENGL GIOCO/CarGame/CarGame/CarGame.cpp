@@ -59,6 +59,7 @@ GLfloat LightPosition[]= { 0.0f, 0.0f, 15.0f, 1.0f };
 #define aisgl_max(x,y) (y>x?y:x)
 #define TRUE                1
 #define FALSE               0
+
 // definizioni di variabili di gameplay
 int livello = 1;
 int modalità = 0;
@@ -68,20 +69,22 @@ int num;
 FILE* fptr;
 int punteggi[5];
 int indice = 0;
-
+bool birra = false;
 bool menu = true;
-bool credits = false;
+int modalita = 0;
 bool invincible = false;
 bool salto = false;
 bool discesa = false;
 bool staccionatatime = false;
-bool scoremenu = false;
+bool birratime = false;
 bool passaononpassa = false;
 bool showMenu = false;
 float vitachepassa = 10;
 float x_coord_t = 0.0;
 float x_coord_obs, z_coord_obs, z_coord_bck = -50;
 float z_coord_stac = -40;
+float z_coord_birra = -40;
+float x_coord_birra = 0.0;
 float z_coord_bck2 = -185;
 int casuale = 0;
 int window_height = 100;
@@ -92,6 +95,7 @@ int score = 0;
 int casual = 0;
 float y_salto = 0;
 int attesa = 0;
+
 
 // ----------------------------------------------------------------------------
 void reshape(int width, int height)
@@ -387,40 +391,50 @@ void do_motion (void)
 	int time = glutGet(GLUT_ELAPSED_TIME);
 	if (!menu) {
 		// Update coordinates
-		if (score < 300) {
+		if (score < 600) {
 			z_coord_obs += (time - prev_time) * 0.02;
 			z_coord_bck += (time - prev_time) * 0.02;
 			z_coord_bck2 += (time - prev_time) * 0.02;
 			if (staccionatatime == true)
 				z_coord_stac += (time - prev_time) * 0.02;
+			if (birratime == true)
+				z_coord_birra += (time - prev_time) * 0.02;
 		}
-		else if (score < 800) {
+		else if (score < 1500) {
 			z_coord_obs += (time - prev_time) * 0.035;
 			z_coord_bck += (time - prev_time) * 0.035;
 			z_coord_bck2 += (time - prev_time) * 0.035;
 			if (staccionatatime == true)
 				z_coord_stac += (time - prev_time) * 0.035;
+			if (birratime == true)
+				z_coord_birra += (time - prev_time) * 0.035;
 		}
-		else if (score < 1300) {
+		else if (score < 2500) {
 			z_coord_obs += (time - prev_time) * 0.05;
 			z_coord_bck += (time - prev_time) * 0.05;
 			z_coord_bck2 += (time - prev_time) * 0.05;
 			if (staccionatatime == true)
 				z_coord_stac += (time - prev_time) * 0.05;
+			if (birratime == true)
+				z_coord_birra += (time - prev_time) * 0.05;
 		}
-		else if (score < 2000) {
+		else if (score < 4000 ) {
 			z_coord_obs += (time - prev_time) * 0.06;
 			z_coord_bck += (time - prev_time) * 0.06;
 			z_coord_bck2 += (time - prev_time) * 0.06;
 			if (staccionatatime == true)
 				z_coord_stac += (time - prev_time) * 0.06;
+			if (birratime == true)
+				z_coord_birra += (time - prev_time) * 0.06;
 		}
 		else {
-			z_coord_obs += (time - prev_time) * 0.06;
-			z_coord_bck += (time - prev_time) * 0.06;
-			z_coord_bck2 += (time - prev_time) * 0.06;
+			z_coord_obs += (time - prev_time) * 0.07;
+			z_coord_bck += (time - prev_time) * 0.07;
+			z_coord_bck2 += (time - prev_time) * 0.07;
 			if (staccionatatime == true)
-				z_coord_stac += (time - prev_time) * 0.06;
+				z_coord_stac += (time - prev_time) * 0.07;
+			if (birratime == true)
+				z_coord_birra += (time - prev_time) * 0.07;
 		}
 
 		if (z_coord_obs > 10) {			// Reset position for the obstacles
@@ -432,10 +446,13 @@ void do_motion (void)
 			casuale = (rand() % (7 - 1)) + 1; // (rand() % (max- min)) + min , genera numero casuale tra max e min;
 			if (casuale == 6 || casuale == 5 || casuale == 7)
 				x_coord_obs = 2.0;
+			x_coord_birra = 0.0;
 			if (casuale == 4 || casuale == 3)
 				x_coord_obs = 0.0;
+			x_coord_birra = -2.0;
 			if (casuale == 2 || casuale == 1)
 				x_coord_obs = -2.0;
+			x_coord_birra = 2.0;
 		}
 		
 		if (z_coord_bck > 130)			// Reset position for the background
@@ -450,6 +467,10 @@ void do_motion (void)
 		if (z_coord_stac > 10) {
 			z_coord_stac = -50;
 			staccionatatime = false;
+		}
+		if (z_coord_birra > 10) {
+			z_coord_birra = -50;
+			birratime = false;
 		}
 
 		prev_time = time;
@@ -468,14 +489,15 @@ void scoreboard() {
 		exit(1);
 	}
 
-
-
+	
+	
 
 	while (fscanf(fptr, "%d\n", &num) != EOF) {
 		punteggi[indice] = num;
-		printf("%d %d\n", indice + 1, punteggi[indice]);
+		//printf("%d %d\n", indice + 1, punteggi[indice]);
 		indice++;
 	}
+	
 	if (score > punteggi[4]) {
 		if (score > punteggi[3]) {
 			if (score > punteggi[2]) {
@@ -519,7 +541,7 @@ void scoreboard() {
 		exit(1);
 	}
 	while (indice != 5) {
-		printf("%d %d\n", indice + 1, punteggi[indice]);
+		//printf("%d %d\n", indice + 1, punteggi[indice]);
 		fprintf(fptr, "%d\n", punteggi[indice]);
 		indice++;
 	}
@@ -527,13 +549,15 @@ void scoreboard() {
 
 
 	//aggiorno variabili
+	modalita = 3;
 	menu = true;
-	scoremenu = true;
 	showMenu = false;
 	x_coord_t = 0.0;
 	x_coord_obs, z_coord_obs, z_coord_bck = -50;
 	z_coord_stac = -40;
 	z_coord_bck2 = -185;
+	z_coord_birra = -40;
+	x_coord_birra = 0.0;
 	casuale = 0;
 	window_height = 100;
 	window_width = 600;
@@ -545,7 +569,7 @@ void scoreboard() {
 	discesa = false;
 	attesa = 0;
 	staccionatatime = false;
-
+	indice = 0;
 }
 // -----------------------------------------------------------------
 void check_collisions()
@@ -572,6 +596,13 @@ void check_collisions()
 			}
 		}
 	}
+	if (z_coord_birra > -2 && z_coord_birra < 2) {
+		if (abs(x_coord_t - x_coord_birra) < 2) {
+			birratime = false;
+			birra = true;
+		}
+	}
+
 }
 // ----------------------------------------------------------------------------
 
@@ -604,7 +635,7 @@ void display(void) {
 						y_salto += 0.3;
 					if (y_salto > 2) {
 						attesa++;
-						if (attesa == 12) {
+						if (attesa == 24) { // prima era 12
 							discesa = true;
 							attesa = 0;
 						}
@@ -652,7 +683,7 @@ void display(void) {
 
 			glPushMatrix();
 			glTranslatef(z_coord_bck, 0, 0);
-			recursive_render(scene, scene->mRootNode->mChildren[4], 1.0);
+			recursive_render(scene, scene->mRootNode->mChildren[7], 1.0);
 			glPopMatrix();
 
 			//draw sky2
@@ -708,15 +739,41 @@ void display(void) {
 			}
 		}*/
 			//draw staccionata
-			if (score % 150 == 0) staccionatatime = true;
+			if (score % 290 == 0) {
+				staccionatatime = true;
+			}
 			if (staccionatatime == true) {
 				glPushMatrix();
 				glTranslatef(0, 0, z_coord_stac);
 				recursive_render(scene, scene->mRootNode->mChildren[2], 1.0);
 				glPopMatrix();
 			}
+			//draw birra
+			if (score % 1000 == 0) {
+				birratime = true;
+				z_coord_birra = -60;
+			}
+			if (birratime == true) {
+				
+				glPushMatrix();
+				glTranslatef(x_coord_birra, 0, z_coord_birra);
+				glRotatef(z_coord_bck * 10, 0,2, 0);
+				recursive_render(scene, scene->mRootNode->mChildren[24], 1.0);
+				glPopMatrix();
+			}
+			// draw icona birra
+			
+			glPushMatrix();
+			glTranslatef(8, 0, -8);
+			if (birra == true) {
+				recursive_render(scene, scene->mRootNode->mChildren[25], 1.0);
+			}
+			else {
+				recursive_render(scene, scene->mRootNode->mChildren[26], 1.0);
+			}
+			glPopMatrix();
 
-
+			// dra
 
 
 			//draw punteggio
@@ -786,10 +843,10 @@ void display(void) {
 		//drawMenu
 		glPushMatrix();
 		glTranslatef(0, -5, -10);
-		if (!credits && !scoremenu){
+		if (modalita==0){
 			recursive_render(scene, scene->mRootNode->mChildren[9], 1.0);
 		}
-		else if(scoremenu) {
+		else if(modalita==3) {
 			recursive_render(scene, scene->mRootNode->mChildren[11], 1.0);
 			//draw punteggio
 			char score2_str[10];
@@ -798,7 +855,7 @@ void display(void) {
 				int numbers[10];
 				float pos_x = 0.399;//TODO
 				int i = 0;
-				while (score != 0) {
+				while(score != 0){
 					numbers[i] = score % 10; // ottiene l'ultima cifra del numero
 					glPushMatrix();
 					glTranslatef(pos_x, 0, 0);
@@ -822,9 +879,59 @@ void display(void) {
 				
 			
 		}
-		else {
-			recursive_render(scene, scene->mRootNode->mChildren[22], 1.0);
+		else if (modalita == 2) {
+
+			recursive_render(scene, scene->mRootNode->mChildren[23], 1.0);
+
+			
+			if ((fptr = fopen("C:\\scoreboard.txt", "r")) == NULL) {
+				printf("Error! opening file");
+
+				// Program exits if the file pointer returns NULL.
+				exit(1);
+			}
+			
+			float pos_y = 0;
+			while (fscanf(fptr, "%d\n", &num) != EOF) {
+				punteggi[indice] = num;
+				int numbers[10];
+				float pos_x = 0.399;//TODO
+				pos_y -= 1;
+				int i = 0;
+				
+				while (punteggi[indice] != 0) {
+					
+					numbers[i] = punteggi[indice] % 10; // ottiene l'ultima cifra del numero
+					glPushMatrix();
+					glTranslatef(pos_x, pos_y, 0);
+					switch (numbers[i]) {
+					case 1: recursive_render(scene, scene->mRootNode->mChildren[14], 1.0); break;
+					case 2: recursive_render(scene, scene->mRootNode->mChildren[15], 1.0); break;
+					case 3: recursive_render(scene, scene->mRootNode->mChildren[16], 1.0); break;
+					case 4: recursive_render(scene, scene->mRootNode->mChildren[17], 1.0); break;
+					case 5: recursive_render(scene, scene->mRootNode->mChildren[18], 1.0); break;
+					case 6: recursive_render(scene, scene->mRootNode->mChildren[19], 1.0); break;
+					case 7: recursive_render(scene, scene->mRootNode->mChildren[20], 1.0); break;
+					case 8: recursive_render(scene, scene->mRootNode->mChildren[21], 1.0); break;
+					case 9: recursive_render(scene, scene->mRootNode->mChildren[22], 1.0); break;
+					default: recursive_render(scene, scene->mRootNode->mChildren[13], 1.0);
+					}
+					i++;
+					punteggi[indice] = punteggi[indice] / 10; // rimuove l'ultima cifra dal numero
+					pos_x -= 0.399;
+					glPopMatrix();
+				}
+				indice++;
+			}
+			fclose(fptr);
+			indice = 0;
+
+
 		}
+			else if(modalita == 1) {
+				recursive_render(scene, scene->mRootNode->mChildren[8], 1.0);
+			}
+		
 		glPopMatrix();
 		
 		glutSwapBuffers();
@@ -837,6 +944,9 @@ void display(void) {
 
 // ----------------------------------------------------------------------------
 
+
+
+// ----------------------------------------------------------------------------
 void specialKeyListener(int key, int x, int y)
 {
 	if (!menu) {
@@ -1026,54 +1136,69 @@ void mouse(int button, int state, int x, int y) {
 		GLubyte pixel[3];
 
 		// ottiene le coordinate del click e legge il colore del pixel
-		glGetIntegerv(GL_VIEWPORT, viewport);
-		glReadPixels(x, viewport[3] - y, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, pixel);
+	//	glGetIntegerv(GL_VIEWPORT, viewport);
+		//glReadPixels(x, viewport[3] - y, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, pixel);
 
 		if (menu == true) {
-			if (credits == false && scoremenu == false) {
+			if (modalita == 0) {
 
 				if ((y >= 90 && y <= 200) && (x >= 560 && x <= 980)) {
 					menu = false;
+					x_coord_t = 0.0;
+					x_coord_obs, z_coord_obs, z_coord_bck = -50;
+					z_coord_stac = -40;
+					z_coord_bck2 = -185;
 					glutPostRedisplay();
 				}
 				if ((y >= 230 && y <= 340) && (x >= 560 && x <= 980)) {
-					credits = true;
+					modalita = 2;
 					glutPostRedisplay();
 				}
 				if ((y >= 375 && y <= 480) && (x >= 560 && x <= 980)) {
+					modalita = 1;
+					glutPostRedisplay();
+				}
+				if ((y >= 510 && y <= 620) && (x >= 560 && x <= 980)) {
 					exit(1);
 				}
 			}
-			if (credits == true && scoremenu == false) {
+			if (modalita == 1) {
 				if ((y >= 450 && y <= 540) && (x >= 615 && x <= 905)) {
-					credits = false;
+					modalita = 0;
 					glutPostRedisplay();
 				}
 			}
-			if (scoremenu) {
+			if (modalita == 2) {
+				if ((y >= 375 && y <= 480) && (x >= 560 && x <= 980)) {
+					modalita = 0;
+					glutPostRedisplay();
+				}
+			}
+
+			if (modalita == 3) {
 				if ((y >= 230 && y <= 340) && (x >= 560 && x <= 980)) {
-					bool credits = false;
-					bool invincible = false;
-					bool salto = false;
-					bool discesa = false;
-					bool staccionatatime = false;
-					bool scoremenu = false;
-					bool passaononpassa = false;
-					float vitachepassa = 10;
-					float x_coord_t = 0.0;
-					float x_coord_obs, z_coord_obs, z_coord_bck = -15;
-					float z_coord_stac = -5;
-					float z_coord_bck2 = -150;
-					int casuale = 0;
-					int window_height = 100;
-					int window_width = 1000;
-					int vite = 3;
-					int durata = 0;
-					int score = 0;
-					int casual = 0;
-					float y_salto = 0;
-					int attesa = 0;
-					menu = false;
+					 invincible = false;
+				     salto = false;
+				     discesa = false;
+					 staccionatatime = false;
+					 birratime = false;
+					 passaononpassa = false;
+					 vitachepassa = 10;
+					 x_coord_t = 0.0;
+					 x_coord_obs, z_coord_obs, z_coord_bck = -15;
+					 z_coord_stac = -5;
+					 z_coord_bck2 = -150;
+				     casuale = 0;
+					window_height = 100;
+					window_width = 1000;
+					vite = 3;
+					durata = 0;
+					score = 0;
+					casual = 0;
+				    y_salto = 0;
+					attesa = 0;
+					modalita = 0;
+
 					glutPostRedisplay();
 				}
 				if ((y >= 375 && y <= 480) && (x >= 560 && x <= 980)) {
@@ -1084,6 +1209,14 @@ void mouse(int button, int state, int x, int y) {
 		    }
 		
 			
+		}
+		if (!menu) {
+			if ((button == GLUT_LEFT_BUTTON) && (state == GLUT_DOWN))
+			{
+			//	if (x >= && y <= ) {
+			//	birra = false;
+			//	}
+			}
 		}
 		
 	}
