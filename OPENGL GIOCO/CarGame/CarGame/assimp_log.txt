@@ -1,28 +1,28 @@
-Info,  T352: Load models\tumbleweed_s.obj
-Info,  T352: Found a matching importer for this file format
-Info,  T352: Import root directory is 'models\'
-Info,  T352: Entering post processing pipeline
-Info,  T352: RemoveRedundantMatsProcess finished. 11 redundant and 1 unused materials
-Warn,  T352: Found 68 degenerated primitives
+Info,  T16368: Load models\tumbleweed_s.obj
+Info,  T16368: Found a matching importer for this file format
+Info,  T16368: Import root directory is 'models\'
+Info,  T16368: Entering post processing pipeline
+Info,  T16368: RemoveRedundantMatsProcess finished. 11 redundant and 1 unused materials
+Warn,  T16368: Found 68 degenerated primitives
 Skipping one or more lines with the same contents
-Error, T352: Failed to triangulate polygon (no ear found). Probably not a simple polygon?
-Info,  T352: TriangulateProcess finished. All polygons have been triangulated.
-Info,  T352: Points: 0, Lines: 3, Triangles: 294, Polygons: 0 (Meshes, X = removed)
-Error, T352: FindInvalidDataProcess fails on mesh uvcoords: All vectors are identical
+Error, T16368: Failed to triangulate polygon (no ear found). Probably not a simple polygon?
+Info,  T16368: TriangulateProcess finished. All polygons have been triangulated.
+Info,  T16368: Points: 0, Lines: 3, Triangles: 297, Polygons: 0 (Meshes, X = removed)
+Error, T16368: FindInvalidDataProcess fails on mesh uvcoords: All vectors are identical
 Skipping one or more lines with the same contents
-Info,  T352: FindInvalidDataProcess finished. Found issues ...
-Error, T352: Unable to compute tangents: UV0 and normals must be there 
+Info,  T16368: FindInvalidDataProcess finished. Found issues ...
+Error, T16368: Unable to compute tangents: UV0 and normals must be there 
 Skipping one or more lines with the same contents
-Info,  T352: Tangents are undefined for line and point meshes
-Error, T352: Unable to compute tangents: UV0 and normals must be there 
-Info,  T352: Tangents are undefined for line and point meshes
-Error, T352: Unable to compute tangents: UV0 and normals must be there 
+Info,  T16368: Tangents are undefined for line and point meshes
+Error, T16368: Unable to compute tangents: UV0 and normals must be there 
+Info,  T16368: Tangents are undefined for line and point meshes
+Error, T16368: Unable to compute tangents: UV0 and normals must be there 
 Skipping one or more lines with the same contents
-Info,  T352: Tangents are undefined for line and point meshes
-Error, T352: Unable to compute tangents: UV0 and normals must be there 
+Info,  T16368: Tangents are undefined for line and point meshes
+Error, T16368: Unable to compute tangents: UV0 and normals must be there 
 Skipping one or more lines with the same contents
-Info,  T352: JoinVerticesProcess finished | Verts in: 228504 out: 123302 | ~46.0%
-Error, T352: This algorithm works on triangle meshes only
+Info,  T16368: JoinVerticesProcess finished | Verts in: 228936 out: 123734 | ~46.0%
+Error, T16368: This algorithm works on triangle meshes only
 Skipping one or more lines with the same contents
-Info,  T352: Cache relevant are 294 meshes (106074 faces). Average output ACMR is 1.278862
-Info,  T352: Leaving post processing pipeline
+Info,  T16368: Cache relevant are 297 meshes (106290 faces). Average output ACMR is 1.280327
+Info,  T16368: Leaving post processing pipeline

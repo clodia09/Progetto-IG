@@ -85,6 +85,8 @@ float x_coord_t = 0.0;
 float z_coord_stac_laterale = 0.0;
 float z_coord_stac_laterale2 = -20.0;
 float z_coord_stac_laterale3 = -40.0;
+float z_coord_stac_laterale4 = -60.0;
+float z_coord_stac_laterale5 = -80.0;
 float x_coord_obs, z_coord_obs, z_coord_bck = -50;
 float z_coord_stac = -40;
 float z_coord_birra = -40;
@@ -403,6 +405,8 @@ void do_motion (void)
 			z_coord_stac_laterale += (time - prev_time) * 0.02;
 			z_coord_stac_laterale2 += (time - prev_time) * 0.02;
 			z_coord_stac_laterale3 += (time - prev_time) * 0.02;
+			z_coord_stac_laterale4 += (time - prev_time) * 0.02;
+			z_coord_stac_laterale5 += (time - prev_time) * 0.02;
 			if (staccionatatime == true)
 				z_coord_stac += (time - prev_time) * 0.02;
 			if (birratime == true)
@@ -415,6 +419,8 @@ void do_motion (void)
 			z_coord_stac_laterale += (time - prev_time) * 0.035;
 			z_coord_stac_laterale2 += (time - prev_time) * 0.035;
 			z_coord_stac_laterale3 += (time - prev_time) * 0.035;
+			z_coord_stac_laterale4 += (time - prev_time) * 0.035;
+			z_coord_stac_laterale5 += (time - prev_time) * 0.035;
 			if (staccionatatime == true)
 				z_coord_stac += (time - prev_time) * 0.035;
 			if (birratime == true)
@@ -427,6 +433,8 @@ void do_motion (void)
 			z_coord_stac_laterale += (time - prev_time) * 0.05;
 			z_coord_stac_laterale2 += (time - prev_time) * 0.05;
 			z_coord_stac_laterale3 += (time - prev_time) * 0.05;
+			z_coord_stac_laterale4 += (time - prev_time) * 0.05;
+			z_coord_stac_laterale5 += (time - prev_time) * 0.05;
 			if (staccionatatime == true)
 				z_coord_stac += (time - prev_time) * 0.05;
 			if (birratime == true)
@@ -439,6 +447,8 @@ void do_motion (void)
 			z_coord_stac_laterale += (time - prev_time) * 0.06;
 			z_coord_stac_laterale2 += (time - prev_time) * 0.06;
 			z_coord_stac_laterale3 += (time - prev_time) * 0.06;
+			z_coord_stac_laterale4 += (time - prev_time) * 0.06;
+			z_coord_stac_laterale5 += (time - prev_time) * 0.06;
 			if (staccionatatime == true)
 				z_coord_stac += (time - prev_time) * 0.06;
 			if (birratime == true)
@@ -451,6 +461,8 @@ void do_motion (void)
 			z_coord_stac_laterale += (time - prev_time) * 0.07;
 			z_coord_stac_laterale2 += (time - prev_time) * 0.07;
 			z_coord_stac_laterale3 += (time - prev_time) * 0.07;
+			z_coord_stac_laterale4 += (time - prev_time) * 0.07;
+			z_coord_stac_laterale5 += (time - prev_time) * 0.07;
 			if (staccionatatime == true)
 				z_coord_stac += (time - prev_time) * 0.07;
 			if (birratime == true)
@@ -500,6 +512,12 @@ void do_motion (void)
 		}
 		if (z_coord_stac_laterale3 > 10) {
 			z_coord_stac_laterale3 = -80;
+		}
+		if (z_coord_stac_laterale4 > 10) {
+			z_coord_stac_laterale4 = -80;
+		}
+		if (z_coord_stac_laterale5 > 10) {
+			z_coord_stac_laterale5 = -80;
 		}
 	
 
@@ -607,47 +625,54 @@ void scoreboard() {
 	staccionatatime = false;
 	indice = 0;
 	birra = false;
+	z_coord_stac_laterale = 0;
+	z_coord_stac_laterale2 = -20;
+	z_coord_stac_laterale3 = -40;
+	z_coord_stac_laterale4 = -60;
+	z_coord_stac_laterale5 = -80;
 }
 // -----------------------------------------------------------------
 void check_collisions()
 {
-	if (z_coord_obs > -2 && z_coord_obs < 2) {
-		if (abs(x_coord_t - x_coord_obs) < 2 && invincible == false) {
-			invincible = true;
-			vite--;
-			if (vite == 0){
-				
-				//aggiorna scoreboard 
-				scoreboard();
-			}
-		}
-	}
-	if (z_coord_stac > -2 && z_coord_stac < 2) {
-		if (y_salto < 1.2 && invincible == false) {
-			invincible = true;
-			vite--;
-			if (vite == 0) {
+	if (!menu) {
+		if (z_coord_obs > -2 && z_coord_obs < 2) {
+			if (abs(x_coord_t - x_coord_obs) < 2 && invincible == false) {
+				invincible = true;
+				vite--;
+				if (vite == 0) {
 
-				//aggiorna scoreboard 
-				scoreboard();
+					//aggiorna scoreboard 
+					scoreboard();
+				}
 			}
 		}
-	}
-	if (z_coord_birra > -2 && z_coord_birra < 2) {
-		if (abs(x_coord_t - x_coord_birra) < 2 && birratime==true) {
-			birratime = false;
-			int birracasuale = 0;
-			birracasuale = (rand() % (6-1)+1); // (rand() % (max- min)) + min , genera numero casuale tra max e min;
-			if (birracasuale > 3) {
-				birra1 = 0;
-				birra2 = 1;
+		if (z_coord_stac > -2 && z_coord_stac < 2) {
+			if (y_salto < 1.2 && invincible == false) {
+				invincible = true;
+				vite--;
+				if (vite == 0) {
+
+					//aggiorna scoreboard 
+					scoreboard();
+				}
 			}
-			else {
-				birra1 = 1;
-				birra2 = 0;
+		}
+		if (z_coord_birra > -2 && z_coord_birra < 2) {
+			if (abs(x_coord_t - x_coord_birra) < 2 && birratime == true) {
+				birratime = false;
+				int birracasuale = 0;
+				birracasuale = (rand() % (6 - 1) + 1); // (rand() % (max- min)) + min , genera numero casuale tra max e min;
+				if (birracasuale > 3) {
+					birra1 = 0;
+					birra2 = 1;
+				}
+				else {
+					birra1 = 1;
+					birra2 = 0;
+				}
+
+				birra = true;
 			}
-			
-			birra = true;
 		}
 	}
 
@@ -804,12 +829,22 @@ void display(void) {
 			// draw staccionata laterale2
 			glPushMatrix();
 			glTranslatef(0, 0, z_coord_stac_laterale2);
-			recursive_render(scene, scene->mRootNode->mChildren[29], 1.0);
+			recursive_render(scene, scene->mRootNode->mChildren[30], 1.0);
 			glPopMatrix();
 			// draw staccionata laterale3
 			glPushMatrix();
 			glTranslatef(0, 0, z_coord_stac_laterale3);
-			recursive_render(scene, scene->mRootNode->mChildren[29], 1.0);
+			recursive_render(scene, scene->mRootNode->mChildren[31], 1.0);
+			glPopMatrix();
+			// draw staccionata laterale4
+			glPushMatrix();
+			glTranslatef(0, 0, z_coord_stac_laterale4);
+			recursive_render(scene, scene->mRootNode->mChildren[32], 1.0);
+			glPopMatrix();
+			// draw staccionata laterale4
+			glPushMatrix();
+			glTranslatef(0, 0, z_coord_stac_laterale5);
+			recursive_render(scene, scene->mRootNode->mChildren[33], 1.0);
 			glPopMatrix();
 			//draw birra
 			if (score % 1000 == 0) {
@@ -839,8 +874,8 @@ void display(void) {
 				}
 			}
 			else {
-				glTranslatef(3.5, 1.2, -6);
-				recursive_render(scene, scene->mRootNode->mChildren[26], 1);
+				//glTranslatef(3.5, 1.2, -6);
+				//recursive_render(scene, scene->mRootNode->mChildren[26], 1);
 			}
 			glPopMatrix();
 			// draw icona 2 birra
@@ -857,8 +892,8 @@ void display(void) {
 				}
 			}
 			else {
-				glTranslatef(-1, 1.2, -6);
-				recursive_render(scene, scene->mRootNode->mChildren[27], 1);
+				//glTranslatef(-1, 1.2, -6);
+				//recursive_render(scene, scene->mRootNode->mChildren[27], 1);
 			}
 			glPopMatrix();
 			
@@ -868,6 +903,7 @@ void display(void) {
 			sprintf(score_str, "Punteggio: %d", score);
 			draw_text(score_str, 30 , window_height - 3.5);
 
+			
 			//draw passavita
 			/*
 			char vita_str[30];
@@ -1234,11 +1270,17 @@ void mouse(int button, int state, int x, int y) {
 			if (modalita == 0) {
 
 				if ((y >= 90 && y <= 200) && (x >= 560 && x <= 980)) {
-					menu = false;
+					z_coord_stac_laterale = 0;
+					z_coord_stac_laterale2 = -20;
+					z_coord_stac_laterale3 = -40;
+					z_coord_stac_laterale4 = -60;
+					z_coord_stac_laterale5 = -80;
 					x_coord_t = 0.0;
 					x_coord_obs, z_coord_obs, z_coord_bck = -50;
 					z_coord_stac = -40;
 					z_coord_bck2 = -185;
+					menu = false;
+
 					glutPostRedisplay();
 				}
 				if ((y >= 230 && y <= 340) && (x >= 560 && x <= 980)) {
@@ -1279,6 +1321,11 @@ void mouse(int button, int state, int x, int y) {
 					 x_coord_obs, z_coord_obs, z_coord_bck = -15;
 					 z_coord_stac = -5;
 					 z_coord_bck2 = -150;
+					 z_coord_stac_laterale = 0;
+					 z_coord_stac_laterale2 = -20;
+					 z_coord_stac_laterale3 = -40;
+					 z_coord_stac_laterale4 = -60;
+					 z_coord_stac_laterale5 = -80;
 				     casuale = 0;
 					window_height = 100;
 					window_width = 1000;
@@ -1306,7 +1353,39 @@ void mouse(int button, int state, int x, int y) {
 		if (!menu) {
 			if ((button == GLUT_LEFT_BUTTON) && (state == GLUT_DOWN))
 			{
-				//printf(" cliccato il punto x: %d, y: %d\n", x, y);
+				printf(" cliccato il punto x: %d, y: %d\n", x, y);
+				if ((x >= 1350 && x <= 1520) && (y >= 25 && y <= 80)) {
+					menu = true;
+					showMenu = false;
+					x_coord_t = 0.0;
+					x_coord_obs, z_coord_obs, z_coord_bck = -50;
+					z_coord_stac = -40;
+					z_coord_bck2 = -185;
+					z_coord_birra = -40;
+					x_coord_birra = 0.0;
+					casuale = 0;
+					window_height = 100;
+					window_width = 600;
+					vite = 3;
+					durata = 0;
+					invincible = false;
+					salto = false;
+					y_salto = 0;
+					discesa = false;
+					attesa = 0;
+					staccionatatime = false;
+					indice = 0;
+					birra = false;
+					z_coord_stac_laterale = 0;
+					z_coord_stac_laterale2 = -20;
+					z_coord_stac_laterale3 = -40;
+					z_coord_stac_laterale4 = -60;
+					z_coord_stac_laterale5 = -80;
+					modalita = 0;
+					score = 0;
+				}
+
+				
 			  if ((x >= 105 && x<=365) && (y >=255 && y <=485) && birra==true ) {
 				  if (birra1 == 1) {
 					  vite--;
