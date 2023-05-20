@@ -320,6 +320,8 @@ void recursive_render (const struct aiScene *sc, const struct aiNode* nd, float 
 
 		apply_material(sc->mMaterials[mesh->mMaterialIndex]);
 
+		
+	
 
 		if(mesh->HasTextureCoords(0))
 			glEnable(GL_TEXTURE_2D);
@@ -344,6 +346,18 @@ void recursive_render (const struct aiScene *sc, const struct aiNode* nd, float 
 		}
 
 
+		//FOG 
+		float fogColor[] = { 0.8f, 0.4f, 0.1f, 1.0f };
+		glEnable(GL_FOG);
+		glFogi(GL_FOG_MODE, GL_LINEAR);  // Imposta il tipo di nebbia a lineare
+		glFogf(GL_FOG_DENSITY, 0.2f); // Imposta la densità della nebbia
+		glFogfv(GL_FOG_COLOR, fogColor); // Imposta il colore della nebbia (es. [0.5, 0.5, 0.5, 1.0])
+		glFogf(GL_FOG_START, 60.0f); // Distanza in cui la nebbia inizia ad avere effetto
+		glFogf(GL_FOG_END, 90.0f);  // Distanza in cui la nebbia è completamente opaca
+		
+		// Imposta l'equazione di profondità
+		glHint(GL_FOG_HINT, GL_NICEST);
+		
 
 		for (t = 0; t < mesh->mNumFaces; ++t) {
 			const struct aiFace* face = &mesh->mFaces[t];
@@ -736,6 +750,9 @@ void display(void) {
 			glPushMatrix();
 			glTranslatef(x_coord_obs, 0, z_coord_obs);
 			recursive_render(scene, scene->mRootNode->mChildren[0], 1.0);
+			if (z_coord_obs > 0.5) {
+				z_coord_obs = 120;
+			}
 			glPopMatrix();
 
 			//draw ground1
@@ -755,16 +772,17 @@ void display(void) {
 			//draw sky1
 
 			glPushMatrix();
-			glTranslatef(z_coord_bck, 0, 0);
+			//glTranslatef(z_coord_bck, 0, 0);
 			recursive_render(scene, scene->mRootNode->mChildren[7], 1.0);
 			glPopMatrix();
 
-			//draw sky2
+		/*	//draw sky2
 
 			glPushMatrix();
 			glTranslatef(z_coord_bck2, 0, 0);
 			recursive_render(scene, scene->mRootNode->mChildren[7], 1.0);
 			glPopMatrix();
+*/
 
 			//draw spine
 			glPushMatrix();
