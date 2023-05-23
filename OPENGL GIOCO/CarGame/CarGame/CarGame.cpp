@@ -866,8 +866,10 @@ void display(void) {
 			glPopMatrix();
 			//draw birra
 			if (score % 1000 == 0) {
-				birratime = true;
-				z_coord_birra = -60;
+				if (vite < 3) {
+					birratime = true;
+					z_coord_birra = -60;
+				}
 			}
 			if (birratime == true) {
 				
@@ -1036,12 +1038,12 @@ void display(void) {
 				exit(1);
 			}
 			
-			float pos_y = 0;
+			float pos_y = -0.5;
 			while (fscanf(fptr, "%d\n", &num) != EOF) {
 				punteggi[indice] = num;
 				int numbers[10];
 				float pos_x = 0.399;//TODO
-				pos_y -= 1;
+				pos_y -= 0.9;
 				int i = 0;
 				
 				while (punteggi[indice] != 0) {
@@ -1285,10 +1287,11 @@ void mouse(int button, int state, int x, int y) {
 		//glReadPixels(x, viewport[3] - y, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, pixel);
 
 		if (menu == true) {
-			if (modalita == 0) {
+			printf(" cliccato il punto x: %d, y: %d\n", x, y);
+			if (modalita == 0) { //menu iniziale
 
 				if ((y >= 90 && y <= 200) && (x >= 560 && x <= 980)) {
-					z_coord_stac_laterale = 0;
+					/*z_coord_stac_laterale = 0;
 					z_coord_stac_laterale2 = -20;
 					z_coord_stac_laterale3 = -40;
 					z_coord_stac_laterale4 = -60;
@@ -1297,36 +1300,69 @@ void mouse(int button, int state, int x, int y) {
 					x_coord_obs, z_coord_obs, z_coord_bck = -50;
 					z_coord_stac = -40;
 					z_coord_bck2 = -185;
+					*/
+					
+
+					invincible = false;
+					salto = false;
+					discesa = false;
+					staccionatatime = false;
+					birratime = false;
+					passaononpassa = false;
+					vitachepassa = 10;
+					x_coord_t = 0.0;
+					x_coord_obs, z_coord_obs, z_coord_bck = -15;
+					z_coord_stac = -5;
+					z_coord_bck2 = -150;
+					z_coord_stac_laterale = 0;
+					z_coord_stac_laterale2 = -20;
+					z_coord_stac_laterale3 = -40;
+					z_coord_stac_laterale4 = -60;
+					z_coord_stac_laterale5 = -80;
+					casuale = 0;
+					window_height = 100;
+					window_width = 1000;
+					vite = 3;
+					durata = 0;
+					score = 0;
+					casual = 0;
+					y_salto = 0;
+					attesa = 0;
+					birra = false;
+					birratime = false;
+					newrecord = false;
+
 					menu = false;
+					glutPostRedisplay();
 
 					glutPostRedisplay();
 				}
 				if ((y >= 230 && y <= 340) && (x >= 560 && x <= 980)) {
-					modalita = 2;
+					modalita = 2; // scoreboard
 					glutPostRedisplay();
 				}
 				if ((y >= 375 && y <= 480) && (x >= 560 && x <= 980)) {
-					modalita = 1;
+					modalita = 1; // credits
 					glutPostRedisplay();
 				}
 				if ((y >= 510 && y <= 620) && (x >= 560 && x <= 980)) {
 					exit(1);
 				}
 			}
-			if (modalita == 1) {
+			if (modalita == 1) { // credits
 				if ((y >= 450 && y <= 540) && (x >= 615 && x <= 905)) {
-					modalita = 0;
+					modalita = 0; //menu iniziale
 					glutPostRedisplay();
 				}
 			}
-			if (modalita == 2) {
-				if ((y >= 375 && y <= 480) && (x >= 560 && x <= 980)) {
-					modalita = 0;
+			if (modalita == 2) { // scoreboard
+				if ((y >= 685 && y <= 785) && (x >= 645 && x <= 900)) {
+					modalita = 0; // menu iniziale
 					glutPostRedisplay();
 				}
 			}
 
-			if (modalita == 3) {
+			if (modalita == 3) { // schermata sconfitta
 				if ((y >= 230 && y <= 340) && (x >= 560 && x <= 980)) {
 					 invincible = false;
 				     salto = false;
@@ -1371,7 +1407,7 @@ void mouse(int button, int state, int x, int y) {
 		if (!menu) {
 			if ((button == GLUT_LEFT_BUTTON) && (state == GLUT_DOWN))
 			{
-				printf(" cliccato il punto x: %d, y: %d\n", x, y);
+				
 				if ((x >= 1350 && x <= 1520) && (y >= 25 && y <= 80)) {
 					menu = true;
 					showMenu = false;
