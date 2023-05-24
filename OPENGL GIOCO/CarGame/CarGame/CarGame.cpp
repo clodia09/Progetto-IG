@@ -35,6 +35,8 @@
 #include <string.h>
 #include <stdarg.h>
 
+#include <Windows.h>
+
 
 // currently this is hardcoded
 static const std::string basepath = "./models/"; //per i file blend
@@ -652,6 +654,7 @@ void check_collisions()
 		if (z_coord_obs > -2 && z_coord_obs < 2) {
 			if (abs(x_coord_t - x_coord_obs) < 2 && invincible == false) {
 				invincible = true;
+				PlaySound(TEXT("C:\\Users\\gnico\\OneDrive\\Desktop\\ostacolo.wav"), NULL, SND_FILENAME | SND_ASYNC );
 				vite--;
 				if (vite == 0) {
 
@@ -663,6 +666,7 @@ void check_collisions()
 		if (z_coord_stac > -2 && z_coord_stac < 2) {
 			if (y_salto < 1.2 && invincible == false) {
 				invincible = true;
+				PlaySound(TEXT("C:\\Users\\gnico\\OneDrive\\Desktop\\ostacolo.wav"), NULL, SND_FILENAME | SND_ASYNC);
 				vite--;
 				if (vite == 0) {
 
@@ -673,6 +677,7 @@ void check_collisions()
 		}
 		if (z_coord_birra > -2 && z_coord_birra < 2) {
 			if (abs(x_coord_t - x_coord_birra) < 2 && birratime == true) {
+				PlaySound(TEXT("C:\\Users\\gnico\\OneDrive\\Desktop\\birra.wav"), NULL, SND_FILENAME | SND_ASYNC);
 				birratime = false;
 				int birracasuale = 0;
 				birracasuale = (rand() % (6 - 1) + 1); // (rand() % (max- min)) + min , genera numero casuale tra max e min;
@@ -917,6 +922,10 @@ void display(void) {
 			}
 			glPopMatrix();
 			
+			//draw exit button
+			glPushMatrix();
+			recursive_render(scene, scene->mRootNode->mChildren[34], 1.0);
+			glPopMatrix();
 
 			//draw punteggio
 			char score_str[21];
@@ -1038,7 +1047,8 @@ void display(void) {
 				exit(1);
 			}
 			
-			float pos_y = -0.5;
+			float pos_y = -0.5
+				;
 			while (fscanf(fptr, "%d\n", &num) != EOF) {
 				punteggi[indice] = num;
 				int numbers[10];
@@ -1111,6 +1121,7 @@ void specialKeyListener(int key, int x, int y)
 			break;
 		case GLUT_KEY_DOWN:
 			if (salto == false) {
+				PlaySound(TEXT("C:\\Users\\gnico\\OneDrive\\Desktop\\salto.wav"), NULL, SND_FILENAME | SND_ASYNC);
 				salto = true;
 			}
 			break;
@@ -1291,57 +1302,27 @@ void mouse(int button, int state, int x, int y) {
 			if (modalita == 0) { //menu iniziale
 
 				if ((y >= 90 && y <= 200) && (x >= 560 && x <= 980)) {
-					/*z_coord_stac_laterale = 0;
+		
+					z_coord_stac_laterale = 0;
 					z_coord_stac_laterale2 = -20;
 					z_coord_stac_laterale3 = -40;
 					z_coord_stac_laterale4 = -60;
 					z_coord_stac_laterale5 = -80;
 					x_coord_t = 0.0;
 					x_coord_obs, z_coord_obs, z_coord_bck = -50;
-					z_coord_stac = -40;
-					z_coord_bck2 = -185;
-					*/
+					z_coord_stac = -50;
+					z_coord_bck2 = -185;			
+					PlaySound(TEXT("C:\\Users\\gnico\\OneDrive\\Desktop\\SOUNDTRACK.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 					
-
-					invincible = false;
-					salto = false;
-					discesa = false;
-					staccionatatime = false;
-					birratime = false;
-					passaononpassa = false;
-					vitachepassa = 10;
-					x_coord_t = 0.0;
-					x_coord_obs, z_coord_obs, z_coord_bck = -15;
-					z_coord_stac = -5;
-					z_coord_bck2 = -150;
-					z_coord_stac_laterale = 0;
-					z_coord_stac_laterale2 = -20;
-					z_coord_stac_laterale3 = -40;
-					z_coord_stac_laterale4 = -60;
-					z_coord_stac_laterale5 = -80;
-					casuale = 0;
-					window_height = 100;
-					window_width = 1000;
-					vite = 3;
-					durata = 0;
-					score = 0;
-					casual = 0;
-					y_salto = 0;
-					attesa = 0;
-					birra = false;
-					birratime = false;
-					newrecord = false;
-
 					menu = false;
-					glutPostRedisplay();
-
+					modalita = 3;
 					glutPostRedisplay();
 				}
 				if ((y >= 230 && y <= 340) && (x >= 560 && x <= 980)) {
 					modalita = 2; // scoreboard
 					glutPostRedisplay();
 				}
-				if ((y >= 375 && y <= 480) && (x >= 560 && x <= 980)) {
+				if ((y >= 370 && y <= 480) && (x >= 560 && x <= 980)) {
 					modalita = 1; // credits
 					glutPostRedisplay();
 				}
@@ -1408,7 +1389,7 @@ void mouse(int button, int state, int x, int y) {
 			if ((button == GLUT_LEFT_BUTTON) && (state == GLUT_DOWN))
 			{
 				
-				if ((x >= 1350 && x <= 1520) && (y >= 25 && y <= 80)) {
+				if ((x >= 1380 && x <= 1520) && (y >= 12 && y <= 110)) {
 					menu = true;
 					showMenu = false;
 					x_coord_t = 0.0;
@@ -1442,22 +1423,26 @@ void mouse(int button, int state, int x, int y) {
 				
 			  if ((x >= 105 && x<=365) && (y >=255 && y <=485) && birra==true ) {
 				  if (birra1 == 1) {
+					  PlaySound(TEXT("C:\\Users\\gnico\\OneDrive\\Desktop\\ostacolo.wav"), NULL, SND_FILENAME | SND_ASYNC );
 					  vite--;
 					  birra = false;
 					  if (vite == 0) scoreboard();
 				  }
 				  else if (vite < 3) {
+					  PlaySound(TEXT("C:\\Users\\gnico\\OneDrive\\Desktop\\birra.wav"), NULL, SND_FILENAME | SND_ASYNC );
 					  vite++;
 					  birra = false;
 				  }
 			  }
 			  if ((x >= 1175 && x <= 1365) && (y >= 255 && y <= 485) && birra == true) {
 				  if (birra2 == 1) {
+					  PlaySound(TEXT("C:\\Users\\gnico\\OneDrive\\Desktop\\ostacolo.wav"), NULL, SND_FILENAME | SND_ASYNC );
 					  vite--;
 					  birra = false;
 					  if (vite == 0) scoreboard();
 				  }
 				  else if (vite < 3) {
+					  PlaySound(TEXT("C:\\Users\\gnico\\OneDrive\\Desktop\\birra.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 					  vite++;
 					  birra = false;
 				  }
@@ -1528,7 +1513,7 @@ int main(int argc, char **argv)
 	// by Assimp.
 	aiDetachAllLogStreams();	
 
-
+	
 	glutMainLoop();
 	return 0; 
 
