@@ -72,6 +72,7 @@ FILE* fptr;
 bool newrecord = false;
 int punteggi[5];
 int indice = 0;
+bool suono = true;
 bool birra = false;
 bool menu = true;
 int modalita = 0;
@@ -546,7 +547,7 @@ void do_motion (void)
 // -----------------------------------------------------------------
 void scoreboard() {
 
-
+	
 	if ((fptr = fopen("C:\\scoreboard.txt", "r")) == NULL) {
 		printf("Error! opening file");
 
@@ -646,6 +647,7 @@ void scoreboard() {
 	z_coord_stac_laterale3 = -40;
 	z_coord_stac_laterale4 = -60;
 	z_coord_stac_laterale5 = -80;
+	suono = true;
 }
 // -----------------------------------------------------------------
 void check_collisions()
@@ -709,6 +711,7 @@ void display(void) {
 		glLoadIdentity();
 		
 		if (!menu) {
+			
 			gluLookAt(0.f, 3.f, 7.f, 0.f, 0.f, -5.f, 0.f, 1.f, 0.f);
 
 			if (invincible == true) {
@@ -864,7 +867,7 @@ void display(void) {
 			glTranslatef(0, 0, z_coord_stac_laterale4);
 			recursive_render(scene, scene->mRootNode->mChildren[32], 1.0);
 			glPopMatrix();
-			// draw staccionata laterale4
+			// draw staccionata laterale5
 			glPushMatrix();
 			glTranslatef(0, 0, z_coord_stac_laterale5);
 			recursive_render(scene, scene->mRootNode->mChildren[33], 1.0);
@@ -990,7 +993,10 @@ void display(void) {
 			check_collisions();
 		}
 		else {
-
+		if (suono == true) {
+			PlaySound(TEXT("C:\\Users\\gnico\\OneDrive\\Desktop\\SOUNDTRACK.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
+			suono = false;
+		}
 		gluLookAt(0.f, 3.f, 0.f, 0.f, 0.f, -50.f, 0.f, 1.f, 0.f);
 		//drawMenu
 		glPushMatrix();
@@ -1085,7 +1091,7 @@ void display(void) {
 
 
 		}
-			else if(modalita == 1) {
+			else if(modalita == 1){
 				recursive_render(scene, scene->mRootNode->mChildren[8], 1.0);
 			}
 		
@@ -1298,7 +1304,7 @@ void mouse(int button, int state, int x, int y) {
 		//glReadPixels(x, viewport[3] - y, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, pixel);
 
 		if (menu == true) {
-			printf(" cliccato il punto x: %d, y: %d\n", x, y);
+			//printf(" cliccato il punto x: %d, y: %d\n", x, y);
 			if (modalita == 0) { //menu iniziale
 
 				if ((y >= 90 && y <= 200) && (x >= 560 && x <= 980)) {
@@ -1312,10 +1318,11 @@ void mouse(int button, int state, int x, int y) {
 					x_coord_obs, z_coord_obs, z_coord_bck = -50;
 					z_coord_stac = -50;
 					z_coord_bck2 = -185;			
-					PlaySound(TEXT("C:\\Users\\gnico\\OneDrive\\Desktop\\SOUNDTRACK.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
+					
 					
 					menu = false;
 					modalita = 3;
+					PlaySound(TEXT("C:\\Users\\gnico\\OneDrive\\Desktop\\birra.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 					glutPostRedisplay();
 				}
 				if ((y >= 230 && y <= 340) && (x >= 560 && x <= 980)) {
@@ -1457,13 +1464,12 @@ int main(int argc, char **argv)
 {
 	struct aiLogStream stream;
 	
-	
 
 	
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 	glutInit(&argc, argv);
 
-	glutCreateWindow("Tumbleweed game");
+	glutCreateWindow("Via Col Vento");
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
 	glutSpecialFunc(specialKeyListener);
