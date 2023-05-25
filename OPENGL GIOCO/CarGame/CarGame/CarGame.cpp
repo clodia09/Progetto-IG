@@ -818,25 +818,6 @@ void display(void) {
 				}
 			}
 
-			//draw vita che passa ogni tanto 
-			/*
-			if (score % 1000 == 0) { 
-				passaononpassa = true;
-				vitachepassa = 10;
-				casual = (rand() % (25)) -5;
-			} 
-			if(passaononpassa==true) {
-			glPushMatrix();
-			glTranslatef(casual, vitachepassa, -12);
-			recursive_render(scene, scene->mRootNode->mChildren[12], 1);
-			glPopMatrix();
-			vitachepassa -= 0.025;
-			if (vitachepassa == 8){
-				passaononpassa = false;
-				vitachepassa = 10;
-	
-			}
-		}*/
 			//draw staccionata
 			if (score % 290 == 0) {
 				staccionatatime = true;
@@ -925,68 +906,17 @@ void display(void) {
 			}
 			glPopMatrix();
 			
-			//draw exit button
+			/*//draw exit button
 			glPushMatrix();
 			recursive_render(scene, scene->mRootNode->mChildren[34], 1.0);
 			glPopMatrix();
-
+			*/
 			//draw punteggio
 			char score_str[21];
 			sprintf(score_str, "Punteggio: %d", score);
 			draw_text(score_str, 30 , window_height - 3.5);
 
 			
-			//draw passavita
-			/*
-			char vita_str[30];
-			sprintf(vita_str, "altvita: %d", vitachepassa);
-			glColor3f(1.0f, 1.0f, 1.0f);
-			draw_text(vita_str, 10, window_height - 30);
-			
-			char terreno_str[30];
-			sprintf(terreno_str, "terreno1: %f.4", z_coord_bck);
-			glColor3f(1.0f, 1.0f, 1.0f);
-			draw_text(terreno_str, 10, window_height - 80);
-			char terreno2_str[30];
-			sprintf(terreno2_str, "terreno2: %f.4", z_coord_bck2);
-			glColor3f(1.0f, 1.0f, 1.0f);
-			draw_text(terreno2_str, 10, window_height - 100);
-			
-			//draw cuore rosso per aumentare le vite
-			glBegin(GL_POLYGON);
-			glColor3f(1.0f, 1.0f, 1.0f);
-			// Left half of the heart
-			glVertex2f(-0.5, 0.0);
-			glVertex2f(-0.8, 0.5);
-			glVertex2f(-0.8, 0.8);
-			glVertex2f(-0.5, 1.0);
-			glVertex2f(0.0, 0.8);
-			// Right half of the heart
-			glVertex2f(0.5, 1.0);
-			glVertex2f(0.8, 0.8);
-			glVertex2f(0.8, 0.5);
-			glVertex2f(0.5, 0.0);
-			// Bottom point of the heart
-			glVertex2f(0.0, -0.5);
-			glEnd();
-			*/
-
-			//glColor3f(1.0, 0.0, 0.0); // impostare il colore del testo a rosso
-			//draw_text("Il mio testo rosso", 100, 100);
-			/*
-			//draw tiers
-			glPushMatrix();
-				glTranslatef(x_coord_t, -0.3, -1.5);
-				glRotatef(z_coord_bck * -10, 1, 0, 0);
-				recursive_render(scene, scene->mRootNode->mChildren[3], 1.0);
-			glPopMatrix();
-
-			glPushMatrix();
-				glTranslatef(x_coord_t, -0.3, 1.5);
-				glRotatef(z_coord_bck * -10, 1, 0, 0);
-				recursive_render(scene, scene->mRootNode->mChildren[4], 1.0);
-			glPopMatrix();
-			*/
 			
 			glutSwapBuffers();
 			do_motion();
@@ -1322,7 +1252,7 @@ void mouse(int button, int state, int x, int y) {
 					
 					menu = false;
 					modalita = 3;
-					PlaySound(TEXT("C:\\Users\\gnico\\OneDrive\\Desktop\\birra.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
+					PlaySound(TEXT("C:\\Users\\gnico\\OneDrive\\Desktop\\birra.wav"), NULL, SND_FILENAME | SND_ASYNC);
 					glutPostRedisplay();
 				}
 				if ((y >= 230 && y <= 340) && (x >= 560 && x <= 980)) {
