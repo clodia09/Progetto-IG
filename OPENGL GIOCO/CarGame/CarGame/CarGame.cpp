@@ -86,8 +86,8 @@ bool showMenu = false;
 float vitachepassa = 10;
 float x_coord_t = 0.0;
 float z_coord_stac_laterale = 0.0;
-float z_coord_stac_laterale2 = -20.0;
-float z_coord_stac_laterale3 = -40.0;
+float z_coord_stac_laterale2 = 0.0;
+float z_coord_stac_laterale3 = 0.0;
 float z_coord_stac_laterale4 = -60.0;
 float z_coord_stac_laterale5 = -80.0;
 float x_coord_obs, z_coord_obs, z_coord_bck = -50;
@@ -353,10 +353,10 @@ void recursive_render (const struct aiScene *sc, const struct aiNode* nd, float 
 		float fogColor[] = { 0.8f, 0.4f, 0.1f, 1.0f };
 		glEnable(GL_FOG);
 		glFogi(GL_FOG_MODE, GL_LINEAR);  // Imposta il tipo di nebbia a lineare
-		glFogf(GL_FOG_DENSITY, 0.2f); // Imposta la densità della nebbia
+		glFogf(GL_FOG_DENSITY, 0.3f); // Imposta la densità della nebbia
 		glFogfv(GL_FOG_COLOR, fogColor); // Imposta il colore della nebbia (es. [0.5, 0.5, 0.5, 1.0])
-		glFogf(GL_FOG_START, 60.0f); // Distanza in cui la nebbia inizia ad avere effetto
-		glFogf(GL_FOG_END, 90.0f);  // Distanza in cui la nebbia è completamente opaca
+		glFogf(GL_FOG_START, 100.0f); // Distanza in cui la nebbia inizia ad avere effetto
+		glFogf(GL_FOG_END, 120.0f);  // Distanza in cui la nebbia è completamente opaca
 		
 		// Imposta l'equazione di profondità
 		glHint(GL_FOG_HINT, GL_NICEST);
@@ -521,15 +521,7 @@ void do_motion (void)
 			z_coord_birra = -50;
 			birratime = false;
 		}
-		if (z_coord_stac_laterale > 10) {
-			z_coord_stac_laterale = -80;
-		}
-		if (z_coord_stac_laterale2 > 10) {
-			z_coord_stac_laterale2= -80;
-		}
-		if (z_coord_stac_laterale3 > 10) {
-			z_coord_stac_laterale3 = -80;
-		}
+	
 		if (z_coord_stac_laterale4 > 10) {
 			z_coord_stac_laterale4 = -80;
 		}
@@ -643,8 +635,8 @@ void scoreboard() {
 	indice = 0;
 	birra = false;
 	z_coord_stac_laterale = 0;
-	z_coord_stac_laterale2 = -20;
-	z_coord_stac_laterale3 = -40;
+	z_coord_stac_laterale2 = 0;
+	z_coord_stac_laterale3 = 0;
 	z_coord_stac_laterale4 = -60;
 	z_coord_stac_laterale5 = -80;
 	suono = true;
@@ -832,27 +824,29 @@ void display(void) {
 			glPushMatrix();
 			glTranslatef(0, 0, z_coord_stac_laterale);
 			recursive_render(scene, scene->mRootNode->mChildren[29], 1.0);
+			if (z_coord_stac_laterale > 1) {
+				z_coord_stac_laterale = -60;
+			}
 			glPopMatrix();
+			
 			// draw staccionata laterale2
 			glPushMatrix();
 			glTranslatef(0, 0, z_coord_stac_laterale2);
 			recursive_render(scene, scene->mRootNode->mChildren[30], 1.0);
+			if (z_coord_stac_laterale2 > 21) {
+				z_coord_stac_laterale2 = -80;
+			}
 			glPopMatrix();
+			
 			// draw staccionata laterale3
 			glPushMatrix();
 			glTranslatef(0, 0, z_coord_stac_laterale3);
 			recursive_render(scene, scene->mRootNode->mChildren[31], 1.0);
+			if (z_coord_stac_laterale3 > 41) {
+				z_coord_stac_laterale3 = -100;
+			}
 			glPopMatrix();
-			// draw staccionata laterale4
-			glPushMatrix();
-			glTranslatef(0, 0, z_coord_stac_laterale4);
-			recursive_render(scene, scene->mRootNode->mChildren[32], 1.0);
-			glPopMatrix();
-			// draw staccionata laterale5
-			glPushMatrix();
-			glTranslatef(0, 0, z_coord_stac_laterale5);
-			recursive_render(scene, scene->mRootNode->mChildren[33], 1.0);
-			glPopMatrix();
+			
 			//draw birra
 			if (score % 1000 == 0) {
 				if (vite < 3) {
@@ -906,11 +900,11 @@ void display(void) {
 			}
 			glPopMatrix();
 			
-			/*//draw exit button
+			//draw exit button
 			glPushMatrix();
 			recursive_render(scene, scene->mRootNode->mChildren[34], 1.0);
 			glPopMatrix();
-			*/
+			
 			//draw punteggio
 			char score_str[21];
 			sprintf(score_str, "Punteggio: %d", score);
@@ -1240,8 +1234,8 @@ void mouse(int button, int state, int x, int y) {
 				if ((y >= 90 && y <= 200) && (x >= 560 && x <= 980)) {
 		
 					z_coord_stac_laterale = 0;
-					z_coord_stac_laterale2 = -20;
-					z_coord_stac_laterale3 = -40;
+					z_coord_stac_laterale2 = 0;
+					z_coord_stac_laterale3 = 0;
 					z_coord_stac_laterale4 = -60;
 					z_coord_stac_laterale5 = -80;
 					x_coord_t = 0.0;
@@ -1294,8 +1288,8 @@ void mouse(int button, int state, int x, int y) {
 					 z_coord_stac = -5;
 					 z_coord_bck2 = -150;
 					 z_coord_stac_laterale = 0;
-					 z_coord_stac_laterale2 = -20;
-					 z_coord_stac_laterale3 = -40;
+					 z_coord_stac_laterale2 = 0;
+					 z_coord_stac_laterale3 = 0;
 					 z_coord_stac_laterale4 = -60;
 					 z_coord_stac_laterale5 = -80;
 				     casuale = 0;
@@ -1349,8 +1343,8 @@ void mouse(int button, int state, int x, int y) {
 					indice = 0;
 					birra = false;
 					z_coord_stac_laterale = 0;
-					z_coord_stac_laterale2 = -20;
-					z_coord_stac_laterale3 = -40;
+					z_coord_stac_laterale2 = 0;
+					z_coord_stac_laterale3 = 0;
 					z_coord_stac_laterale4 = -60;
 					z_coord_stac_laterale5 = -80;
 					modalita = 0;
