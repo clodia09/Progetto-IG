@@ -88,8 +88,8 @@ float x_coord_t = 0.0;
 float z_coord_stac_laterale = 0.0;
 float z_coord_stac_laterale2 = 0.0;
 float z_coord_stac_laterale3 = 0.0;
-float z_coord_stac_laterale4 = -60.0;
-float z_coord_stac_laterale5 = -80.0;
+float z_coord_stac_laterale4 = 0.0;
+float z_coord_stac_laterale5 = 0.0;
 float x_coord_obs, z_coord_obs, z_coord_bck = -50;
 float z_coord_stac = -40;
 float z_coord_birra = -40;
@@ -522,13 +522,8 @@ void do_motion (void)
 			birratime = false;
 		}
 	
-		if (z_coord_stac_laterale4 > 10) {
-			z_coord_stac_laterale4 = -80;
-		}
-		if (z_coord_stac_laterale5 > 10) {
-			z_coord_stac_laterale5 = -80;
-		}
-	
+		
+		
 
 
 		prev_time = time;
@@ -637,8 +632,8 @@ void scoreboard() {
 	z_coord_stac_laterale = 0;
 	z_coord_stac_laterale2 = 0;
 	z_coord_stac_laterale3 = 0;
-	z_coord_stac_laterale4 = -60;
-	z_coord_stac_laterale5 = -80;
+	z_coord_stac_laterale4 = 0;
+	z_coord_stac_laterale5 = 0;
 	suono = true;
 }
 // -----------------------------------------------------------------
@@ -825,7 +820,7 @@ void display(void) {
 			glTranslatef(0, 0, z_coord_stac_laterale);
 			recursive_render(scene, scene->mRootNode->mChildren[29], 1.0);
 			if (z_coord_stac_laterale > 1) {
-				z_coord_stac_laterale = -60;
+				z_coord_stac_laterale -= 100;
 			}
 			glPopMatrix();
 			
@@ -834,7 +829,7 @@ void display(void) {
 			glTranslatef(0, 0, z_coord_stac_laterale2);
 			recursive_render(scene, scene->mRootNode->mChildren[30], 1.0);
 			if (z_coord_stac_laterale2 > 21) {
-				z_coord_stac_laterale2 = -80;
+				z_coord_stac_laterale2 -= 100;
 			}
 			glPopMatrix();
 			
@@ -843,7 +838,23 @@ void display(void) {
 			glTranslatef(0, 0, z_coord_stac_laterale3);
 			recursive_render(scene, scene->mRootNode->mChildren[31], 1.0);
 			if (z_coord_stac_laterale3 > 41) {
-				z_coord_stac_laterale3 = -100;
+				z_coord_stac_laterale3 -= 100;
+			}
+			glPopMatrix();
+			// draw staccionata laterale4
+			glPushMatrix();
+			glTranslatef(0, 0, z_coord_stac_laterale4);
+			recursive_render(scene, scene->mRootNode->mChildren[32], 1.0);
+			if (z_coord_stac_laterale4 > 61) {
+				z_coord_stac_laterale4 -= 100;
+			}
+			glPopMatrix();
+			// draw staccionata laterale5
+			glPushMatrix();
+			glTranslatef(0, 0, z_coord_stac_laterale5);
+			recursive_render(scene, scene->mRootNode->mChildren[33], 1.0);
+			if (z_coord_stac_laterale5 > 81) {
+				z_coord_stac_laterale5 -= 100;
 			}
 			glPopMatrix();
 			
@@ -1236,8 +1247,8 @@ void mouse(int button, int state, int x, int y) {
 					z_coord_stac_laterale = 0;
 					z_coord_stac_laterale2 = 0;
 					z_coord_stac_laterale3 = 0;
-					z_coord_stac_laterale4 = -60;
-					z_coord_stac_laterale5 = -80;
+					z_coord_stac_laterale4 = 0;
+					z_coord_stac_laterale5 = 0;
 					x_coord_t = 0.0;
 					x_coord_obs, z_coord_obs, z_coord_bck = -50;
 					z_coord_stac = -50;
@@ -1290,8 +1301,8 @@ void mouse(int button, int state, int x, int y) {
 					 z_coord_stac_laterale = 0;
 					 z_coord_stac_laterale2 = 0;
 					 z_coord_stac_laterale3 = 0;
-					 z_coord_stac_laterale4 = -60;
-					 z_coord_stac_laterale5 = -80;
+					 z_coord_stac_laterale4 = 0;
+					 z_coord_stac_laterale5 = 0;
 				     casuale = 0;
 					window_height = 100;
 					window_width = 1000;
@@ -1345,8 +1356,8 @@ void mouse(int button, int state, int x, int y) {
 					z_coord_stac_laterale = 0;
 					z_coord_stac_laterale2 = 0;
 					z_coord_stac_laterale3 = 0;
-					z_coord_stac_laterale4 = -60;
-					z_coord_stac_laterale5 = -80;
+					z_coord_stac_laterale4 = 0;
+					z_coord_stac_laterale5 = 0;
 					modalita = 0;
 					score = 0;
 				}
