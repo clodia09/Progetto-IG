@@ -506,11 +506,11 @@ void do_motion (void)
 		
 		if (z_coord_bck > 130)			// Reset position for the background
 		{
-			z_coord_bck = -130;
+			z_coord_bck -= 260;
 		}
 		if (z_coord_bck2 > 130)			// Reset position for the background
 		{
-			z_coord_bck2 = -130;
+			z_coord_bck2 -= 260;
 		}
 
 		if (z_coord_stac > 10) {
@@ -643,7 +643,7 @@ void check_collisions()
 		if (z_coord_obs > -2 && z_coord_obs < 2) {
 			if (abs(x_coord_t - x_coord_obs) < 2 && invincible == false) {
 				invincible = true;
-				PlaySound(TEXT("C:\\Users\\gnico\\OneDrive\\Desktop\\ostacolo.wav"), NULL, SND_FILENAME | SND_ASYNC );
+				PlaySound(TEXT("..\\Musica\\ostacolo.wav"), NULL, SND_FILENAME | SND_ASYNC );
 				vite--;
 				if (vite == 0) {
 
@@ -655,8 +655,9 @@ void check_collisions()
 		if (z_coord_stac > -2 && z_coord_stac < 2) {
 			if (y_salto < 1.2 && invincible == false) {
 				invincible = true;
-				PlaySound(TEXT("C:\\Users\\gnico\\OneDrive\\Desktop\\ostacolo.wav"), NULL, SND_FILENAME | SND_ASYNC);
+				PlaySound(TEXT("..\\Musica\\ostacolo.wav"), NULL, SND_FILENAME | SND_ASYNC);
 				vite--;
+				//Musica\ostacolo.wav"
 				if (vite == 0) {
 
 					//aggiorna scoreboard 
@@ -666,7 +667,7 @@ void check_collisions()
 		}
 		if (z_coord_birra > -2 && z_coord_birra < 2) {
 			if (abs(x_coord_t - x_coord_birra) < 2 && birratime == true) {
-				PlaySound(TEXT("C:\\Users\\gnico\\OneDrive\\Desktop\\birra.wav"), NULL, SND_FILENAME | SND_ASYNC);
+				PlaySound(TEXT("..\\Musica\\birra.wav"), NULL, SND_FILENAME | SND_ASYNC);
 				birratime = false;
 				int birracasuale = 0;
 				birracasuale = (rand() % (6 - 1) + 1); // (rand() % (max- min)) + min , genera numero casuale tra max e min;
@@ -929,7 +930,7 @@ void display(void) {
 		}
 		else {
 		if (suono == true) {
-			PlaySound(TEXT("C:\\Users\\gnico\\OneDrive\\Desktop\\SOUNDTRACK.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
+			PlaySound(TEXT("..\\Musica\\SOUNDTRACK.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 			suono = false;
 		}
 		gluLookAt(0.f, 3.f, 0.f, 0.f, 0.f, -50.f, 0.f, 1.f, 0.f);
@@ -1062,7 +1063,7 @@ void specialKeyListener(int key, int x, int y)
 			break;
 		case GLUT_KEY_DOWN:
 			if (salto == false) {
-				PlaySound(TEXT("C:\\Users\\gnico\\OneDrive\\Desktop\\salto.wav"), NULL, SND_FILENAME | SND_ASYNC);
+				PlaySound(TEXT("..\\Musica\\salto.wav"), NULL, SND_FILENAME | SND_ASYNC);
 				salto = true;
 			}
 			break;
@@ -1257,7 +1258,7 @@ void mouse(int button, int state, int x, int y) {
 					
 					menu = false;
 					modalita = 3;
-					PlaySound(TEXT("C:\\Users\\gnico\\OneDrive\\Desktop\\birra.wav"), NULL, SND_FILENAME | SND_ASYNC);
+					PlaySound(TEXT("..\\Musica\\birra.wav"), NULL, SND_FILENAME | SND_ASYNC);
 					glutPostRedisplay();
 				}
 				if ((y >= 230 && y <= 340) && (x >= 560 && x <= 980)) {
@@ -1365,26 +1366,26 @@ void mouse(int button, int state, int x, int y) {
 				
 			  if ((x >= 105 && x<=365) && (y >=255 && y <=485) && birra==true ) {
 				  if (birra1 == 1) {
-					  PlaySound(TEXT("C:\\Users\\gnico\\OneDrive\\Desktop\\ostacolo.wav"), NULL, SND_FILENAME | SND_ASYNC );
+					  PlaySound(TEXT("..\\Musica\\ostacolo.wav"), NULL, SND_FILENAME | SND_ASYNC );
 					  vite--;
 					  birra = false;
 					  if (vite == 0) scoreboard();
 				  }
 				  else if (vite < 3) {
-					  PlaySound(TEXT("C:\\Users\\gnico\\OneDrive\\Desktop\\birra.wav"), NULL, SND_FILENAME | SND_ASYNC );
+					  PlaySound(TEXT("..\\Musica\\birra.wav"), NULL, SND_FILENAME | SND_ASYNC );
 					  vite++;
 					  birra = false;
 				  }
 			  }
 			  if ((x >= 1175 && x <= 1365) && (y >= 255 && y <= 485) && birra == true) {
 				  if (birra2 == 1) {
-					  PlaySound(TEXT("C:\\Users\\gnico\\OneDrive\\Desktop\\ostacolo.wav"), NULL, SND_FILENAME | SND_ASYNC );
+					  PlaySound(TEXT("..\\Musica\\ostacolo.wav"), NULL, SND_FILENAME | SND_ASYNC );
 					  vite--;
 					  birra = false;
 					  if (vite == 0) scoreboard();
 				  }
 				  else if (vite < 3) {
-					  PlaySound(TEXT("C:\\Users\\gnico\\OneDrive\\Desktop\\birra.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
+					  PlaySound(TEXT("..\\Musica\\birra.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 					  vite++;
 					  birra = false;
 				  }
