@@ -91,7 +91,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CarGame.cpp" />
+    <ClCompile Include="ViaColVento.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
