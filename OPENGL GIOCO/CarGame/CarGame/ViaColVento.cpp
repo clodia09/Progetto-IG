@@ -535,7 +535,7 @@ void do_motion (void)
 void scoreboard() {
 
 	
-	if ((fptr = fopen("C:\\scoreboard.txt", "r")) == NULL) {
+	if ((fptr = fopen("..\\Scoreboard\\scoreboard.txt", "r")) == NULL) {
 		printf("Error! opening file");
 
 		// Program exits if the file pointer returns NULL.
@@ -592,7 +592,7 @@ void scoreboard() {
 	fclose(fptr);
 	indice = 0;
 
-	if ((fptr = fopen("C:\\scoreboard.txt", "w")) == NULL) {
+	if ((fptr = fopen("..\\Scoreboard\\scoreboard.txt", "w")) == NULL) {
 		printf("Error! opening file");
 
 		// Program exits if the file pointer returns NULL.
@@ -982,7 +982,7 @@ void display(void) {
 			recursive_render(scene, scene->mRootNode->mChildren[22], 1.0);
 
 			
-			if ((fptr = fopen("C:\\scoreboard.txt", "r")) == NULL) {
+			if ((fptr = fopen("..\\Scoreboard\\scoreboard.txt", "r")) == NULL) {
 				printf("Error! opening file");
 
 				// Program exits if the file pointer returns NULL.
