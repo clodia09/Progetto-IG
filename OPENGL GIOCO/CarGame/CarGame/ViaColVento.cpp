@@ -875,7 +875,9 @@ void display(void) {
 				glPopMatrix();
 			}
 			// draw icona birra
-			
+		
+
+
 			glPushMatrix();
 			
 			if (birra == true) {
@@ -912,11 +914,15 @@ void display(void) {
 			}
 			glPopMatrix();
 			
-			//draw exit button
+			//draw score button
 			glPushMatrix();
 			recursive_render(scene, scene->mRootNode->mChildren[34], 1.0);
 			glPopMatrix();
 			
+
+			glPushMatrix();
+			recursive_render(scene, scene->mRootNode->mChildren[34], 1.0);
+			glPopMatrix();
 			//draw punteggio
 			char score_str[21];
 			sprintf(score_str, "Punteggio: %d", score);
