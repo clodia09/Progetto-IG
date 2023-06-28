@@ -106,6 +106,7 @@ float y_salto = 0;
 int attesa = 0;
 int birra1 = 0;
 int birra2 = 1;
+float passaggio = 0;
 
 // ----------------------------------------------------------------------------
 void reshape(int width, int height)
@@ -945,9 +946,19 @@ void display(void) {
 		glTranslatef(0, -5, -10);
 		if (modalita==0){
 			recursive_render(scene, scene->mRootNode->mChildren[9], 1.0);
+			     glPopMatrix();
+			    glPushMatrix();
+				glTranslatef(passaggio, -1, -10);
+				passaggio += 0.01;
+				if (passaggio > 9) passaggio = -9;
+				glRotatef(passaggio * 25, 60, 0, 0);
+				recursive_render(scene, scene->mRootNode->mChildren[3], 1.0);
+				glPopMatrix();
+				glutPostRedisplay();
 		}
 		else if(modalita==3) {
 			recursive_render(scene, scene->mRootNode->mChildren[11], 1.0);
+			
 			if (newrecord == true) {
 				char score_str[21] = "NEW RECORD!";
 				draw_text(score_str, 280, window_height - 8);
@@ -1040,8 +1051,7 @@ void display(void) {
 		glPopMatrix();
 		
 		glutSwapBuffers();
-
-
+		
 	}
 	}
 	
