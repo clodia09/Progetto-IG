@@ -49,16 +49,16 @@ C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\CarGame\CarGam
 C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\CarGame\CarGame\ViaColVento.cpp(539,14): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
 C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\CarGame\CarGame\ViaColVento.cpp(549,9): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
 C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\CarGame\CarGame\ViaColVento.cpp(596,14): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\CarGame\CarGame\ViaColVento.cpp(929,4): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\CarGame\CarGame\ViaColVento.cpp(968,4): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\CarGame\CarGame\ViaColVento.cpp(1002,16): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\CarGame\CarGame\ViaColVento.cpp(1011,11): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\CarGame\CarGame\ViaColVento.cpp(934,4): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\CarGame\CarGame\ViaColVento.cpp(974,4): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\CarGame\CarGame\ViaColVento.cpp(1009,16): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\CarGame\CarGame\ViaColVento.cpp(1018,11): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
 C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\CarGame\CarGame\ViaColVento.cpp(695,8): warning C4101: 'tmp': variabile locale senza riferimenti
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\CarGame\CarGame\ViaColVento.cpp(1251,9): warning C4101: 'viewport': variabile locale senza riferimenti
-C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\CarGame\CarGame\ViaColVento.cpp(1252,11): warning C4101: 'pixel': variabile locale senza riferimenti
+C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\CarGame\CarGame\ViaColVento.cpp(1275,9): warning C4101: 'viewport': variabile locale senza riferimenti
+C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\CarGame\CarGame\ViaColVento.cpp(1276,11): warning C4101: 'pixel': variabile locale senza riferimenti
   Generazione codice in corso...
-  1 of 238 functions ( 0.4%) were compiled, the rest were copied from previous compilation.
+  0 of 238 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+    0 functions had inline decision re-evaluated but remain unchanged
   Generazione codice terminata
   CarGame.vcxproj -> C:\Users\gnico\OneDrive\Documenti\GitHub\Progetto-IG\OPENGL GIOCO\CarGame\Release\CarGame.exe

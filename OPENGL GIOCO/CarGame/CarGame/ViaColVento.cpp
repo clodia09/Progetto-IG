@@ -106,7 +106,7 @@ float y_salto = 0;
 int attesa = 0;
 int birra1 = 0;
 int birra2 = 1;
-float passaggio = 0;
+float passaggio = -9;
 
 // ----------------------------------------------------------------------------
 void reshape(int width, int height)
@@ -719,7 +719,7 @@ void display(void) {
 						y_salto += 0.3;
 					if (y_salto > 2) {
 						attesa++;
-						if (attesa == 24) { // prima era 12
+						if (attesa == 40) { // prima era 12
 							discesa = true;
 							attesa = 0;
 						}
@@ -785,6 +785,11 @@ void display(void) {
 			glPushMatrix();
 			glTranslatef(x_coord_obs, 0, z_coord_obs);
 			recursive_render(scene, scene->mRootNode->mChildren[1], 1.0);
+			glPopMatrix();
+			//draw plane
+			glPushMatrix();
+			glTranslatef(0, 0, 0);
+			recursive_render(scene, scene->mRootNode->mChildren[34], 10);
 			glPopMatrix();
 
 			//draw vite rimaste - cuori
@@ -959,6 +964,7 @@ void display(void) {
 		else if(modalita==3) {
 			recursive_render(scene, scene->mRootNode->mChildren[11], 1.0);
 			
+			
 			if (newrecord == true) {
 				char score_str[21] = "NEW RECORD!";
 				draw_text(score_str, 280, window_height - 8);
@@ -992,12 +998,13 @@ void display(void) {
 					glPopMatrix();
 				}
 				
+				
 			
 		}
 		else if (modalita == 2) {
 
 			recursive_render(scene, scene->mRootNode->mChildren[22], 1.0);
-
+			
 			
 			if ((fptr = fopen("..\\Scoreboard\\scoreboard.txt", "r")) == NULL) {
 				printf("Error! opening file");
@@ -1041,11 +1048,28 @@ void display(void) {
 			}
 			fclose(fptr);
 			indice = 0;
-
+			glPopMatrix();
+			glPushMatrix();
+			glTranslatef(passaggio, -1, -10);
+			passaggio += 0.01;
+			if (passaggio > 9) passaggio = -9;
+			glRotatef(passaggio * 25, 60, 0, 0);
+			recursive_render(scene, scene->mRootNode->mChildren[3], 1.0);
+			glPopMatrix();
+			glutPostRedisplay();
 
 		}
 			else if(modalita == 1){
 				recursive_render(scene, scene->mRootNode->mChildren[8], 1.0);
+				glPopMatrix();
+				glPushMatrix();
+				glTranslatef(passaggio, -1, -10);
+				passaggio += 0.01;
+				if (passaggio > 9) passaggio = -9;
+				glRotatef(passaggio * 25, 60, 0, 0);
+				recursive_render(scene, scene->mRootNode->mChildren[3], 1.0);
+				glPopMatrix();
+				glutPostRedisplay();
 			}
 		
 		glPopMatrix();
