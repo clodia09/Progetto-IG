@@ -719,7 +719,7 @@ void display(void) {
 						y_salto += 0.3;
 					if (y_salto > 2) {
 						attesa++;
-						if (attesa == 40) { // prima era 12
+						if (attesa == 80){ // prima era 12
 							discesa = true;
 							attesa = 0;
 						}
@@ -789,7 +789,7 @@ void display(void) {
 			//draw plane
 			glPushMatrix();
 			glTranslatef(0, 0, 0);
-			recursive_render(scene, scene->mRootNode->mChildren[34], 10);
+			recursive_render(scene, scene->mRootNode->mChildren[34], 1.0);
 			glPopMatrix();
 
 			//draw vite rimaste - cuori
@@ -927,7 +927,7 @@ void display(void) {
 			
 
 			glPushMatrix();
-			recursive_render(scene, scene->mRootNode->mChildren[34], 1.0);
+			recursive_render(scene, scene->mRootNode->mChildren[35], 1.0);
 			glPopMatrix();
 			//draw punteggio
 			char score_str[21];
